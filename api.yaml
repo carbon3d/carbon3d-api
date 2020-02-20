@@ -1,0 +1,1151 @@
+openapi: 3.0.0
+info:
+  title: Carbon API (Draft)
+  version: 1.0.0
+  description: |
+    An API to interact with Carbon's Manufacturing Cloud including 3D model upload, automated order processing and part history.
+
+    Getting started
+    ---------------
+
+    - [Generate and download an API key](https://carbon3d.print.carbon3d.com/api_keys)
+      - Your API key and client secret will be downloaded into a secret.json file.
+
+    - [Use generated API key to generate a JWT token](/token_generator) from the api key.
+      - If your API key is revoked, this token will no longer work.
+
+    - Authorize with generated token
+
+    - Upload mesh files
+
+    - Create orders
+
+    - Monitor order status
+  contact:
+    name: Carbon API Support
+    url: 'https://www.carbon3d.com'
+    email: api-list@carbon3d.com
+servers:
+  - url: 'https://api-sandbox.carbon3d.com/v1'
+    description: Sandbox Server
+  - url: 'https://api.carbon3d.com/v1'
+    description: Production Server
+  - url: '{protocol}://{host}:{port}/v1'
+    description: Test Endpoint
+    variables:
+      host:
+        default: localhost
+        description: Test server host
+      port:
+        default: '5000'
+        description: Test server port
+      protocol:
+        default: http
+        description: http or https
+paths:
+  /builds:
+    summary: Path used to manage the list of builds.
+    x-controller: BuildController
+    get:
+      x-operation: listBuilds
+      parameters:
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+      tags:
+        - Builds
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BuildsResponse'
+          description: Expected response to a valid request
+      operationId: getBuilds
+      summary: Fetch builds
+      description: Fetch a list of `build` entities (most recent first)
+  '/builds/{uuid}':
+    summary: Path used to manage a single build.
+    x-controller: BuildController
+    get:
+      x-operation: getBuild
+      tags:
+        - Builds
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Build'
+          description: Expected response to a valid request
+        '404':
+          description: The build does not exist
+      operationId: getBuild
+      summary: Fetch a build
+      description: Gets the details of a single build.
+    parameters:
+      - name: uuid
+        description: Build Uuid
+        schema:
+          type: string
+        in: path
+        required: true
+  /orders:
+    x-controller: OrderController
+    post:
+      x-operation: createOrder
+      requestBody:
+        description: A new Order to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderRequest'
+      tags:
+        - Orders
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Expected response to a valid request
+        '400':
+          description: Invalid input
+      operationId: createOrder
+      summary: Create an Order
+      description: Creates a new Order.
+    get:
+      x-operation: listOrders
+      tags:
+        - Orders
+      parameters:
+        - name: status
+          description: Order status
+          schema:
+            $ref: '#/components/schemas/OrderStatus'
+          in: query
+        - name: order_number
+          description: Customer-provided order number
+          in: query
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersResponse'
+          description: Expected response to a valid request
+      operationId: getOrders
+      summary: Fetch orders
+      description: Fetch a list of `Order` entities (most recent first)
+  '/orders/{uuid}':
+    x-controller: OrderController
+    get:
+      x-operation: getOrder
+      tags:
+        - Orders
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Expected response to a valid request
+        '404':
+          description: The order does not exist
+      operationId: getOrder
+      summary: Get an Order
+      description: Gets the details of a single Order.
+    delete:
+      x-operation: deleteOrder
+      tags:
+        - Orders
+      responses:
+        '204':
+          description: Expected response to a valid request
+        '400':
+          description: Invalid input
+        '405':
+          description: Order cannot be canceled
+      operationId: deleteOrder
+      summary: Cancel an Order
+      description: |
+        Cancel an existing eligible Order. Orders may only be canceled
+        while they are in 'open' status.
+    parameters:
+      - name: uuid
+        description: Carbon-generated order UUID
+        schema:
+          type: string
+        in: path
+        required: true
+  /parts:
+    summary: Path used to manage the list of parts.
+    description: |
+      The REST endpoint/path used to list and create zero or more `Part`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    x-controller: PartController
+    post:
+      x-operation: createPart
+      tags:
+        - Parts
+      requestBody:
+        description: A new Part to be created.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+          description: Expected response to a valid request
+      operationId: createPart
+      summary: Create a Part
+      description: Create a part from a model.
+    get:
+      x-operation: listParts
+      tags:
+        - Parts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PartsResponse'
+          description: Expected response to a valid request
+      operationId: getParts
+      summary: Fetch parts
+      description: Gets a list of `Part` entities (most recent first)
+      parameters:
+        - name: model_uuid
+          description: Model UUID
+          in: query
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+  '/parts/{uuid}':
+    summary: Path used to manage a single Part.
+    description: Fetch a Part by UUID
+    x-controller: PartController
+    get:
+      x-operation: getPart
+      tags:
+        - Parts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+          description: Expected response to a valid request
+        '404':
+          description: The part does not exist
+      operationId: getPart
+      summary: Fetch a Part
+      description: Fetch the details of a single Part.
+      parameters:
+        - name: uuid
+          description: A unique identifier for a Part.
+          schema:
+            type: string
+          in: path
+          required: true
+  /models:
+    x-controller: ModelController
+    post:
+      x-operation: createModel
+      requestBody:
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      tags:
+        - Models
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+          description: Successful operation
+        '400':
+          description: Invalid input
+      operationId: uploadModel
+      description: Upload a new model
+      summary: Upload a model
+      parameters:
+        - name: filename
+          required: true
+          description: Filename of the model
+          schema:
+            type: string
+          in: header
+        - name: application-id
+          description: Application ID
+          schema:
+            type: number
+          in: header
+    get:
+      description: 'Fetch Models, filtered by the respective query parameters (most recent first)'
+      x-operation: listModels
+      tags:
+        - Models
+      parameters:
+        - name: filename
+          description: Filename of the model
+          schema:
+            type: string
+          in: query
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ModelsResponse'
+          description: Successful operation
+      security:
+        - bearerAuth: []
+      operationId: getModels
+      summary: Fetch models
+  '/models/{uuid}':
+    x-controller: ModelController
+    get:
+      x-operation: getModel
+      tags:
+        - Models
+      parameters:
+        - name: uuid
+          description: Model UUID
+          schema:
+            type: string
+          in: path
+          required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Model'
+          description: OK
+        '404':
+          description: The model does not exist
+      security:
+        - bearerAuth: []
+      operationId: getModel
+      summary: Get a model by UUID
+      description: Fetch a model by UUID
+  /printed_parts:
+    summary: Path used to manage the list of printed parts.
+    description: |
+      The REST endpoint/path used to list and create zero or more `Part`
+      entities.  This path contains a `GET` and `POST` operation to perform the list
+      and create tasks, respectively.
+    x-controller: PrintedPartController
+    get:
+      x-operation: listPrintedParts
+      tags:
+        - Printed Parts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrintedPartsResponse'
+          description: Expected response to a valid request
+      operationId: getPrintedParts
+      summary: Fetch printed parts
+      description: Gets a list of Part entities (most recent first)
+      parameters:
+        - name: status
+          description: Current printed part status
+          schema:
+            $ref: '#/components/schemas/PrintedPartStatus'
+          in: query
+        - name: order_uuid
+          description: Order UUID
+          schema:
+            type: string
+          in: query
+        - name: part_uuid
+          description: Part UUID
+          in: query
+          schema:
+            type: string
+        - name: order_number
+          description: Customer-provided order number the printed parts belong to
+          in: query
+          schema:
+            type: string
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+  '/printed_parts/{uuid}':
+    summary: Path used to manage a single Printed Part.
+    description: Fetch a printed part by UUID
+    x-controller: PrintedPartController
+    get:
+      x-operation: getPrintedPart
+      tags:
+        - Printed Parts
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PrintedPart'
+          description: Expected response to a valid request
+        '404':
+          description: The printed part does not exist
+      operationId: getPrintedPart
+      summary: Fetch a printed Part
+      description: Fetch the details of a single PrintedPart.
+    parameters:
+      - name: uuid
+        description: A unique identifier for a PrintedPart.
+        schema:
+          type: string
+        in: path
+        required: true
+  '/printers/{name}':
+    summary: Path used to retrieve status of a single printer
+    x-controller: PrinterController
+    get:
+      x-operation: getPrinter
+      tags:
+        - Printers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Printer'
+          description: Expected response to a valid request
+        '404':
+          description: Invalid printer name
+      operationId: getPrinter
+      summary: "Fetch a specific printer's status information"
+      description: ''
+    parameters:
+      - name: name
+        description: e.g. L1001
+        schema:
+          type: string
+        in: path
+        required: true
+  /prints:
+    get:
+      summary: List print information
+      tags:
+        - Prints
+      responses:
+        '200':
+          description: OK
+          headers: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Print'
+      operationId: getPrints
+      description: ''
+      parameters:
+        - name: platform_serial
+          description: Platform used for print
+          schema:
+            type: string
+          in: query
+        - $ref: '#/components/parameters/LimitParam'
+        - $ref: '#/components/parameters/OffsetParam'
+        - $ref: '#/components/parameters/SortParam'
+        - schema:
+            type: string
+            enum:
+              - printing
+              - done
+          in: query
+          name: status
+  /printers:
+    summary: Path used to retrieve status of all printers
+    x-controller: PrinterController
+    get:
+      x-operation: listPrinters
+      tags:
+        - Printers
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PrintersResponse"
+          description: Expected response to a valid request
+        '404':
+          description: No printer was found
+      operationId: getPrinters
+      summary: Fetch all printer's status information
+      description: Fetch all printers and their relevant attached information like status and sliding print window (past/current/next). Sorted by name, ascending.
+      parameters:
+        - name: limit
+          $ref: "#/components/parameters/LimitParam"
+        - name: offset
+          $ref: "#/components/parameters/OffsetParam"
+components:
+  parameters:
+    SortParam:
+      name: sort
+      in: query
+      description: 'Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order.'
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+    OffsetParam:
+      name: offset
+      in: query
+      description: Number of items to skip
+      required: true
+      schema:
+        type: integer
+        format: int32
+        default: 0
+        minimum: 0
+    LimitParam:
+      name: limit
+      in: query
+      description: Max records to return
+      required: true
+      schema:
+        type: integer
+        format: int32
+        default: 100
+        minimum: 1
+        maximum: 1000
+  schemas:
+    Model:
+      description: Model file (e.g. .stl)
+      required:
+        - uuid
+        - filename
+      type: object
+      properties:
+        uuid:
+          description: Generated unique identifier
+          example: 1cf34076-417e-489f-8863-3438facd4808
+          type: string
+          readOnly: true
+        filename:
+          description: Filename of the model
+          example: file.stl
+          type: string
+        application_id:
+          description: Application ID
+          example: 99
+          type: number
+    Build:
+      title: Build
+      description: A build containing one or more parts
+      type: object
+      required:
+        - uuid
+        - parts
+      properties:
+        uuid:
+          type: string
+          readOnly: true
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+      example:
+        uuid: 98d97fe6-83d2-473c-9148-322012ea835b
+        parts:
+          - uuid: 9962b034-e64b-4f81-a40d-26b885239a58
+            part_number: B142353
+            model_uuid: 2ce02977-fad4-4b21-b49c-019144d945a8
+    OrderRequest:
+      title: OrderRequest
+      type: object
+      example:
+        order_number: SO_12345
+        parts:
+          - uuid: 75e4811b-0f54-4ce0-a93a-511668b08b49
+        due_date: '2020-03-28T12:25:00.000Z'
+        route_to:
+          - production
+      properties:
+        order_number:
+          description: Customer-provided order number
+          type: string
+        parts:
+          description: Parts to be printed
+          type: array
+          minItems: 1
+          items:
+            type: object
+            properties:
+              uuid:
+                description: Part UUID
+                type: string
+        due_date:
+          description: Print due date, used to prioritize orders for packing and printing
+          format: date-time
+          type: string
+        route_to:
+          description: Section(s) to route this order to (e.g. a rework line)
+          type: array
+          items:
+            type: string
+      required:
+        - order_number
+        - due_date
+        - parts
+    Order:
+      title: Order
+      description: An order to print parts
+      type: object
+      example:
+        uuid: 261bfc3a-1644-4b78-80be-264d3c85dc15
+        order_number: SO_12345
+        printed_parts:
+          - uuid: 4962b034-e64b-4f81-a40d-26b885239a58
+            part_uuid: 75e4811b-0f54-4ce0-a93a-511668b08b49
+            status: printing
+        due_date: '2020-03-28T12:25:00.000Z'
+        route_to:
+          - production
+      properties:
+        uuid:
+          description: Order UUID
+          type: string
+          readOnly: true
+        status:
+          $ref: '#/components/schemas/OrderStatus'
+        order_number:
+          description: Customer-provided order number
+          type: string
+        printed_parts:
+          description: Parts already printed or to be printed
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PrintedPartRef'
+        due_date:
+          description: 'Print due date, used to prioritize orders for packing and printing'
+          format: date-time
+          type: string
+        route_to:
+          description: Section to route this order to (e.g. a rework line)
+          type: array
+          items:
+            type: string
+      required:
+        - uuid
+        - order_number
+        - printed_parts
+        - due_date
+    OrderStatus:
+      description: |
+        Order status:
+          * `open` - Order was submitted, but manufacturing has not started yet
+          * `processing` - Parts are being manufactured
+          * `complete` - All parts have been manufactured
+          * `incomplete` - Not all parts could be manufactured
+          * `canceled` - Order has been canceled
+      enum:
+        - open
+        - processing
+        - complete
+        - incomplete
+        - canceled
+      type: string
+      readOnly: true
+    ModelsResponse:
+      title: ModelsResponse
+      description: ''
+      type: object
+      properties:
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        total_count:
+          format: int32
+          type: integer
+        models:
+          type: array
+          items:
+            $ref: '#/components/schemas/Model'
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        models: []
+    BuildsResponse:
+      title: BuildsResponse
+      description: ''
+      type: object
+      properties:
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        total_count:
+          format: int32
+          type: integer
+        builds:
+          type: array
+          items:
+            $ref: '#/components/schemas/Build'
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        builds: []
+    OrdersResponse:
+      title: OrdersResponse
+      description: ''
+      type: object
+      properties:
+        limit:
+          format: int32
+          description: Response limit
+          type: integer
+        offset:
+          format: int32
+          description: Response offset
+          type: integer
+        total_count:
+          format: int32
+          description: Total number of orders matching the query
+          type: integer
+        orders:
+          description: Orders
+          type: array
+          items:
+            $ref: '#/components/schemas/Order'
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        orders: []
+    PartsResponse:
+      title: PartsResponse
+      description: ''
+      type: object
+      properties:
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        total_count:
+          format: int32
+          type: integer
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Part'
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        parts: []
+    PrintersResponse:
+      title: PrintersResponse
+      description: ""
+      type: object
+      properties:
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        total_count:
+          format: int32
+          type: integer
+        printers:
+          type: array
+          items:
+            $ref: "#/components/schemas/Printer"
+      required:
+        - limit
+        - offset
+        - total_count
+        - printers
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        printers: []
+    PrintedPartRef:
+      type: object
+      required:
+        - uuid
+        - part_uuid
+        - status
+      properties:
+        uuid:
+          description: Printed Part UUID
+          type: string
+        part_uuid:
+          description: Part UUID
+          type: string
+        status:
+          $ref: '#/components/schemas/PrintedPartStatus'
+    PrintedPartsResponse:
+      title: PrintedPartsResponse
+      description: ''
+      type: object
+      properties:
+        limit:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        total_count:
+          format: int32
+          type: integer
+        parts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PrintedPart'
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        parts: []
+    PartGenealogy:
+      title: PartGenealogy
+      description: 'Part manufacturing process info (nesting, queuing & printing)'
+      type: object
+      nullable: true
+      example:
+        status: printed
+        build_info:
+          build_uuid: 29b2c0e9-ba72-45b0-b0f6-4005f0c2327a
+          traveler_url: 'http://<url>'
+          slice_video_url: 'http://<url>'
+        print_info:
+          queued_at: '2019-10-11T21:25:00.000Z'
+          printer_serial: 5Y01GZ
+          print_uuid: 2992c0e9-ba72-45b0-b0f6-4005f0c2327a
+          printed_part_serial: 123334-2
+          started_at: '2019-10-11T21:30:00.000Z'
+          finished_at: '2019-10-11T21:38:00.000Z'
+          platform_serial: 6P64234
+          cassette_serial: 7C124234
+      properties:
+        build_info:
+          type: object
+          nullable: true
+          properties:
+            build_uuid:
+              type: string
+            traveler_url:
+              type: string
+            slice_video_url:
+              type: string
+            error:
+              type: string
+        print_info:
+          type: object
+          nullable: true
+          properties:
+            queued_at:
+              format: date-time
+              type: string
+            print_uuid:
+              type: string
+            printer_serial:
+              type: string
+            platform_serial:
+              type: string
+            cassette_serial:
+              type: string
+            resin_lot_number:
+              type: string
+            started_at:
+              format: date-time
+              type: string
+            finished_at:
+              format: date-time
+              type: string
+            error:
+              type: string
+    PartRequest:
+      title: PartRequest
+      required:
+        - part_number
+        - model_uuid
+      type: object
+      properties:
+        part_number:
+          description: Part Number
+          type: string
+        model_uuid:
+          description: Model UUID
+          type: string
+        application_id:
+          description: Application ID
+          type: number
+      example:
+        part_number: '12345'
+        model_uuid: 3cc663e2-c762-4f8f-8997-30d17bc13e8d
+    Part:
+      title: Part
+      description: A part that can be ordered
+      required:
+        - uuid
+        - part_number
+        - model_uuid
+      type: object
+      properties:
+        uuid:
+          description: Part UUID
+          type: string
+          readOnly: true
+        part_number:
+          description: Part Number
+          type: string
+        model_uuid:
+          description: Model UUID
+          type: string
+      example:
+        uuid: 6401c93f-f340-4da2-8784-bddd4065e75c
+        part_number: '12345'
+        model_uuid: 3cc663e2-c762-4f8f-8997-30d17bc13e8d
+    PrintedPart:
+      title: PrintedPart
+      description: A printed part
+      type: object
+      example:
+        uuid: 6401c93f-f340-4da2-8784-bddd4065e75c
+        part_uuid: 3585e82c-999f-4594-b619-5925c0203237
+        part_number: '12345'
+        order_uuid: 3585e82c-999f-4594-b619-5925c0203777
+        model_uuid: 3cc663e2-c762-4f8f-8997-30d17bc13e8d
+        status: waiting
+        genealogy:
+          build_info: {}
+          print_info: {}
+        build_uuid: 7482212b-1fd4-45aa-aba4-00db8cf8776d
+      properties:
+        uuid:
+          description: Printed Part UUID
+          type: string
+          readOnly: true
+        order_uuid:
+          type: string
+          description: Order UUID
+        part_uuid:
+          description: Part UUID
+          type: string
+        genealogy:
+          $ref: '#/components/schemas/PartGenealogy'
+        status:
+          $ref: '#/components/schemas/PrintedPartStatus'
+        serial_number:
+          type: string
+          description: Serial Number (after printing)
+          readOnly: true
+        error:
+          description: Error message (if part could not be produced)
+          type: string
+          readOnly: true
+      required:
+        - uuid
+        - order_uuid
+        - part_uuid
+        - genealogy
+        - status
+    PrintedPartStatus:
+      description: |
+        Part status:
+          * `waiting` - Part is waiting to be prepared
+          * `preparing` - Part is being prepared/packed
+          * `rejected` - Part couldn't be packed into a build
+          * `queued` - Part is queued for printing
+          * `printing` - Part is printing
+          * `complete` - Part has been manufactured
+          * `failed` - Part failed to be manufactured
+          * `canceled` - Order for this part was canceled
+      type: string
+      readOnly: true
+      enum:
+        - waiting
+        - preparing
+        - rejected
+        - queued
+        - printing
+        - printed
+        - failed
+        - canceled
+    Printer:
+      title: Printer
+      description: Printer object
+      type: object
+      example:
+        name: L9001
+        serial: 3P01CM
+        hw_type: L1
+        url: 'https://l9001.carbon3d.print.carbon3d.com'
+        updated_at: '2020-03-28T12:25:00.000Z'
+        status:
+          alerts:
+            - oxygen shortage
+          printer_state: PRINTING
+          software_version: 123.0-785.85
+        prints:
+          last:
+            name: great_file.stl
+            build_uuid: 1cf34076-417e-489f-8863-3438facd4808-10
+            print_id: JN007KA
+            finished_at: '2020-01-18T12:25:00.000Z'
+          current:
+            name: greater_file.stl
+            print_id: JN008KA
+            build_uuid: 3ff34076-417e-489f-8863-3438facd4808-99
+            started_at: '2020-01-18T14:25:00.000Z'
+            remaining_sec: 523
+          next:
+            name: future_file.stl
+            build_uuid: 66634076-417e-489f-8863-3438facd4808-09
+          queue_length: 2
+      properties:
+        name:
+          type: string
+        serial:
+          type: string
+        hw_type:
+          type: string
+        url:
+          type: string
+        updated_at:
+          type: string
+          format: date-time
+        status:
+          type: object
+          required:
+            - printer_state
+            - software_version
+          properties:
+            alerts:
+              type: array
+              items:
+                type: string
+            printer_state:
+              type: string
+            software_version:
+              type: string
+        prints:
+          type: object
+          required:
+            - queue_length
+          properties:
+            last:
+              $ref: '#/components/schemas/Print'
+            current:
+              $ref: '#/components/schemas/Print'
+            next:
+              $ref: '#/components/schemas/Print'
+            queue_length:
+              type: integer
+      required:
+        - name
+        - serial
+        - hw_type
+        - url
+        - status
+        - prints
+        - updated_at
+    Print:
+      type: object
+      description: A print of a build
+      properties:
+        name:
+          type: string
+        print_id:
+          type: string
+        build_uuid:
+          type: string
+        finished_at:
+          type: string
+          format: date-time
+        started_at:
+          type: string
+          format: date-time
+        remaining_sec:
+          description: Estimated time until expected print completion (in seconds)
+          type: integer
+    PrintsResponse:
+      title: PrintsResponse
+      type: object
+      example:
+        limit: 10
+        offset: 5
+        total_count: 100
+        parts: []
+      properties:
+        prints:
+          allOf:
+            - $ref: '#/components/schemas/Print'
+            - type: object
+              properties:
+                parts:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      part_uuid:
+                        type: string
+        total_count:
+          format: int32
+          type: integer
+        offset:
+          format: int32
+          type: integer
+        limit:
+          format: int32
+          type: integer
+  securitySchemes:
+    bearerAuth:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+security:
+  - bearerAuth: []
+tags:
+  - name: Models
+    description: Uploaded 3D model files that can be referenced by one or more parts
+  - name: Parts
+    description: Parts that can be ordered and carry a part number
+  - name: Orders
+    description: Work orders for one or more parts
+  - name: Builds
+    description: A set of parts arranged on a build platform, ready for printing
+  - name: Printed Parts
+    description: Parts that have been printed or are about to be printed
+  - name: Prints
+    description: Builds that have been printed
+  - name: Printers
+    description: Devices that produce Printed Parts based on Parts
