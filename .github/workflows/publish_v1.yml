@@ -1,4 +1,4 @@
-name: Upload Python Package
+name: Publish Python Package
 
 on:
   release:
@@ -25,4 +25,4 @@ jobs:
         pushd v1/generated
         python setup.py sdist bdist_wheel
         find .
-        twine upload --verbose --repository-url https://test.pypi.org/legacy/ dist/*
+        twine upload --verbose dist/*
