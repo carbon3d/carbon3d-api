@@ -1,0 +1,19 @@
+# Generated files
+gen/
+
+# Downloaded openapi files
+carbon-api*.yaml
+
+# Editor files
+.vscode/
+
+# pyenv
+.python-version
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+
