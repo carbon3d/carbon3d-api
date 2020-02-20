@@ -2,8 +2,6 @@
 
 ## Requirements
 
-- curl (> 7.0) to download latest Carbon API spec
-- nodejs (> 5.2) for code generation from Carbon API spec
 - python3 (> 3.5) for python examples
 
 ## Installation
