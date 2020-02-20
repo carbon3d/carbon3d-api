@@ -12,7 +12,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v1
       with:
-        python-version: '3.x'
+        python-version: '3.7'
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
@@ -25,4 +25,4 @@ jobs:
         pushd v1/generated
         python setup.py sdist bdist_wheel
         find .
-        twine upload --verbose dist/*
+        twine upload --verbose --repository-url https://test.pypi.org/legacy/ dist/*
