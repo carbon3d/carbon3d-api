@@ -13,7 +13,7 @@
 ### Model upload example
 
 ```
-v1/python/examples/model-upload.py -h
+v1/examples/model-upload.py -h
 usage: model-upload.py [-h] --model_id MODEL_ID --part_number PART_NUMBER
                        --access_token ACCESS_TOKEN [--url URL]
                        file
@@ -33,7 +33,7 @@ optional arguments:
 ### Model list example
 
 ```
-v1/python/examples/model-list.py -h
+v1/examples/model-list.py -h
 usage: model-list.py [-h] [--model_id MODEL_ID] [--part_number PART_NUMBER]
                      --access_token ACCESS_TOKEN [--api API]
 

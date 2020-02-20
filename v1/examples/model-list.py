@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 import time
-import carbon
-from carbon.rest import ApiException
+import carbon3d
+from carbon3d.rest import ApiException
 from pprint import pprint
 import os
 
@@ -19,13 +19,13 @@ my_parser.add_argument('--api', '-a', help='API URL prefix',
                        default='https://api-sandbox.carbon3d.com/v1')
 args = my_parser.parse_args()
 
-configuration = carbon.Configuration(host=args.api)
+configuration = carbon3d.Configuration(host=args.api)
 
 # Configure Bearer authorization (JWT): bearerAuth
 configuration.access_token = args.access_token
 
 # Create an instance of the API class
-api = carbon.ModelsApi(carbon.ApiClient(configuration))
+api = carbon3d.ModelsApi(carbon3d.ApiClient(configuration))
 
 try:
     # Upload a model

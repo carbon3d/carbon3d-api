@@ -7,10 +7,10 @@ from datetime import datetime, timedelta, timezone
 from http.client import HTTPConnection
 from pprint import pprint
 
-import carbon
+import carbon3d
 # To debug requests API requests:
 import requests
-from carbon.rest import ApiException
+from carbon3d.rest import ApiException
 from dateutil import tz
 
 HTTPConnection.debuglevel = 1
@@ -32,13 +32,13 @@ my_parser.add_argument('--api', '-a', help='API URL prefix',
                        default='https://api-sandbox.carbon3d.com/v1')
 args = my_parser.parse_args()
 
-configuration = carbon.Configuration(host=args.api)
+configuration = carbon3d.Configuration(host=args.api)
 
 # Configure Bearer authorization (JWT): bearerAuth
 configuration.access_token = args.access_token
 
 # Create an instance of the API class
-api_instance = carbon.OrdersApi(carbon.ApiClient(configuration))
+api_instance = carbon3d.OrdersApi(carbon3d.ApiClient(configuration))
 
 due_date = datetime.today() + timedelta(days=10)
 parts = [
