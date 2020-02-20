@@ -25,4 +25,4 @@ jobs:
         pushd v1/generated
         python setup.py sdist bdist_wheel
         find .
-        twine upload dist/*
+        twine --verbose upload dist/*
