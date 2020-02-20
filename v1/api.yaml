@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Carbon API (Draft)
-  version: 1.0.1
+  version: 0.0.1
   description: |
     An API to interact with Carbon's Manufacturing Cloud including 3D model upload, automated order processing and part history.
 

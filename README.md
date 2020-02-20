@@ -6,7 +6,7 @@
 
 ## Installation
 
-run v1/setup.sh to generate "carbon-sdk" python code and install it as a pip module
+`pip install carbon3d-client`
 
 ## Running examples
 
