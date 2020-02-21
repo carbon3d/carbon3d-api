@@ -1,6 +1,6 @@
 # carbon3d.ModelsApi
 
-All URIs are relative to *https://api-sandbox.carbon3d.com/v1*
+All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -29,8 +29,8 @@ configuration = carbon3d.Configuration()
 # Configure Bearer authorization (JWT): bearerAuth
 configuration.access_token = 'YOUR_BEARER_TOKEN'
 
-# Defining host is optional and default to https://api-sandbox.carbon3d.com/v1
-configuration.host = "https://api-sandbox.carbon3d.com/v1"
+# Defining host is optional and default to https://api.carbon3d.com/v1
+configuration.host = "https://api.carbon3d.com/v1"
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -92,8 +92,8 @@ configuration = carbon3d.Configuration()
 # Configure Bearer authorization (JWT): bearerAuth
 configuration.access_token = 'YOUR_BEARER_TOKEN'
 
-# Defining host is optional and default to https://api-sandbox.carbon3d.com/v1
-configuration.host = "https://api-sandbox.carbon3d.com/v1"
+# Defining host is optional and default to https://api.carbon3d.com/v1
+configuration.host = "https://api.carbon3d.com/v1"
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -160,14 +160,14 @@ configuration = carbon3d.Configuration()
 # Configure Bearer authorization (JWT): bearerAuth
 configuration.access_token = 'YOUR_BEARER_TOKEN'
 
-# Defining host is optional and default to https://api-sandbox.carbon3d.com/v1
-configuration.host = "https://api-sandbox.carbon3d.com/v1"
+# Defining host is optional and default to https://api.carbon3d.com/v1
+configuration.host = "https://api.carbon3d.com/v1"
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.ModelsApi(api_client)
     filename = 'filename_example' # str | Filename of the model
-application_id = 3.4 # float | Application ID (optional)
+application_id = 56 # int | Application ID (optional)
 body = '/path/to/file' # file |  (optional)
 
     try:
@@ -183,7 +183,7 @@ body = '/path/to/file' # file |  (optional)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filename** | **str**| Filename of the model | 
- **application_id** | **float**| Application ID | [optional] 
+ **application_id** | **int**| Application ID | [optional] 
  **body** | **file**|  | [optional] 
 
 ### Return type
