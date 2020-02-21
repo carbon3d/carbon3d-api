@@ -66,8 +66,11 @@ optional arguments:
   --api API, -a API     API URL prefix
 ```
 
-## TODO
-
 ### Builds
 
 ### Parts
+
+## How to release
+
+1. Create a new Github release
+2. The Github action automatically publishes to pypi
