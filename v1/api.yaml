@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Carbon API (Draft)
-  version: 0.0.2
+  version: 1.0.0
   description: |
     An API to interact with Carbon's Manufacturing Cloud including 3D model upload, automated order processing and part history.
 
@@ -26,10 +26,10 @@ info:
     url: 'https://www.carbon3d.com'
     email: api-list@carbon3d.com
 servers:
-  - url: 'https://api-sandbox.carbon3d.com/v1'
-    description: Sandbox Server
   - url: 'https://api.carbon3d.com/v1'
     description: Production Server
+  - url: 'https://api-sandbox.carbon3d.com/v1'
+    description: Sandbox Server
   - url: '{protocol}://{host}:{port}/v1'
     description: Test Endpoint
     variables:
@@ -294,7 +294,8 @@ paths:
         - name: application-id
           description: Application ID
           schema:
-            type: number
+            format: int32
+            type: integer
           in: header
     get:
       description: 'Fetch Models, filtered by the respective query parameters (most recent first)'
@@ -553,7 +554,8 @@ components:
         application_id:
           description: Application ID
           example: 99
-          type: number
+          format: int32
+          type: integer
     Build:
       title: Build
       description: A build containing one or more parts
@@ -907,7 +909,8 @@ components:
           type: string
         application_id:
           description: Application ID
-          type: number
+          format: int32
+          type: integer
       example:
         part_number: '12345'
         model_uuid: 3cc663e2-c762-4f8f-8997-30d17bc13e8d
