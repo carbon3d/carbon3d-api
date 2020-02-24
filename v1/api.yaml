@@ -90,6 +90,28 @@ paths:
           type: string
         in: path
         required: true
+  '/attachments/{uuid}':
+    summary: Path used to download a single attachment file.
+    x-controller: AttachmentController
+    get:
+      x-operation: getAttachment
+      tags:
+        - Attachments
+      responses:
+        '302':
+          description: Expected response to be a redirect to the file
+        '404':
+          description: The file does not exist or can't be accessed
+      operationId: getAttachment
+      summary: Download a file attachment
+      description: Downloads a single file attachment.
+    parameters:
+      - name: uuid
+        description: Attachment Uuid
+        schema:
+          type: string
+        in: path
+        required: true
   /orders:
     x-controller: OrderController
     post:
@@ -571,12 +593,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Part'
+        files:
+          type: array
+          items:
+            type: object
+            properties:
+              filename: 
+                type: string
+                description: Name of the file attachment
+              uuid:
+                type: string
+                description: uuid of the file, download it with /attachments/:uuid
       example:
         uuid: 98d97fe6-83d2-473c-9148-322012ea835b
         parts:
           - uuid: 9962b034-e64b-4f81-a40d-26b885239a58
             part_number: B142353
             model_uuid: 2ce02977-fad4-4b21-b49c-019144d945a8
+        files:
+          - filename: 'traveler.pdf'
+            uuid: 10d97fe6-fad4-7721-b49c-017133d945b0
     OrderRequest:
       title: OrderRequest
       type: object
