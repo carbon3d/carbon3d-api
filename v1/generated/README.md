@@ -79,15 +79,14 @@ configuration.host = "https://api.carbon3d.com/v1"
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = carbon3d.BuildsApi(api_client)
-    uuid = 'uuid_example' # str | Build Uuid
+    api_instance = carbon3d.AttachmentsApi(api_client)
+    uuid = 'uuid_example' # str | Attachment Uuid
 
     try:
-        # Fetch a build
-        api_response = api_instance.get_build(uuid)
-        pprint(api_response)
+        # Download a file attachment
+        api_instance.get_attachment(uuid)
     except ApiException as e:
-        print("Exception when calling BuildsApi->get_build: %s\n" % e)
+        print("Exception when calling AttachmentsApi->get_attachment: %s\n" % e)
     
 ```
 
@@ -97,6 +96,7 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AttachmentsApi* | [**get_attachment**](docs/AttachmentsApi.md#get_attachment) | **GET** /attachments/{uuid} | Download a file attachment
 *BuildsApi* | [**get_build**](docs/BuildsApi.md#get_build) | **GET** /builds/{uuid} | Fetch a build
 *BuildsApi* | [**get_builds**](docs/BuildsApi.md#get_builds) | **GET** /builds | Fetch builds
 *ModelsApi* | [**get_model**](docs/ModelsApi.md#get_model) | **GET** /models/{uuid} | Get a model by UUID
@@ -119,6 +119,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Build](docs/Build.md)
+ - [BuildFiles](docs/BuildFiles.md)
  - [BuildsResponse](docs/BuildsResponse.md)
  - [Model](docs/Model.md)
  - [ModelPrint](docs/ModelPrint.md)

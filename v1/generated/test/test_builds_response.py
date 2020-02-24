@@ -41,7 +41,7 @@ class TestBuildsResponse(unittest.TestCase):
                 offset = 56, 
                 total_count = 56, 
                 builds = [
-                    {"uuid":"98d97fe6-83d2-473c-9148-322012ea835b","parts":[{"uuid":"9962b034-e64b-4f81-a40d-26b885239a58","part_number":"B142353","model_uuid":"2ce02977-fad4-4b21-b49c-019144d945a8"}]}
+                    {"uuid":"98d97fe6-83d2-473c-9148-322012ea835b","parts":[{"uuid":"9962b034-e64b-4f81-a40d-26b885239a58","part_number":"B142353","model_uuid":"2ce02977-fad4-4b21-b49c-019144d945a8"}],"files":[{"filename":"traveler.pdf","uuid":"10d97fe6-fad4-7721-b49c-017133d945b0"}]}
                     ]
             )
         else :

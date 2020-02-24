@@ -18,6 +18,7 @@ from __future__ import absolute_import
 __version__ = "1.0.0"
 
 # import apis into sdk package
+from carbon3d.api.attachments_api import AttachmentsApi
 from carbon3d.api.builds_api import BuildsApi
 from carbon3d.api.models_api import ModelsApi
 from carbon3d.api.orders_api import OrdersApi
@@ -36,6 +37,7 @@ from carbon3d.exceptions import ApiKeyError
 from carbon3d.exceptions import ApiException
 # import models into sdk package
 from carbon3d.models.build import Build
+from carbon3d.models.build_files import BuildFiles
 from carbon3d.models.builds_response import BuildsResponse
 from carbon3d.models.model import Model
 from carbon3d.models.model_print import ModelPrint

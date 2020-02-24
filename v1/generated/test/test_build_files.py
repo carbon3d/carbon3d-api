@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import carbon3d
-from carbon3d.models.build import Build  # noqa: E501
+from carbon3d.models.build_files import BuildFiles  # noqa: E501
 from carbon3d.rest import ApiException
 
-class TestBuild(unittest.TestCase):
-    """Build unit test stubs"""
+class TestBuildFiles(unittest.TestCase):
+    """BuildFiles unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,33 +30,22 @@ class TestBuild(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test Build
+        """Test BuildFiles
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = carbon3d.models.build.Build()  # noqa: E501
+        # model = carbon3d.models.build_files.BuildFiles()  # noqa: E501
         if include_optional :
-            return Build(
-                uuid = '0', 
-                parts = [
-                    {"uuid":"6401c93f-f340-4da2-8784-bddd4065e75c","part_number":"12345","model_uuid":"3cc663e2-c762-4f8f-8997-30d17bc13e8d"}
-                    ], 
-                files = [
-                    carbon3d.models.build_files.Build_files(
-                        filename = '0', 
-                        uuid = '0', )
-                    ]
+            return BuildFiles(
+                filename = '0', 
+                uuid = '0'
             )
         else :
-            return Build(
-                uuid = '0',
-                parts = [
-                    {"uuid":"6401c93f-f340-4da2-8784-bddd4065e75c","part_number":"12345","model_uuid":"3cc663e2-c762-4f8f-8997-30d17bc13e8d"}
-                    ],
+            return BuildFiles(
         )
 
-    def testBuild(self):
-        """Test Build"""
+    def testBuildFiles(self):
+        """Test BuildFiles"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 
