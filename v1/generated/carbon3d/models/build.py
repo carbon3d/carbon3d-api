@@ -36,16 +36,16 @@ class Build(object):
     openapi_types = {
         'uuid': 'str',
         'parts': 'list[Part]',
-        'files': 'list[BuildFiles]'
+        'attachments': 'list[BuildAttachments]'
     }
 
     attribute_map = {
         'uuid': 'uuid',
         'parts': 'parts',
-        'files': 'files'
+        'attachments': 'attachments'
     }
 
-    def __init__(self, uuid=None, parts=None, files=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, uuid=None, parts=None, attachments=None, local_vars_configuration=None):  # noqa: E501
         """Build - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -53,13 +53,13 @@ class Build(object):
 
         self._uuid = None
         self._parts = None
-        self._files = None
+        self._attachments = None
         self.discriminator = None
 
         self.uuid = uuid
         self.parts = parts
-        if files is not None:
-            self.files = files
+        if attachments is not None:
+            self.attachments = attachments
 
     @property
     def uuid(self):
@@ -108,25 +108,25 @@ class Build(object):
         self._parts = parts
 
     @property
-    def files(self):
-        """Gets the files of this Build.  # noqa: E501
+    def attachments(self):
+        """Gets the attachments of this Build.  # noqa: E501
 
 
-        :return: The files of this Build.  # noqa: E501
-        :rtype: list[BuildFiles]
+        :return: The attachments of this Build.  # noqa: E501
+        :rtype: list[BuildAttachments]
         """
-        return self._files
+        return self._attachments
 
-    @files.setter
-    def files(self, files):
-        """Sets the files of this Build.
+    @attachments.setter
+    def attachments(self, attachments):
+        """Sets the attachments of this Build.
 
 
-        :param files: The files of this Build.  # noqa: E501
-        :type: list[BuildFiles]
+        :param attachments: The attachments of this Build.  # noqa: E501
+        :type: list[BuildAttachments]
         """
 
-        self._files = files
+        self._attachments = attachments
 
     def to_dict(self):
         """Returns the model properties as a dict"""

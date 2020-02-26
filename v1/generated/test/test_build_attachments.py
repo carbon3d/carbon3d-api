@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import carbon3d
-from carbon3d.models.build_files import BuildFiles  # noqa: E501
+from carbon3d.models.build_attachments import BuildAttachments  # noqa: E501
 from carbon3d.rest import ApiException
 
-class TestBuildFiles(unittest.TestCase):
-    """BuildFiles unit test stubs"""
+class TestBuildAttachments(unittest.TestCase):
+    """BuildAttachments unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,22 +30,22 @@ class TestBuildFiles(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test BuildFiles
+        """Test BuildAttachments
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = carbon3d.models.build_files.BuildFiles()  # noqa: E501
+        # model = carbon3d.models.build_attachments.BuildAttachments()  # noqa: E501
         if include_optional :
-            return BuildFiles(
+            return BuildAttachments(
                 filename = '0', 
                 uuid = '0'
             )
         else :
-            return BuildFiles(
+            return BuildAttachments(
         )
 
-    def testBuildFiles(self):
-        """Test BuildFiles"""
+    def testBuildAttachments(self):
+        """Test BuildAttachments"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -41,8 +41,8 @@ class TestBuild(unittest.TestCase):
                 parts = [
                     {"uuid":"6401c93f-f340-4da2-8784-bddd4065e75c","part_number":"12345","model_uuid":"3cc663e2-c762-4f8f-8997-30d17bc13e8d"}
                     ], 
-                files = [
-                    carbon3d.models.build_files.Build_files(
+                attachments = [
+                    carbon3d.models.build_attachments.Build_attachments(
                         filename = '0', 
                         uuid = '0', )
                     ]

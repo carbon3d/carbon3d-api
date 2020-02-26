@@ -16,7 +16,7 @@ from __future__ import absolute_import
 
 # import models into model package
 from carbon3d.models.build import Build
-from carbon3d.models.build_files import BuildFiles
+from carbon3d.models.build_attachments import BuildAttachments
 from carbon3d.models.builds_response import BuildsResponse
 from carbon3d.models.model import Model
 from carbon3d.models.model_print import ModelPrint

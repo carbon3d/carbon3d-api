@@ -119,7 +119,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Build](docs/Build.md)
- - [BuildFiles](docs/BuildFiles.md)
+ - [BuildAttachments](docs/BuildAttachments.md)
  - [BuildsResponse](docs/BuildsResponse.md)
  - [Model](docs/Model.md)
  - [ModelPrint](docs/ModelPrint.md)
