@@ -593,7 +593,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Part'
-        files:
+        attachments:
           type: array
           items:
             type: object
