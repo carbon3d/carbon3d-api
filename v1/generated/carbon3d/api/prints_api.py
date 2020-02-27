@@ -38,7 +38,7 @@ class PrintsApi(object):
         self.api_client = api_client
 
     def get_prints(self, limit, offset, **kwargs):  # noqa: E501
-        """List print information  # noqa: E501
+        """List finished prints information  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -49,8 +49,6 @@ class PrintsApi(object):
         :param int limit: Max records to return (required)
         :param int offset: Number of items to skip (required)
         :param str platform_serial: Platform used for print
-        :param list[str] sort: Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order.
-        :param str status:
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -66,7 +64,7 @@ class PrintsApi(object):
         return self.get_prints_with_http_info(limit, offset, **kwargs)  # noqa: E501
 
     def get_prints_with_http_info(self, limit, offset, **kwargs):  # noqa: E501
-        """List print information  # noqa: E501
+        """List finished prints information  # noqa: E501
 
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
@@ -77,8 +75,6 @@ class PrintsApi(object):
         :param int limit: Max records to return (required)
         :param int offset: Number of items to skip (required)
         :param str platform_serial: Platform used for print
-        :param list[str] sort: Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order.
-        :param str status:
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -95,7 +91,7 @@ class PrintsApi(object):
 
         local_var_params = locals()
 
-        all_params = ['limit', 'offset', 'platform_serial', 'sort', 'status']  # noqa: E501
+        all_params = ['limit', 'offset', 'platform_serial']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -135,11 +131,6 @@ class PrintsApi(object):
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
         if 'offset' in local_var_params and local_var_params['offset'] is not None:  # noqa: E501
             query_params.append(('offset', local_var_params['offset']))  # noqa: E501
-        if 'sort' in local_var_params and local_var_params['sort'] is not None:  # noqa: E501
-            query_params.append(('sort', local_var_params['sort']))  # noqa: E501
-            collection_formats['sort'] = 'multi'  # noqa: E501
-        if 'status' in local_var_params and local_var_params['status'] is not None:  # noqa: E501
-            query_params.append(('status', local_var_params['status']))  # noqa: E501
 
         header_params = {}
 

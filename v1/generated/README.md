@@ -113,7 +113,7 @@ Class | Method | HTTP request | Description
 *PrintedPartsApi* | [**get_printed_parts**](docs/PrintedPartsApi.md#get_printed_parts) | **GET** /printed_parts | Fetch printed parts
 *PrintersApi* | [**get_printer**](docs/PrintersApi.md#get_printer) | **GET** /printers/{name} | Fetch a specific printer&#39;s status information
 *PrintersApi* | [**get_printers**](docs/PrintersApi.md#get_printers) | **GET** /printers | Fetch all printer&#39;s status information
-*PrintsApi* | [**get_prints**](docs/PrintsApi.md#get_prints) | **GET** /prints | List print information
+*PrintsApi* | [**get_prints**](docs/PrintsApi.md#get_prints) | **GET** /prints | List finished prints information
 
 
 ## Documentation For Models

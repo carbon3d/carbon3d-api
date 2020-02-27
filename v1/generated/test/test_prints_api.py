@@ -32,7 +32,7 @@ class TestPrintsApi(unittest.TestCase):
     def test_get_prints(self):
         """Test case for get_prints
 
-        List print information  # noqa: E501
+        List finished prints information  # noqa: E501
         """
         pass
 

@@ -4,13 +4,13 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_prints**](PrintsApi.md#get_prints) | **GET** /prints | List print information
+[**get_prints**](PrintsApi.md#get_prints) | **GET** /prints | List finished prints information
 
 
 # **get_prints**
-> ModelPrint get_prints(limit, offset, platform_serial=platform_serial, sort=sort, status=status)
+> ModelPrint get_prints(limit, offset, platform_serial=platform_serial)
 
-List print information
+List finished prints information
 
 ### Example
 
@@ -34,12 +34,10 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
 platform_serial = 'platform_serial_example' # str | Platform used for print (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
-status = 'status_example' # str |  (optional)
 
     try:
-        # List print information
-        api_response = api_instance.get_prints(limit, offset, platform_serial=platform_serial, sort=sort, status=status)
+        # List finished prints information
+        api_response = api_instance.get_prints(limit, offset, platform_serial=platform_serial)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintsApi->get_prints: %s\n" % e)
@@ -52,8 +50,6 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
  **platform_serial** | **str**| Platform used for print | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
- **status** | **str**|  | [optional] 
 
 ### Return type
 
