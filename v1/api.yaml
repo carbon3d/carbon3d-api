@@ -471,7 +471,7 @@ paths:
         required: true
   /prints:
     get:
-      summary: List print information
+      summary: List finished prints information
       tags:
         - Prints
       responses:
@@ -492,14 +492,6 @@ paths:
           in: query
         - $ref: '#/components/parameters/LimitParam'
         - $ref: '#/components/parameters/OffsetParam'
-        - $ref: '#/components/parameters/SortParam'
-        - schema:
-            type: string
-            enum:
-              - printing
-              - done
-          in: query
-          name: status
   /printers:
     summary: Path used to retrieve status of all printers
     x-controller: PrinterController
