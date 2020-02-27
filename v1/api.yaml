@@ -470,14 +470,15 @@ paths:
         in: path
         required: true
   /prints:
+    x-controller: PrintController
     get:
+      x-operation: listPrints
       summary: List finished prints information
       tags:
         - Prints
       responses:
         '200':
           description: OK
-          headers: {}
           content:
             application/json:
               schema:
