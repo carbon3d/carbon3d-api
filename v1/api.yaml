@@ -1,14 +1,14 @@
 openapi: 3.0.0
 info:
-  title: Carbon API (Draft)
-  version: 1.0.0
+  title: Carbon API
+  version: 0.0.3
   description: |
     An API to interact with Carbon's Manufacturing Cloud including 3D model upload, automated order processing and part history.
 
     Getting started
     ---------------
 
-    - [Generate and download an API key](https://carbon3d.print.carbon3d.com/api_keys)
+    - [Generate and download an API key](https://print.carbon3d.com/api_keys)
       - Your API key and client secret will be downloaded into a secret.json file.
 
     - [Use generated API key to generate a JWT token](/token_generator) from the api key.
@@ -591,7 +591,7 @@ components:
           items:
             type: object
             properties:
-              filename: 
+              filename:
                 type: string
                 description: Name of the file attachment
               uuid:
@@ -1040,7 +1040,7 @@ components:
         name: L9001
         serial: 3P01CM
         hw_type: L1
-        url: 'https://l9001.carbon3d.print.carbon3d.com'
+        url: 'https://l9001.customer.print.carbon3d.com'
         updated_at: '2020-03-28T12:25:00.000Z'
         status:
           alerts:
