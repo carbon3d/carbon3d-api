@@ -643,6 +643,8 @@ components:
         - order_number
         - due_date
         - parts
+    # TODO: Use the 'allOf' inheritance function once the code generator works again
+    # https://github.com/OpenAPITools/openapi-generator/issues/2845
     Order:
       title: Order
       description: An order to print parts
@@ -667,12 +669,6 @@ components:
         order_number:
           description: Customer-provided order number
           type: string
-        printed_parts:
-          description: Parts already printed or to be printed
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/PrintedPartRef'
         due_date:
           description: 'Print due date, used to prioritize orders for packing and printing'
           format: date-time
@@ -682,11 +678,17 @@ components:
           type: array
           items:
             type: string
+        printed_parts:
+          description: Parts already printed or to be printed
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/PrintedPartRef'
       required:
         - uuid
         - order_number
-        - printed_parts
         - due_date
+        - printed_parts
     OrderStatus:
       description: |
         Order status:
@@ -770,7 +772,28 @@ components:
           description: Orders
           type: array
           items:
-            $ref: '#/components/schemas/Order'
+            type: object
+            properties:
+              uuid:
+                description: Order UUID
+                type: string
+              status:
+                $ref: '#/components/schemas/OrderStatus'
+              order_number:
+                description: Customer-provided order number
+                type: string
+              printed_parts_count:
+                description: Quantity of printed parts in the order
+                type: integer
+              due_date:
+                description: 'Print due date, used to prioritize orders for packing and printing'
+                format: date-time
+                type: string
+              route_to:
+                description: Section to route this order to (e.g. production, a rework line)
+                type: array
+                items:
+                  type: string
       example:
         limit: 10
         offset: 5
