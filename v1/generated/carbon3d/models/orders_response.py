@@ -37,7 +37,7 @@ class OrdersResponse(object):
         'limit': 'int',
         'offset': 'int',
         'total_count': 'int',
-        'orders': 'list[Order]'
+        'orders': 'list[OrdersResponseOrders]'
     }
 
     attribute_map = {
@@ -144,7 +144,7 @@ class OrdersResponse(object):
         Orders  # noqa: E501
 
         :return: The orders of this OrdersResponse.  # noqa: E501
-        :rtype: list[Order]
+        :rtype: list[OrdersResponseOrders]
         """
         return self._orders
 
@@ -155,7 +155,7 @@ class OrdersResponse(object):
         Orders  # noqa: E501
 
         :param orders: The orders of this OrdersResponse.  # noqa: E501
-        :type: list[Order]
+        :type: list[OrdersResponseOrders]
         """
 
         self._orders = orders

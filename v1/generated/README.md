@@ -129,6 +129,7 @@ Class | Method | HTTP request | Description
  - [OrderRequestParts](docs/OrderRequestParts.md)
  - [OrderStatus](docs/OrderStatus.md)
  - [OrdersResponse](docs/OrdersResponse.md)
+ - [OrdersResponseOrders](docs/OrdersResponseOrders.md)
  - [Part](docs/Part.md)
  - [PartGenealogy](docs/PartGenealogy.md)
  - [PartGenealogyBuildInfo](docs/PartGenealogyBuildInfo.md)

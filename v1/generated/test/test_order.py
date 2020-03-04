@@ -40,28 +40,28 @@ class TestOrder(unittest.TestCase):
                 uuid = '0', 
                 status = 'open', 
                 order_number = '0', 
+                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                route_to = [
+                    '0'
+                    ], 
                 printed_parts = [
                     carbon3d.models.printed_part_ref.PrintedPartRef(
                         uuid = '0', 
                         part_uuid = '0', 
                         status = 'waiting', )
-                    ], 
-                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                route_to = [
-                    '0'
                     ]
             )
         else :
             return Order(
                 uuid = '0',
                 order_number = '0',
+                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 printed_parts = [
                     carbon3d.models.printed_part_ref.PrintedPartRef(
                         uuid = '0', 
                         part_uuid = '0', 
                         status = 'waiting', )
                     ],
-                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
 
     def testOrder(self):
