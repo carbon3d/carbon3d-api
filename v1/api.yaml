@@ -490,7 +490,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Print'
+                $ref: '#/components/schemas/PrintsResponse'
       operationId: getPrints
       description: ''
       parameters:
@@ -1126,11 +1126,11 @@ components:
             - queue_length
           properties:
             last:
-              $ref: '#/components/schemas/Print'
+              $ref: '#/components/schemas/PrintRef'
             current:
-              $ref: '#/components/schemas/Print'
+              $ref: '#/components/schemas/PrintRef'
             next:
-              $ref: '#/components/schemas/Print'
+              $ref: '#/components/schemas/PrintRef'
             queue_length:
               type: integer
       required:
@@ -1141,7 +1141,7 @@ components:
         - status
         - prints
         - updated_at
-    Print:
+    PrintRef:
       type: object
       description: A print of a build
       properties:
@@ -1167,20 +1167,12 @@ components:
         limit: 10
         offset: 5
         total_count: 100
-        parts: []
+        prints: []
       properties:
         prints:
-          allOf:
-            - $ref: '#/components/schemas/Print'
-            - type: object
-              properties:
-                parts:
-                  type: array
-                  items:
-                    type: object
-                    properties:
-                      part_uuid:
-                        type: string
+          type: array
+          items:
+            $ref: '#/components/schemas/PrintRef'
         total_count:
           format: int32
           type: integer
