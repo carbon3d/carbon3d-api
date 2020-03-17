@@ -34,9 +34,9 @@ class PrinterPrints(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'last': 'ModelPrint',
-        'current': 'ModelPrint',
-        'next': 'ModelPrint',
+        'last': 'PrintRef',
+        'current': 'PrintRef',
+        'next': 'PrintRef',
         'queue_length': 'int'
     }
 
@@ -73,7 +73,7 @@ class PrinterPrints(object):
 
 
         :return: The last of this PrinterPrints.  # noqa: E501
-        :rtype: ModelPrint
+        :rtype: PrintRef
         """
         return self._last
 
@@ -83,7 +83,7 @@ class PrinterPrints(object):
 
 
         :param last: The last of this PrinterPrints.  # noqa: E501
-        :type: ModelPrint
+        :type: PrintRef
         """
 
         self._last = last
@@ -94,7 +94,7 @@ class PrinterPrints(object):
 
 
         :return: The current of this PrinterPrints.  # noqa: E501
-        :rtype: ModelPrint
+        :rtype: PrintRef
         """
         return self._current
 
@@ -104,7 +104,7 @@ class PrinterPrints(object):
 
 
         :param current: The current of this PrinterPrints.  # noqa: E501
-        :type: ModelPrint
+        :type: PrintRef
         """
 
         self._current = current
@@ -115,7 +115,7 @@ class PrinterPrints(object):
 
 
         :return: The next of this PrinterPrints.  # noqa: E501
-        :rtype: ModelPrint
+        :rtype: PrintRef
         """
         return self._next
 
@@ -125,7 +125,7 @@ class PrinterPrints(object):
 
 
         :param next: The next of this PrinterPrints.  # noqa: E501
-        :type: ModelPrint
+        :type: PrintRef
         """
 
         self._next = next

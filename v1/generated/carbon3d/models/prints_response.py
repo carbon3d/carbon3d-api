@@ -34,7 +34,7 @@ class PrintsResponse(object):
                             and the value is json key in definition.
     """
     openapi_types = {
-        'prints': 'ModelPrint',
+        'prints': 'list[PrintRef]',
         'total_count': 'int',
         'offset': 'int',
         'limit': 'int'
@@ -74,7 +74,7 @@ class PrintsResponse(object):
 
 
         :return: The prints of this PrintsResponse.  # noqa: E501
-        :rtype: ModelPrint
+        :rtype: list[PrintRef]
         """
         return self._prints
 
@@ -84,7 +84,7 @@ class PrintsResponse(object):
 
 
         :param prints: The prints of this PrintsResponse.  # noqa: E501
-        :type: ModelPrint
+        :type: list[PrintRef]
         """
 
         self._prints = prints

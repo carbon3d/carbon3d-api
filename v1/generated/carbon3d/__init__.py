@@ -40,7 +40,6 @@ from carbon3d.models.build import Build
 from carbon3d.models.build_attachments import BuildAttachments
 from carbon3d.models.builds_response import BuildsResponse
 from carbon3d.models.model import Model
-from carbon3d.models.model_print import ModelPrint
 from carbon3d.models.models_response import ModelsResponse
 from carbon3d.models.order import Order
 from carbon3d.models.order_request import OrderRequest
@@ -54,6 +53,7 @@ from carbon3d.models.part_genealogy_build_info import PartGenealogyBuildInfo
 from carbon3d.models.part_genealogy_print_info import PartGenealogyPrintInfo
 from carbon3d.models.part_request import PartRequest
 from carbon3d.models.parts_response import PartsResponse
+from carbon3d.models.print_ref import PrintRef
 from carbon3d.models.printed_part import PrintedPart
 from carbon3d.models.printed_part_ref import PrintedPartRef
 from carbon3d.models.printed_part_status import PrintedPartStatus

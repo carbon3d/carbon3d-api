@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_prints**
-> ModelPrint get_prints(limit, offset, platform_serial=platform_serial)
+> PrintsResponse get_prints(limit, offset, platform_serial=platform_serial)
 
 List finished prints information
 
@@ -53,7 +53,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ModelPrint**](ModelPrint.md)
+[**PrintsResponse**](PrintsResponse.md)
 
 ### Authorization
 

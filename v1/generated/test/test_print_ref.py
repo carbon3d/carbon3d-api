@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import carbon3d
-from carbon3d.models.model_print import ModelPrint  # noqa: E501
+from carbon3d.models.print_ref import PrintRef  # noqa: E501
 from carbon3d.rest import ApiException
 
-class TestModelPrint(unittest.TestCase):
-    """ModelPrint unit test stubs"""
+class TestPrintRef(unittest.TestCase):
+    """PrintRef unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,13 +30,13 @@ class TestModelPrint(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test ModelPrint
+        """Test PrintRef
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = carbon3d.models.model_print.ModelPrint()  # noqa: E501
+        # model = carbon3d.models.print_ref.PrintRef()  # noqa: E501
         if include_optional :
-            return ModelPrint(
+            return PrintRef(
                 name = '0', 
                 print_id = '0', 
                 build_uuid = '0', 
@@ -45,11 +45,11 @@ class TestModelPrint(unittest.TestCase):
                 remaining_sec = 56
             )
         else :
-            return ModelPrint(
+            return PrintRef(
         )
 
-    def testModelPrint(self):
-        """Test ModelPrint"""
+    def testPrintRef(self):
+        """Test PrintRef"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -37,21 +37,21 @@ class TestPrinterPrints(unittest.TestCase):
         # model = carbon3d.models.printer_prints.PrinterPrints()  # noqa: E501
         if include_optional :
             return PrinterPrints(
-                last = carbon3d.models.print.Print(
+                last = carbon3d.models.print_ref.PrintRef(
                     name = '0', 
                     print_id = '0', 
                     build_uuid = '0', 
                     finished_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     started_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     remaining_sec = 56, ), 
-                current = carbon3d.models.print.Print(
+                current = carbon3d.models.print_ref.PrintRef(
                     name = '0', 
                     print_id = '0', 
                     build_uuid = '0', 
                     finished_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     started_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     remaining_sec = 56, ), 
-                next = carbon3d.models.print.Print(
+                next = carbon3d.models.print_ref.PrintRef(
                     name = '0', 
                     print_id = '0', 
                     build_uuid = '0', 

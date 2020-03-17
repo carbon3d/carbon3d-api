@@ -37,7 +37,15 @@ class TestPrintsResponse(unittest.TestCase):
         # model = carbon3d.models.prints_response.PrintsResponse()  # noqa: E501
         if include_optional :
             return PrintsResponse(
-                prints = null, 
+                prints = [
+                    carbon3d.models.print_ref.PrintRef(
+                        name = '0', 
+                        print_id = '0', 
+                        build_uuid = '0', 
+                        finished_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        started_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        remaining_sec = 56, )
+                    ], 
                 total_count = 56, 
                 offset = 56, 
                 limit = 56
