@@ -1,6 +1,5 @@
 # coding: utf-8
 
-# flake8: noqa
 """
     Carbon DLS API
 
@@ -14,32 +13,41 @@
 
 from __future__ import absolute_import
 
-# import models into model package
-from carbon3d.models.build import Build
-from carbon3d.models.build_attachments import BuildAttachments
-from carbon3d.models.builds_response import BuildsResponse
-from carbon3d.models.model import Model
-from carbon3d.models.models_response import ModelsResponse
-from carbon3d.models.order import Order
-from carbon3d.models.order_request import OrderRequest
-from carbon3d.models.order_request_parts import OrderRequestParts
-from carbon3d.models.order_status import OrderStatus
-from carbon3d.models.order_update_request import OrderUpdateRequest
-from carbon3d.models.orders_response import OrdersResponse
-from carbon3d.models.orders_response_orders import OrdersResponseOrders
-from carbon3d.models.part import Part
-from carbon3d.models.part_genealogy import PartGenealogy
-from carbon3d.models.part_genealogy_build_info import PartGenealogyBuildInfo
-from carbon3d.models.part_genealogy_print_info import PartGenealogyPrintInfo
-from carbon3d.models.part_request import PartRequest
-from carbon3d.models.parts_response import PartsResponse
-from carbon3d.models.print_ref import PrintRef
-from carbon3d.models.printed_part import PrintedPart
-from carbon3d.models.printed_part_ref import PrintedPartRef
-from carbon3d.models.printed_part_status import PrintedPartStatus
-from carbon3d.models.printed_parts_response import PrintedPartsResponse
-from carbon3d.models.printer import Printer
-from carbon3d.models.printer_prints import PrinterPrints
-from carbon3d.models.printer_status import PrinterStatus
-from carbon3d.models.printers_response import PrintersResponse
-from carbon3d.models.prints_response import PrintsResponse
+import unittest
+import datetime
+
+import carbon3d
+from carbon3d.models.order_update_request import OrderUpdateRequest  # noqa: E501
+from carbon3d.rest import ApiException
+
+class TestOrderUpdateRequest(unittest.TestCase):
+    """OrderUpdateRequest unit test stubs"""
+
+    def setUp(self):
+        pass
+
+    def tearDown(self):
+        pass
+
+    def make_instance(self, include_optional):
+        """Test OrderUpdateRequest
+            include_option is a boolean, when False only required
+            params are included, when True both required and
+            optional params are included """
+        # model = carbon3d.models.order_update_request.OrderUpdateRequest()  # noqa: E501
+        if include_optional :
+            return OrderUpdateRequest(
+                flush = True
+            )
+        else :
+            return OrderUpdateRequest(
+        )
+
+    def testOrderUpdateRequest(self):
+        """Test OrderUpdateRequest"""
+        inst_req_only = self.make_instance(include_optional=False)
+        inst_req_and_optional = self.make_instance(include_optional=True)
+
+
+if __name__ == '__main__':
+    unittest.main()

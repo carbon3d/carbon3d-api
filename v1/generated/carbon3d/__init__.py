@@ -45,6 +45,7 @@ from carbon3d.models.order import Order
 from carbon3d.models.order_request import OrderRequest
 from carbon3d.models.order_request_parts import OrderRequestParts
 from carbon3d.models.order_status import OrderStatus
+from carbon3d.models.order_update_request import OrderUpdateRequest
 from carbon3d.models.orders_response import OrdersResponse
 from carbon3d.models.orders_response_orders import OrdersResponseOrders
 from carbon3d.models.part import Part

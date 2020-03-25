@@ -57,6 +57,13 @@ class TestOrdersApi(unittest.TestCase):
         """
         pass
 
+    def test_update_order(self):
+        """Test case for update_order
+
+        Update an Order  # noqa: E501
+        """
+        pass
+
 
 if __name__ == '__main__':
     unittest.main()

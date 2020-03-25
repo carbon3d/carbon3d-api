@@ -44,7 +44,8 @@ class TestOrdersResponseOrders(unittest.TestCase):
                 due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                 route_to = [
                     '0'
-                    ]
+                    ], 
+                flushed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else :
             return OrdersResponseOrders(

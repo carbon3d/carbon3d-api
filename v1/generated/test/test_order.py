@@ -49,7 +49,8 @@ class TestOrder(unittest.TestCase):
                         uuid = '0', 
                         part_uuid = '0', 
                         status = 'waiting', )
-                    ]
+                    ], 
+                flushed_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
         else :
             return Order(

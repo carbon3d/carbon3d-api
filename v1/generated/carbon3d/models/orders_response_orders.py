@@ -39,7 +39,8 @@ class OrdersResponseOrders(object):
         'order_number': 'str',
         'printed_parts_count': 'int',
         'due_date': 'datetime',
-        'route_to': 'list[str]'
+        'route_to': 'list[str]',
+        'flushed_at': 'datetime'
     }
 
     attribute_map = {
@@ -48,10 +49,11 @@ class OrdersResponseOrders(object):
         'order_number': 'order_number',
         'printed_parts_count': 'printed_parts_count',
         'due_date': 'due_date',
-        'route_to': 'route_to'
+        'route_to': 'route_to',
+        'flushed_at': 'flushed_at'
     }
 
-    def __init__(self, uuid=None, status=None, order_number=None, printed_parts_count=None, due_date=None, route_to=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, uuid=None, status=None, order_number=None, printed_parts_count=None, due_date=None, route_to=None, flushed_at=None, local_vars_configuration=None):  # noqa: E501
         """OrdersResponseOrders - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
@@ -63,6 +65,7 @@ class OrdersResponseOrders(object):
         self._printed_parts_count = None
         self._due_date = None
         self._route_to = None
+        self._flushed_at = None
         self.discriminator = None
 
         if uuid is not None:
@@ -77,6 +80,8 @@ class OrdersResponseOrders(object):
             self.due_date = due_date
         if route_to is not None:
             self.route_to = route_to
+        if flushed_at is not None:
+            self.flushed_at = flushed_at
 
     @property
     def uuid(self):
@@ -213,6 +218,29 @@ class OrdersResponseOrders(object):
         """
 
         self._route_to = route_to
+
+    @property
+    def flushed_at(self):
+        """Gets the flushed_at of this OrdersResponseOrders.  # noqa: E501
+
+        When the order was flushed through the packer, or null if it is not flushed.  # noqa: E501
+
+        :return: The flushed_at of this OrdersResponseOrders.  # noqa: E501
+        :rtype: datetime
+        """
+        return self._flushed_at
+
+    @flushed_at.setter
+    def flushed_at(self, flushed_at):
+        """Sets the flushed_at of this OrdersResponseOrders.
+
+        When the order was flushed through the packer, or null if it is not flushed.  # noqa: E501
+
+        :param flushed_at: The flushed_at of this OrdersResponseOrders.  # noqa: E501
+        :type: datetime
+        """
+
+        self._flushed_at = flushed_at
 
     def to_dict(self):
         """Returns the model properties as a dict"""

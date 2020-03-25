@@ -113,6 +113,7 @@ Class | Method | HTTP request | Description
 *OrdersApi* | [**delete_order**](docs/OrdersApi.md#delete_order) | **DELETE** /orders/{uuid} | Cancel an Order
 *OrdersApi* | [**get_order**](docs/OrdersApi.md#get_order) | **GET** /orders/{uuid} | Get an Order
 *OrdersApi* | [**get_orders**](docs/OrdersApi.md#get_orders) | **GET** /orders | Fetch orders
+*OrdersApi* | [**update_order**](docs/OrdersApi.md#update_order) | **PATCH** /orders/{uuid} | Update an Order
 *PartsApi* | [**create_part**](docs/PartsApi.md#create_part) | **POST** /parts | Create a Part
 *PartsApi* | [**get_part**](docs/PartsApi.md#get_part) | **GET** /parts/{uuid} | Fetch a Part
 *PartsApi* | [**get_parts**](docs/PartsApi.md#get_parts) | **GET** /parts | Fetch parts
@@ -134,6 +135,7 @@ Class | Method | HTTP request | Description
  - [OrderRequest](docs/OrderRequest.md)
  - [OrderRequestParts](docs/OrderRequestParts.md)
  - [OrderStatus](docs/OrderStatus.md)
+ - [OrderUpdateRequest](docs/OrderUpdateRequest.md)
  - [OrdersResponse](docs/OrdersResponse.md)
  - [OrdersResponseOrders](docs/OrdersResponseOrders.md)
  - [Part](docs/Part.md)
