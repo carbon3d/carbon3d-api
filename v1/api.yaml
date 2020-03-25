@@ -190,6 +190,29 @@ paths:
       operationId: getOrder
       summary: Get an Order
       description: Gets the details of a single Order.
+    patch:
+      x-operation: updateOrder
+      tags:
+        - Orders
+      requestBody:
+        description: Update an existing Order.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrderUpdateRequest'
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: Expected response to a valid request
+        '404':
+          description: The order does not exist
+      operationId: updateOrder
+      summary: Update an Order
+      description: Updates parts of a single Order.
+
     delete:
       x-operation: deleteOrder
       tags:
@@ -624,6 +647,7 @@ components:
         due_date: '2020-03-28T12:25:00.000Z'
         route_to:
           - production
+        flush: false
       properties:
         order_number:
           description: Customer-provided order number
@@ -647,10 +671,24 @@ components:
           type: array
           items:
             type: string
+        flush:
+          description: Push parts in an order through the auto-packer.
+          type: boolean
       required:
         - order_number
         - due_date
         - parts
+    OrderUpdateRequest:
+      title: OrderUpdateRequest
+      type: object
+      example:
+        flush: true
+      properties:
+        flush:
+          description: Push parts in an order through the auto-packer.
+          type: boolean
+          enum:
+            - true
     # TODO: Use the 'allOf' inheritance function once the code generator works again
     # https://github.com/OpenAPITools/openapi-generator/issues/2845
     Order:
@@ -667,6 +705,7 @@ components:
         due_date: '2020-03-28T12:25:00.000Z'
         route_to:
           - production
+        flushed_at: '2020-03-28T12:25:00.000Z'
       properties:
         uuid:
           description: Order UUID
@@ -692,6 +731,10 @@ components:
           minItems: 1
           items:
             $ref: '#/components/schemas/PrintedPartRef'
+        flushed_at:
+          description: 'When the order was flushed, or null if it has not been flushed'
+          format: date-time
+          type: string
       required:
         - uuid
         - order_number
@@ -802,6 +845,10 @@ components:
                 type: array
                 items:
                   type: string
+              flushed_at:
+                description: When the order was flushed through the packer, or null if it is not flushed.
+                format: date-time
+                type: string
       example:
         limit: 10
         offset: 5
