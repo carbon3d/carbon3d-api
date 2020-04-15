@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Carbon DLS API
-  version: 0.0.3
+  version: 0.0.4
   description: |
     Welcome to the Carbon DLS API docs!
 
