@@ -31,6 +31,7 @@ configuration.access_token = 'YOUR_BEARER_TOKEN'
 
 # Defining host is optional and default to https://api.carbon3d.com/v1
 configuration.host = "https://api.carbon3d.com/v1"
+
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -94,6 +95,7 @@ configuration.access_token = 'YOUR_BEARER_TOKEN'
 
 # Defining host is optional and default to https://api.carbon3d.com/v1
 configuration.host = "https://api.carbon3d.com/v1"
+
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -162,6 +164,7 @@ configuration.access_token = 'YOUR_BEARER_TOKEN'
 
 # Defining host is optional and default to https://api.carbon3d.com/v1
 configuration.host = "https://api.carbon3d.com/v1"
+
 # Enter a context with an instance of the API client
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
