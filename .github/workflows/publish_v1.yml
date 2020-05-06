@@ -22,7 +22,7 @@ jobs:
         TWINE_USERNAME: __token__
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        pushd v1/generated
+        pushd v1/python
         python setup.py sdist bdist_wheel
         find .
         twine upload --verbose dist/*
