@@ -103,7 +103,8 @@ with carbon3d.ApiClient(configuration) as api_client:
 
     try:
         # Download a file attachment
-        api_instance.get_attachment(uuid)
+        api_response = api_instance.get_attachment(uuid)
+        pprint(api_response)
     except ApiException as e:
         print("Exception when calling AttachmentsApi->get_attachment: %s\n" % e)
     

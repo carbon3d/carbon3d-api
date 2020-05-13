@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_attachment**
-> get_attachment(uuid)
+> file get_attachment(uuid)
 
 Download a file attachment
 
@@ -47,7 +47,8 @@ with carbon3d.ApiClient(configuration) as api_client:
 
     try:
         # Download a file attachment
-        api_instance.get_attachment(uuid)
+        api_response = api_instance.get_attachment(uuid)
+        pprint(api_response)
     except ApiException as e:
         print("Exception when calling AttachmentsApi->get_attachment: %s\n" % e)
 ```
@@ -60,7 +61,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-void (empty response body)
+**file**
 
 ### Authorization
 
@@ -69,11 +70,12 @@ void (empty response body)
 ### HTTP request headers
 
  - **Content-Type**: Not defined
- - **Accept**: Not defined
+ - **Accept**: application/octet-stream
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
+**200** | File response after redirect |  -  |
 **302** | Expected response to be a redirect to the file |  -  |
 **404** | The file does not exist or can&#39;t be accessed |  -  |
 

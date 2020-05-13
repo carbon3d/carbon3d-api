@@ -13,19 +13,25 @@ The documentation in this wiki is intended to help you get started and provide s
 ### Authentication
 The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token to authenticate each request. Follow these steps to get started.
 1. Generate an API Key [here](https://carbon3d.print.carbon3d.com/api_keys)* by clicking the "Create API Key" button. This will automatically download a `secrets.json` file; your client secret is NOT stored by Carbon.
-2. You can now use the `authenticate-create.py`script to generate a valid token with your desired expiration. You can re-generate as many tokens as you'd like with new expirations utilizing the same secret.
-`# generate an access token that is valid for 24 hours
-v1/python/examples/authtoken-create.py path/to/secret.json --exp_hours 24`
+2. You can now use the `authenticate-create.py`script to generate a valid token with your desired expiration. You can re-generate as many tokens as you'd like with new expirations utilizing the same secret. For example, to generate a token that is valid for 24 hours you could run:
+    ``` bash
+    v1/python/examples/authtoken-create.py path/to/secret.json --exp_hours 24
+    ```
 3. You must now add an HTTP header `Authorization: Bearer [token]` in all of your requests.
 
 *If you can't access this page, please reach out to your Carbon Technical Partner to discuss gaining access to our Early Access Program.
 
 ### Definitions
 **Models:** A 3d file representing a geometry with no particular orientation, supports, etc. Models can belong to multiple parts.
+
 **Parts:** A printable model design which has a specific orientation, resin, etc.
+
 **Printed Parts:** A specific instance of a part that has been printed and properly serialized.
+
 **Orders:** A logical grouping of parts you would like to print on as few builds as possible.
-**Builds:** A printable set of parts arranged on a build platform ready for printing.  
+
+**Builds:** A printable set of parts arranged on a build platform ready for printing.
+
 ## Examples
 ### Python
 Read more about our Python examples [here](v1/python_examples/README.md)
@@ -52,10 +58,8 @@ Part numbers are a common term used in manufacturing to denote a reference to a 
 ### Are there any API calls that allow me to interact with the printer (e.g. start a print, open the door, etc)?
 Unfortunately, this API is not intended to facilitate robotic automation for a printer. If this is something you need, please let your Carbon Technical Partner know.
 
-
 ### Can you add ____ to the print data we are able to export?
 Please submit the request via <api-list@carbon3d.com>
 
 ## Feedback
 Please send all questions and feedback to <api-list@carbon3d.com>
-

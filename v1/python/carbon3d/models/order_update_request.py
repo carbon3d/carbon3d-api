@@ -57,7 +57,7 @@ class OrderUpdateRequest(object):
     def flush(self):
         """Gets the flush of this OrderUpdateRequest.  # noqa: E501
 
-        Push parts in an order through the auto-packer.  # noqa: E501
+        Push parts in an order through the auto-packer. A value of false is ignored.  # noqa: E501
 
         :return: The flush of this OrderUpdateRequest.  # noqa: E501
         :rtype: bool
@@ -68,17 +68,11 @@ class OrderUpdateRequest(object):
     def flush(self, flush):
         """Sets the flush of this OrderUpdateRequest.
 
-        Push parts in an order through the auto-packer.  # noqa: E501
+        Push parts in an order through the auto-packer. A value of false is ignored.  # noqa: E501
 
         :param flush: The flush of this OrderUpdateRequest.  # noqa: E501
         :type: bool
         """
-        allowed_values = [true]  # noqa: E501
-        if self.local_vars_configuration.client_side_validation and flush not in allowed_values:  # noqa: E501
-            raise ValueError(
-                "Invalid value for `flush` ({0}), must be one of {1}"  # noqa: E501
-                .format(flush, allowed_values)
-            )
 
         self._flush = flush
 
