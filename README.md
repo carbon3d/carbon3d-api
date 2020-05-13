@@ -1,4 +1,4 @@
-# Carbon API testing
+# Carbon API
 Welcome to the Carbon DLS API. 
 The documentation here will help you get started integrating with our API, but first, **make sure you've reached out to your Carbon Technical Partner and signed all the required documents**.
 

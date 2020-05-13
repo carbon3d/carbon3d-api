@@ -1,5 +1,5 @@
 # carbon3d-client
-Welcome to the Carbon DLS API docs! TESTING 
+Welcome to the Carbon DLS API docs!
 
 A Carbon DLS API token ([JWT](https://en.wikipedia.org/wiki/JSON_Web_Token)) must be included with each request to the API.
 
