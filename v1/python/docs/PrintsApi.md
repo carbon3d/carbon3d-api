@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_prints**
-> PrintsResponse get_prints(limit, offset, platform_serial=platform_serial)
+> PrintsResponse get_prints(limit, offset, platform_serial=platform_serial, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after)
 
 List finished prints information
 
@@ -44,10 +44,14 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
 platform_serial = 'platform_serial_example' # str | Platform used for print (optional)
+started_before = 'started_before_example' # str | Print started before timestamp (inclusive) (optional)
+started_after = 'started_after_example' # str | Print started after timestamp (inclusive) (optional)
+finished_before = 'finished_before_example' # str | Print finished before timestamp (inclusive) (optional)
+finished_after = 'finished_after_example' # str | Print finished after timestamp (inclusive) (optional)
 
     try:
         # List finished prints information
-        api_response = api_instance.get_prints(limit, offset, platform_serial=platform_serial)
+        api_response = api_instance.get_prints(limit, offset, platform_serial=platform_serial, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintsApi->get_prints: %s\n" % e)
@@ -60,6 +64,10 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
  **platform_serial** | **str**| Platform used for print | [optional] 
+ **started_before** | **str**| Print started before timestamp (inclusive) | [optional] 
+ **started_after** | **str**| Print started after timestamp (inclusive) | [optional] 
+ **finished_before** | **str**| Print finished before timestamp (inclusive) | [optional] 
+ **finished_after** | **str**| Print finished after timestamp (inclusive) | [optional] 
 
 ### Return type
 

@@ -49,6 +49,10 @@ class PrintsApi(object):
         :param int limit: Max records to return (required)
         :param int offset: Number of items to skip (required)
         :param str platform_serial: Platform used for print
+        :param str started_before: Print started before timestamp (inclusive)
+        :param str started_after: Print started after timestamp (inclusive)
+        :param str finished_before: Print finished before timestamp (inclusive)
+        :param str finished_after: Print finished after timestamp (inclusive)
         :param _preload_content: if False, the urllib3.HTTPResponse object will
                                  be returned without reading/decoding response
                                  data. Default is True.
@@ -75,6 +79,10 @@ class PrintsApi(object):
         :param int limit: Max records to return (required)
         :param int offset: Number of items to skip (required)
         :param str platform_serial: Platform used for print
+        :param str started_before: Print started before timestamp (inclusive)
+        :param str started_after: Print started after timestamp (inclusive)
+        :param str finished_before: Print finished before timestamp (inclusive)
+        :param str finished_after: Print finished after timestamp (inclusive)
         :param _return_http_data_only: response data without head status code
                                        and headers
         :param _preload_content: if False, the urllib3.HTTPResponse object will
@@ -94,7 +102,11 @@ class PrintsApi(object):
         all_params = [
             'limit',
             'offset',
-            'platform_serial'
+            'platform_serial',
+            'started_before',
+            'started_after',
+            'finished_before',
+            'finished_after'
         ]
         all_params.extend(
             [
@@ -135,6 +147,14 @@ class PrintsApi(object):
         query_params = []
         if 'platform_serial' in local_var_params and local_var_params['platform_serial'] is not None:  # noqa: E501
             query_params.append(('platform_serial', local_var_params['platform_serial']))  # noqa: E501
+        if 'started_before' in local_var_params and local_var_params['started_before'] is not None:  # noqa: E501
+            query_params.append(('started_before', local_var_params['started_before']))  # noqa: E501
+        if 'started_after' in local_var_params and local_var_params['started_after'] is not None:  # noqa: E501
+            query_params.append(('started_after', local_var_params['started_after']))  # noqa: E501
+        if 'finished_before' in local_var_params and local_var_params['finished_before'] is not None:  # noqa: E501
+            query_params.append(('finished_before', local_var_params['finished_before']))  # noqa: E501
+        if 'finished_after' in local_var_params and local_var_params['finished_after'] is not None:  # noqa: E501
+            query_params.append(('finished_after', local_var_params['finished_after']))  # noqa: E501
         if 'limit' in local_var_params and local_var_params['limit'] is not None:  # noqa: E501
             query_params.append(('limit', local_var_params['limit']))  # noqa: E501
         if 'offset' in local_var_params and local_var_params['offset'] is not None:  # noqa: E501
