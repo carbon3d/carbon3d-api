@@ -31,14 +31,13 @@ class PrintedPartStatus(object):
     """
     WAITING = "waiting"
     PREPARING = "preparing"
-    REJECTED = "rejected"
     QUEUED = "queued"
     PRINTING = "printing"
     COMPLETE = "complete"
     FAILED = "failed"
     CANCELED = "canceled"
 
-    allowable_values = [WAITING, PREPARING, REJECTED, QUEUED, PRINTING, COMPLETE, FAILED, CANCELED]  # noqa: E501
+    allowable_values = [WAITING, PREPARING, QUEUED, PRINTING, COMPLETE, FAILED, CANCELED]  # noqa: E501
 
     """
     Attributes:
