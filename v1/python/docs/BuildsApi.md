@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_builds**
-> BuildsResponse get_builds(limit, offset, sort=sort)
+> BuildsResponse get_builds(limit, offset)
 
 Fetch builds
 
@@ -119,11 +119,10 @@ with carbon3d.ApiClient(configuration) as api_client:
     api_instance = carbon3d.BuildsApi(api_client)
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
 
     try:
         # Fetch builds
-        api_response = api_instance.get_builds(limit, offset, sort=sort)
+        api_response = api_instance.get_builds(limit, offset)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling BuildsApi->get_builds: %s\n" % e)
@@ -135,7 +134,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
 
 ### Return type
 

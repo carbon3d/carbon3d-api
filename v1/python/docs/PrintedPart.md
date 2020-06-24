@@ -5,7 +5,7 @@ A printed part
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** | Printed Part UUID | [readonly] 
-**order_uuid** | **str** | Order UUID | 
+**part_order_uuid** | **str** | PartOrder UUID | 
 **part_uuid** | **str** | Part UUID | 
 **genealogy** | [**PartGenealogy**](PartGenealogy.md) |  | 
 **status** | [**PrintedPartStatus**](PrintedPartStatus.md) |  | 

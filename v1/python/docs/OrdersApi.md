@@ -268,9 +268,9 @@ with carbon3d.ApiClient(configuration) as api_client:
     api_instance = carbon3d.OrdersApi(api_client)
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
-status = carbon3d.OrderStatus() # OrderStatus | Order status (optional)
+status = carbon3d.PartOrderStatus() # PartOrderStatus | Order status (optional)
 order_number = 'order_number_example' # str | Customer-provided order number (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
+sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `order_number`, `due_date`, `flushed_at` (optional)
 
     try:
         # Fetch orders
@@ -286,9 +286,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
- **status** | [**OrderStatus**](.md)| Order status | [optional] 
+ **status** | [**PartOrderStatus**](.md)| Order status | [optional] 
  **order_number** | **str**| Customer-provided order number | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
+ **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;order_number&#x60;, &#x60;due_date&#x60;, &#x60;flushed_at&#x60; | [optional] 
 
 ### Return type
 

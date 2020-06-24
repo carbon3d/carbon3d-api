@@ -10,7 +10,7 @@ First, generate an API key and download the secret.json file by following the st
 You can then create your access token using the example script `authtoken-create.py`
 ```
 # generate an access token that is valid for 24 hours
-v1/python/examples/authtoken-create.py path/to/secret.json --exp_hours 24
+v1/python_examples/authtoken_create.py path/to/secret.json --exp_minutes 1440
 ```
 
 ### Create a custom part order
@@ -28,8 +28,8 @@ Builds can be retrieved either in bulk or by UUID at the /builds endpoint.
 Build attachments (traveler, slice video) can be retrieved by UUID at the /attachments endpoint.
 
 ```
-./v1/python/examples/custom-part-order.py --help
-usage: custom-part-order.py [-h] [--application_id APPLICATION_ID]
+./v1/python_examples/custom_part_order.py --help
+usage: custom_part_order.py [-h] [--application_id APPLICATION_ID]
                             [--host HOST] --part_catalog_num PART_CATALOG_NUM
                             --order_number ORDER_NUMBER --due_date DUE_DATE
                             --secret SECRET

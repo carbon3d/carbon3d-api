@@ -121,7 +121,7 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
 filename = 'filename_example' # str | Filename of the model (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
+sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `filename` (optional)
 
     try:
         # Fetch models
@@ -138,7 +138,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
  **filename** | **str**| Filename of the model | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
+ **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;filename&#x60; | [optional] 
 
 ### Return type
 

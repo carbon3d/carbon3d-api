@@ -5,7 +5,7 @@ An order to print parts
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** | Order UUID | [readonly] 
-**status** | [**OrderStatus**](OrderStatus.md) |  | [optional] 
+**status** | [**PartOrderStatus**](PartOrderStatus.md) |  | [optional] 
 **order_number** | **str** | Customer-provided order number | 
 **due_date** | **datetime** | Print due date, used to prioritize orders for packing and printing | 
 **route_to** | **list[str]** | Section to route this order to (e.g. a rework line) | [optional] 

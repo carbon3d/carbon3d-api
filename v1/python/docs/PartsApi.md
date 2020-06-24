@@ -193,7 +193,7 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
 model_uuid = 'model_uuid_example' # str | Model UUID (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
+sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `part_number` (optional)
 
     try:
         # Fetch parts
@@ -210,7 +210,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
  **model_uuid** | **str**| Model UUID | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
+ **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;part_number&#x60; | [optional] 
 
 ### Return type
 

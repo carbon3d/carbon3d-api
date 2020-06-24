@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** | Order UUID | [optional] 
-**status** | [**OrderStatus**](OrderStatus.md) |  | [optional] 
+**status** | [**PartOrderStatus**](PartOrderStatus.md) |  | [optional] 
 **order_number** | **str** | Customer-provided order number | [optional] 
 **printed_parts_count** | **int** | Quantity of printed parts in the order | [optional] 
 **due_date** | **datetime** | Print due date, used to prioritize orders for packing and printing | [optional] 

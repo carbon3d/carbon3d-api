@@ -28,7 +28,9 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
 
 **Printed Parts:** A specific instance of a part that has been printed and properly serialized.
 
-**Orders:** A logical grouping of parts you would like to print on as few builds as possible.
+**Part Orders:** A logical grouping of parts you would like to be auto packed on as few builds as possible.
+
+**Print Orders:** A single build that you would like to queue N times on M printers.
 
 **Builds:** A printable set of parts arranged on a build platform ready for printing.
 

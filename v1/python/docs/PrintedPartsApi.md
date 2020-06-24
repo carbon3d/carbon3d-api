@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_printed_parts**
-> PrintedPartsResponse get_printed_parts(limit, offset, status=status, order_uuid=order_uuid, part_uuid=part_uuid, order_number=order_number, sort=sort)
+> PrintedPartsResponse get_printed_parts(limit, offset, status=status, part_order_uuid=part_order_uuid, part_uuid=part_uuid, part_order_number=part_order_number, sort=sort)
 
 Fetch printed parts
 
@@ -120,14 +120,14 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
 status = carbon3d.PrintedPartStatus() # PrintedPartStatus | Current printed part status (optional)
-order_uuid = 'order_uuid_example' # str | Order UUID (optional)
+part_order_uuid = 'part_order_uuid_example' # str | PartOrder UUID (optional)
 part_uuid = 'part_uuid_example' # str | Part UUID (optional)
-order_number = 'order_number_example' # str | Customer-provided order number the printed parts belong to (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. (optional)
+part_order_number = 'part_order_number_example' # str | Customer-provided part order number the printed parts belong to (optional)
+sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `status`, `part_number` (optional)
 
     try:
         # Fetch printed parts
-        api_response = api_instance.get_printed_parts(limit, offset, status=status, order_uuid=order_uuid, part_uuid=part_uuid, order_number=order_number, sort=sort)
+        api_response = api_instance.get_printed_parts(limit, offset, status=status, part_order_uuid=part_order_uuid, part_uuid=part_uuid, part_order_number=part_order_number, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintedPartsApi->get_printed_parts: %s\n" % e)
@@ -140,10 +140,10 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
  **status** | [**PrintedPartStatus**](.md)| Current printed part status | [optional] 
- **order_uuid** | **str**| Order UUID | [optional] 
+ **part_order_uuid** | **str**| PartOrder UUID | [optional] 
  **part_uuid** | **str**| Part UUID | [optional] 
- **order_number** | **str**| Customer-provided order number the printed parts belong to | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. | [optional] 
+ **part_order_number** | **str**| Customer-provided part order number the printed parts belong to | [optional] 
+ **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;status&#x60;, &#x60;part_number&#x60; | [optional] 
 
 ### Return type
 
