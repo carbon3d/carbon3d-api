@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** | Printed Part UUID | [readonly] 
 **part_order_uuid** | **str** | PartOrder UUID | 
+**part_order_number** | **str** | Customer-provided part order number | [optional] 
 **part_uuid** | **str** | Part UUID | 
+**part_number** | **str** | Part Number | [optional] 
 **genealogy** | [**PartGenealogy**](PartGenealogy.md) |  | 
 **status** | [**PrintedPartStatus**](PrintedPartStatus.md) |  | 
 **serial_number** | **str** | Serial Number (after printing) | [optional] [readonly] 

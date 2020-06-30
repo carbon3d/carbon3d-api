@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import carbon3d
-from carbon3d.models.part import Part  # noqa: E501
+from carbon3d.models.print_order_routed_to import PrintOrderRoutedTo  # noqa: E501
 from carbon3d.rest import ApiException
 
-class TestPart(unittest.TestCase):
-    """Part unit test stubs"""
+class TestPrintOrderRoutedTo(unittest.TestCase):
+    """PrintOrderRoutedTo unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,26 +30,22 @@ class TestPart(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test Part
+        """Test PrintOrderRoutedTo
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = carbon3d.models.part.Part()  # noqa: E501
+        # model = carbon3d.models.print_order_routed_to.PrintOrderRoutedTo()  # noqa: E501
         if include_optional :
-            return Part(
-                uuid = '0', 
-                part_number = '0', 
-                model_uuid = '0'
+            return PrintOrderRoutedTo(
+                copies_queued = 56, 
+                copies_printed = 56
             )
         else :
-            return Part(
-                uuid = '0',
-                part_number = '0',
-                model_uuid = '0',
+            return PrintOrderRoutedTo(
         )
 
-    def testPart(self):
-        """Test Part"""
+    def testPrintOrderRoutedTo(self):
+        """Test PrintOrderRoutedTo"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -4,12 +4,12 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_printer**](PrintersApi.md#get_printer) | **GET** /printers/{name} | Fetch a specific printer&#39;s status information
+[**get_printer**](PrintersApi.md#get_printer) | **GET** /printers/{serial} | Fetch a specific printer&#39;s status information
 [**get_printers**](PrintersApi.md#get_printers) | **GET** /printers | Fetch all printer&#39;s status information
 
 
 # **get_printer**
-> Printer get_printer(name)
+> Printer get_printer(serial)
 
 Fetch a specific printer's status information
 
@@ -42,11 +42,11 @@ configuration = carbon3d.Configuration(
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.PrintersApi(api_client)
-    name = 'name_example' # str | e.g. L1001
+    serial = 'serial_example' # str | e.g. 3P01CM
 
     try:
         # Fetch a specific printer's status information
-        api_response = api_instance.get_printer(name)
+        api_response = api_instance.get_printer(serial)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintersApi->get_printer: %s\n" % e)
@@ -56,7 +56,7 @@ with carbon3d.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **name** | **str**| e.g. L1001 | 
+ **serial** | **str**| e.g. 3P01CM | 
 
 ### Return type
 

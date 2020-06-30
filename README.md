@@ -49,7 +49,7 @@ Models can't be printed; they just represent three-dimensional shapes that can b
 A project is a collection of builds that have been modified over time. For example, let's say you open our project editing software, upload 10 models, then click print. Afterwards, you realize you want to change the orientation of a few of the models so you open the project again, modify the orientation, and click print. You printed the same project but two different builds.
 
 ### How can I queue a build?
-We haven't exposed this endpoint yet, look out for updates.
+You can use the [createPrintOrder](https://api.carbon3d.com/v1/api-docs/#/PrintOrders/createPrintOrder) API method.
 
 ### Why can't I see my models, orders, etc. in the UI.
 Please let us know if you'd like to see these concepts exposed in our UI.
