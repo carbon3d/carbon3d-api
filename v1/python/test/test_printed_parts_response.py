@@ -41,7 +41,7 @@ class TestPrintedPartsResponse(unittest.TestCase):
                 offset = 56, 
                 total_count = 56, 
                 parts = [
-                    {"uuid":"6401c93f-f340-4da2-8784-bddd4065e75c","part_uuid":"3585e82c-999f-4594-b619-5925c0203237","part_number":"12345","part_order_uuid":"3585e82c-999f-4594-b619-5925c0203777","model_uuid":"3cc663e2-c762-4f8f-8997-30d17bc13e8d","status":"waiting","genealogy":{"build_info":{},"print_info":{}},"build_uuid":"7482212b-1fd4-45aa-aba4-00db8cf8776d"}
+                    {"build_uuid":"d938c229-a14d-4314-8a00-f2d2717c43d0","model_uuid":"26ee9a9b-0a23-4146-93de-27afea4acd65","part_number":"101000-01","part_order_number":"","part_order_uuid":"7eacc87e-e4ee-4911-b317-039717dd9a76","part_uuid":"4133bbe6-4858-4f18-ad6f-95ef6ea08b31","print_id":"KT310GVA","print_order_number":"WO-123","print_order_uuid":"657208d6-d796-4623-8981-d7aa66932a69","serial_number":"KT310GVA-1","status":"complete","tags":{"part_number":{"size":"large","color":"red"},"part":{"customization_id":"123456"},"printed_part":{}},"uuid":"cc49c64d-c3cf-45f8-943b-c8693f28c146"}
                     ]
             )
         else :

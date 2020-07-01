@@ -69,6 +69,7 @@ from carbon3d.models.print_ref import PrintRef
 from carbon3d.models.printed_part import PrintedPart
 from carbon3d.models.printed_part_ref import PrintedPartRef
 from carbon3d.models.printed_part_status import PrintedPartStatus
+from carbon3d.models.printed_part_tags import PrintedPartTags
 from carbon3d.models.printed_parts_response import PrintedPartsResponse
 from carbon3d.models.printer import Printer
 from carbon3d.models.printer_prints import PrinterPrints

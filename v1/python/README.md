@@ -156,6 +156,7 @@ Class | Method | HTTP request | Description
  - [PrintedPart](docs/PrintedPart.md)
  - [PrintedPartRef](docs/PrintedPartRef.md)
  - [PrintedPartStatus](docs/PrintedPartStatus.md)
+ - [PrintedPartTags](docs/PrintedPartTags.md)
  - [PrintedPartsResponse](docs/PrintedPartsResponse.md)
  - [Printer](docs/Printer.md)
  - [PrinterPrints](docs/PrinterPrints.md)

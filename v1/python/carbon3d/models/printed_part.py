@@ -35,61 +35,87 @@ class PrintedPart(object):
     """
     openapi_types = {
         'uuid': 'str',
+        'part_uuid': 'str',
+        'model_uuid': 'str',
+        'part_number': 'str',
+        'build_uuid': 'str',
         'part_order_uuid': 'str',
         'part_order_number': 'str',
-        'part_uuid': 'str',
-        'part_number': 'str',
-        'genealogy': 'PartGenealogy',
-        'status': 'PrintedPartStatus',
+        'print_order_uuid': 'str',
+        'print_order_number': 'str',
+        'print_id': 'str',
         'serial_number': 'str',
-        'build_uuid': 'str',
+        'tags': 'PrintedPartTags',
+        'status': 'PrintedPartStatus',
+        'genealogy': 'PartGenealogy',
         'error': 'str'
     }
 
     attribute_map = {
         'uuid': 'uuid',
+        'part_uuid': 'part_uuid',
+        'model_uuid': 'model_uuid',
+        'part_number': 'part_number',
+        'build_uuid': 'build_uuid',
         'part_order_uuid': 'part_order_uuid',
         'part_order_number': 'part_order_number',
-        'part_uuid': 'part_uuid',
-        'part_number': 'part_number',
-        'genealogy': 'genealogy',
-        'status': 'status',
+        'print_order_uuid': 'print_order_uuid',
+        'print_order_number': 'print_order_number',
+        'print_id': 'print_id',
         'serial_number': 'serial_number',
-        'build_uuid': 'build_uuid',
+        'tags': 'tags',
+        'status': 'status',
+        'genealogy': 'genealogy',
         'error': 'error'
     }
 
-    def __init__(self, uuid=None, part_order_uuid=None, part_order_number=None, part_uuid=None, part_number=None, genealogy=None, status=None, serial_number=None, build_uuid=None, error=None, local_vars_configuration=None):  # noqa: E501
+    def __init__(self, uuid=None, part_uuid=None, model_uuid=None, part_number=None, build_uuid=None, part_order_uuid=None, part_order_number=None, print_order_uuid=None, print_order_number=None, print_id=None, serial_number=None, tags=None, status=None, genealogy=None, error=None, local_vars_configuration=None):  # noqa: E501
         """PrintedPart - a model defined in OpenAPI"""  # noqa: E501
         if local_vars_configuration is None:
             local_vars_configuration = Configuration()
         self.local_vars_configuration = local_vars_configuration
 
         self._uuid = None
+        self._part_uuid = None
+        self._model_uuid = None
+        self._part_number = None
+        self._build_uuid = None
         self._part_order_uuid = None
         self._part_order_number = None
-        self._part_uuid = None
-        self._part_number = None
-        self._genealogy = None
-        self._status = None
+        self._print_order_uuid = None
+        self._print_order_number = None
+        self._print_id = None
         self._serial_number = None
-        self._build_uuid = None
+        self._tags = None
+        self._status = None
+        self._genealogy = None
         self._error = None
         self.discriminator = None
 
         self.uuid = uuid
-        self.part_order_uuid = part_order_uuid
-        if part_order_number is not None:
-            self.part_order_number = part_order_number
         self.part_uuid = part_uuid
+        if model_uuid is not None:
+            self.model_uuid = model_uuid
         if part_number is not None:
             self.part_number = part_number
-        self.genealogy = genealogy
-        self.status = status
-        if serial_number is not None:
-            self.serial_number = serial_number
         if build_uuid is not None:
             self.build_uuid = build_uuid
+        if part_order_uuid is not None:
+            self.part_order_uuid = part_order_uuid
+        if part_order_number is not None:
+            self.part_order_number = part_order_number
+        if print_order_uuid is not None:
+            self.print_order_uuid = print_order_uuid
+        if print_order_number is not None:
+            self.print_order_number = print_order_number
+        if print_id is not None:
+            self.print_id = print_id
+        if serial_number is not None:
+            self.serial_number = serial_number
+        if tags is not None:
+            self.tags = tags
+        self.status = status
+        self.genealogy = genealogy
         if error is not None:
             self.error = error
 
@@ -119,58 +145,9 @@ class PrintedPart(object):
         self._uuid = uuid
 
     @property
-    def part_order_uuid(self):
-        """Gets the part_order_uuid of this PrintedPart.  # noqa: E501
-
-        PartOrder UUID  # noqa: E501
-
-        :return: The part_order_uuid of this PrintedPart.  # noqa: E501
-        :rtype: str
-        """
-        return self._part_order_uuid
-
-    @part_order_uuid.setter
-    def part_order_uuid(self, part_order_uuid):
-        """Sets the part_order_uuid of this PrintedPart.
-
-        PartOrder UUID  # noqa: E501
-
-        :param part_order_uuid: The part_order_uuid of this PrintedPart.  # noqa: E501
-        :type: str
-        """
-        if self.local_vars_configuration.client_side_validation and part_order_uuid is None:  # noqa: E501
-            raise ValueError("Invalid value for `part_order_uuid`, must not be `None`")  # noqa: E501
-
-        self._part_order_uuid = part_order_uuid
-
-    @property
-    def part_order_number(self):
-        """Gets the part_order_number of this PrintedPart.  # noqa: E501
-
-        Customer-provided part order number  # noqa: E501
-
-        :return: The part_order_number of this PrintedPart.  # noqa: E501
-        :rtype: str
-        """
-        return self._part_order_number
-
-    @part_order_number.setter
-    def part_order_number(self, part_order_number):
-        """Sets the part_order_number of this PrintedPart.
-
-        Customer-provided part order number  # noqa: E501
-
-        :param part_order_number: The part_order_number of this PrintedPart.  # noqa: E501
-        :type: str
-        """
-
-        self._part_order_number = part_order_number
-
-    @property
     def part_uuid(self):
         """Gets the part_uuid of this PrintedPart.  # noqa: E501
 
-        Part UUID  # noqa: E501
 
         :return: The part_uuid of this PrintedPart.  # noqa: E501
         :rtype: str
@@ -181,7 +158,6 @@ class PrintedPart(object):
     def part_uuid(self, part_uuid):
         """Sets the part_uuid of this PrintedPart.
 
-        Part UUID  # noqa: E501
 
         :param part_uuid: The part_uuid of this PrintedPart.  # noqa: E501
         :type: str
@@ -192,10 +168,30 @@ class PrintedPart(object):
         self._part_uuid = part_uuid
 
     @property
+    def model_uuid(self):
+        """Gets the model_uuid of this PrintedPart.  # noqa: E501
+
+
+        :return: The model_uuid of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._model_uuid
+
+    @model_uuid.setter
+    def model_uuid(self, model_uuid):
+        """Sets the model_uuid of this PrintedPart.
+
+
+        :param model_uuid: The model_uuid of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._model_uuid = model_uuid
+
+    @property
     def part_number(self):
         """Gets the part_number of this PrintedPart.  # noqa: E501
 
-        Part Number  # noqa: E501
 
         :return: The part_number of this PrintedPart.  # noqa: E501
         :rtype: str
@@ -206,7 +202,6 @@ class PrintedPart(object):
     def part_number(self, part_number):
         """Sets the part_number of this PrintedPart.
 
-        Part Number  # noqa: E501
 
         :param part_number: The part_number of this PrintedPart.  # noqa: E501
         :type: str
@@ -215,25 +210,174 @@ class PrintedPart(object):
         self._part_number = part_number
 
     @property
-    def genealogy(self):
-        """Gets the genealogy of this PrintedPart.  # noqa: E501
+    def build_uuid(self):
+        """Gets the build_uuid of this PrintedPart.  # noqa: E501
 
 
-        :return: The genealogy of this PrintedPart.  # noqa: E501
-        :rtype: PartGenealogy
+        :return: The build_uuid of this PrintedPart.  # noqa: E501
+        :rtype: str
         """
-        return self._genealogy
+        return self._build_uuid
 
-    @genealogy.setter
-    def genealogy(self, genealogy):
-        """Sets the genealogy of this PrintedPart.
+    @build_uuid.setter
+    def build_uuid(self, build_uuid):
+        """Sets the build_uuid of this PrintedPart.
 
 
-        :param genealogy: The genealogy of this PrintedPart.  # noqa: E501
-        :type: PartGenealogy
+        :param build_uuid: The build_uuid of this PrintedPart.  # noqa: E501
+        :type: str
         """
 
-        self._genealogy = genealogy
+        self._build_uuid = build_uuid
+
+    @property
+    def part_order_uuid(self):
+        """Gets the part_order_uuid of this PrintedPart.  # noqa: E501
+
+
+        :return: The part_order_uuid of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._part_order_uuid
+
+    @part_order_uuid.setter
+    def part_order_uuid(self, part_order_uuid):
+        """Sets the part_order_uuid of this PrintedPart.
+
+
+        :param part_order_uuid: The part_order_uuid of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._part_order_uuid = part_order_uuid
+
+    @property
+    def part_order_number(self):
+        """Gets the part_order_number of this PrintedPart.  # noqa: E501
+
+
+        :return: The part_order_number of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._part_order_number
+
+    @part_order_number.setter
+    def part_order_number(self, part_order_number):
+        """Sets the part_order_number of this PrintedPart.
+
+
+        :param part_order_number: The part_order_number of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._part_order_number = part_order_number
+
+    @property
+    def print_order_uuid(self):
+        """Gets the print_order_uuid of this PrintedPart.  # noqa: E501
+
+
+        :return: The print_order_uuid of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._print_order_uuid
+
+    @print_order_uuid.setter
+    def print_order_uuid(self, print_order_uuid):
+        """Sets the print_order_uuid of this PrintedPart.
+
+
+        :param print_order_uuid: The print_order_uuid of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._print_order_uuid = print_order_uuid
+
+    @property
+    def print_order_number(self):
+        """Gets the print_order_number of this PrintedPart.  # noqa: E501
+
+
+        :return: The print_order_number of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._print_order_number
+
+    @print_order_number.setter
+    def print_order_number(self, print_order_number):
+        """Sets the print_order_number of this PrintedPart.
+
+
+        :param print_order_number: The print_order_number of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._print_order_number = print_order_number
+
+    @property
+    def print_id(self):
+        """Gets the print_id of this PrintedPart.  # noqa: E501
+
+
+        :return: The print_id of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._print_id
+
+    @print_id.setter
+    def print_id(self, print_id):
+        """Sets the print_id of this PrintedPart.
+
+
+        :param print_id: The print_id of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._print_id = print_id
+
+    @property
+    def serial_number(self):
+        """Gets the serial_number of this PrintedPart.  # noqa: E501
+
+        Only created after printing  # noqa: E501
+
+        :return: The serial_number of this PrintedPart.  # noqa: E501
+        :rtype: str
+        """
+        return self._serial_number
+
+    @serial_number.setter
+    def serial_number(self, serial_number):
+        """Sets the serial_number of this PrintedPart.
+
+        Only created after printing  # noqa: E501
+
+        :param serial_number: The serial_number of this PrintedPart.  # noqa: E501
+        :type: str
+        """
+
+        self._serial_number = serial_number
+
+    @property
+    def tags(self):
+        """Gets the tags of this PrintedPart.  # noqa: E501
+
+
+        :return: The tags of this PrintedPart.  # noqa: E501
+        :rtype: PrintedPartTags
+        """
+        return self._tags
+
+    @tags.setter
+    def tags(self, tags):
+        """Sets the tags of this PrintedPart.
+
+
+        :param tags: The tags of this PrintedPart.  # noqa: E501
+        :type: PrintedPartTags
+        """
+
+        self._tags = tags
 
     @property
     def status(self):
@@ -259,50 +403,25 @@ class PrintedPart(object):
         self._status = status
 
     @property
-    def serial_number(self):
-        """Gets the serial_number of this PrintedPart.  # noqa: E501
+    def genealogy(self):
+        """Gets the genealogy of this PrintedPart.  # noqa: E501
 
-        Serial Number (after printing)  # noqa: E501
 
-        :return: The serial_number of this PrintedPart.  # noqa: E501
-        :rtype: str
+        :return: The genealogy of this PrintedPart.  # noqa: E501
+        :rtype: PartGenealogy
         """
-        return self._serial_number
+        return self._genealogy
 
-    @serial_number.setter
-    def serial_number(self, serial_number):
-        """Sets the serial_number of this PrintedPart.
+    @genealogy.setter
+    def genealogy(self, genealogy):
+        """Sets the genealogy of this PrintedPart.
 
-        Serial Number (after printing)  # noqa: E501
 
-        :param serial_number: The serial_number of this PrintedPart.  # noqa: E501
-        :type: str
+        :param genealogy: The genealogy of this PrintedPart.  # noqa: E501
+        :type: PartGenealogy
         """
 
-        self._serial_number = serial_number
-
-    @property
-    def build_uuid(self):
-        """Gets the build_uuid of this PrintedPart.  # noqa: E501
-
-        Build UUID  # noqa: E501
-
-        :return: The build_uuid of this PrintedPart.  # noqa: E501
-        :rtype: str
-        """
-        return self._build_uuid
-
-    @build_uuid.setter
-    def build_uuid(self, build_uuid):
-        """Sets the build_uuid of this PrintedPart.
-
-        Build UUID  # noqa: E501
-
-        :param build_uuid: The build_uuid of this PrintedPart.  # noqa: E501
-        :type: str
-        """
-
-        self._build_uuid = build_uuid
+        self._genealogy = genealogy
 
     @property
     def error(self):

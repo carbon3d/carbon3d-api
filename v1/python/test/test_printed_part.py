@@ -38,22 +38,34 @@ class TestPrintedPart(unittest.TestCase):
         if include_optional :
             return PrintedPart(
                 uuid = '0', 
+                part_uuid = '0', 
+                model_uuid = '0', 
+                part_number = '0', 
+                build_uuid = '0', 
                 part_order_uuid = '0', 
                 part_order_number = '0', 
-                part_uuid = '0', 
-                part_number = '0', 
-                genealogy = {"status":"printed","build_info":{"build_uuid":"29b2c0e9-ba72-45b0-b0f6-4005f0c2327a","traveler_url":"http://<url>","slice_video_url":"http://<url>"},"print_info":{"queued_at":"2019-10-11T21:25:00.000Z","printer_serial":"5Y01GZ","print_uuid":"2992c0e9-ba72-45b0-b0f6-4005f0c2327a","printed_part_serial":"123334-2","started_at":"2019-10-11T21:30:00.000Z","finished_at":"2019-10-11T21:38:00.000Z","platform_serial":"6P64234","cassette_serial":"7C124234"}}, 
-                status = 'waiting', 
+                print_order_uuid = '0', 
+                print_order_number = '0', 
+                print_id = '0', 
                 serial_number = '0', 
-                build_uuid = '0', 
+                tags = carbon3d.models.printed_part_tags.PrintedPart_tags(
+                    part_number = {
+                        'key' : '0'
+                        }, 
+                    part = {
+                        'key' : '0'
+                        }, 
+                    printed_part = {
+                        'key' : '0'
+                        }, ), 
+                status = 'waiting', 
+                genealogy = {"status":"printed","build_info":{"build_uuid":"29b2c0e9-ba72-45b0-b0f6-4005f0c2327a","traveler_url":"http://<url>","slice_video_url":"http://<url>"},"print_info":{"queued_at":"2019-10-11T21:25:00.000Z","printer_serial":"5Y01GZ","print_uuid":"2992c0e9-ba72-45b0-b0f6-4005f0c2327a","printed_part_serial":"123334-2","started_at":"2019-10-11T21:30:00.000Z","finished_at":"2019-10-11T21:38:00.000Z","platform_serial":"6P64234","cassette_serial":"7C124234"}}, 
                 error = '0'
             )
         else :
             return PrintedPart(
                 uuid = '0',
-                part_order_uuid = '0',
                 part_uuid = '0',
-                genealogy = {"status":"printed","build_info":{"build_uuid":"29b2c0e9-ba72-45b0-b0f6-4005f0c2327a","traveler_url":"http://<url>","slice_video_url":"http://<url>"},"print_info":{"queued_at":"2019-10-11T21:25:00.000Z","printer_serial":"5Y01GZ","print_uuid":"2992c0e9-ba72-45b0-b0f6-4005f0c2327a","printed_part_serial":"123334-2","started_at":"2019-10-11T21:30:00.000Z","finished_at":"2019-10-11T21:38:00.000Z","platform_serial":"6P64234","cassette_serial":"7C124234"}},
                 status = 'waiting',
         )
 
