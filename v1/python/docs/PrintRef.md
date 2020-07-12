@@ -1,6 +1,6 @@
 # PrintRef
 
-A print of a build
+A print reference
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------

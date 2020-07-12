@@ -3,7 +3,7 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prints** | [**list[PrintRef]**](PrintRef.md) |  | [optional] 
+**prints** | [**list[ModelPrint]**](ModelPrint.md) |  | [optional] 
 **total_count** | **int** |  | [optional] 
 **offset** | **int** |  | [optional] 
 **limit** | **int** |  | [optional] 
