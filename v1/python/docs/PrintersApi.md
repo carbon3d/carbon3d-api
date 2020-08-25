@@ -4,14 +4,16 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_printer**](PrintersApi.md#get_printer) | **GET** /printers/{serial} | Fetch a specific printer&#39;s status information
+[**get_printer**](PrintersApi.md#get_printer) | **GET** /printers/{serial} | Get a specific printer&#39;s status information
 [**get_printers**](PrintersApi.md#get_printers) | **GET** /printers | Fetch all printer&#39;s status information
 
 
 # **get_printer**
 > Printer get_printer(serial)
 
-Fetch a specific printer's status information
+Get a specific printer's status information
+
+Fetch printer status
 
 ### Example
 
@@ -45,7 +47,7 @@ with carbon3d.ApiClient(configuration) as api_client:
     serial = 'serial_example' # str | e.g. 3P01CM
 
     try:
-        # Fetch a specific printer's status information
+        # Get a specific printer's status information
         api_response = api_instance.get_printer(serial)
         pprint(api_response)
     except ApiException as e:

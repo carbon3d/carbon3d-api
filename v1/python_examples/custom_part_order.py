@@ -45,7 +45,7 @@ def create_api_token(key_file: str, exp_minutes: int) -> str:
     # Generate jwt token
     jwt_contents = {
         'iss': client_id,
-        'exp': int(time.time() + exp_minutes*60)
+        'exp': int(time.time() + exp_minutes*60*60)
     }
 
     # Sign & encode token with client secret
