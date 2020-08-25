@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_builds**
-> BuildsResponse get_builds(limit, offset, revision=revision, status=status, created_before=created_before, created_after=created_after)
+> BuildsResponse get_builds(limit, offset, name=name, revision=revision, status=status, created_before=created_before, created_after=created_after)
 
 Fetch builds
 
@@ -119,14 +119,15 @@ with carbon3d.ApiClient(configuration) as api_client:
     api_instance = carbon3d.BuildsApi(api_client)
     limit = 100 # int | Max records to return (default to 100)
 offset = 0 # int | Number of items to skip (default to 0)
-revision = 'revision_example' # str | Build revision (optional)
+name = ['name_example'] # list[str] | An array of build names (optional)
+revision = ['revision_example'] # list[str] | An array of build revisions (optional)
 status = 'status_example' # str | Status of the build (optional)
 created_before = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date prior to param (optional)
 created_after = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date after param (optional)
 
     try:
         # Fetch builds
-        api_response = api_instance.get_builds(limit, offset, revision=revision, status=status, created_before=created_before, created_after=created_after)
+        api_response = api_instance.get_builds(limit, offset, name=name, revision=revision, status=status, created_before=created_before, created_after=created_after)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling BuildsApi->get_builds: %s\n" % e)
@@ -138,7 +139,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max records to return | [default to 100]
  **offset** | **int**| Number of items to skip | [default to 0]
- **revision** | **str**| Build revision | [optional] 
+ **name** | [**list[str]**](str.md)| An array of build names | [optional] 
+ **revision** | [**list[str]**](str.md)| An array of build revisions | [optional] 
  **status** | **str**| Status of the build | [optional] 
  **created_before** | **datetime**| Select build with creation date prior to param | [optional] 
  **created_after** | **datetime**| Select build with creation date after param | [optional] 

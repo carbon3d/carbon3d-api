@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **due_date** | **datetime** | Print due date, used to prioritize part orders for packing and printing | [optional] 
 **route_to** | **list[str]** | Section to route this part order to (e.g. production, a rework line) | [optional] 
 **flushed_at** | **datetime** | When the part order was flushed through the packer, or null if it is not flushed. | [optional] 
+**part_uuids** | **list[str]** | List of part_uuids for given order | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
