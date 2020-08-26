@@ -1,19 +1,26 @@
 # Carbon API
-Welcome to the Carbon DLS API. 
+Welcome to the Carbon DLS API.
 The documentation here will help you get started integrating with our API. Before you begin, **make sure you've reached out to your Carbon Technical Partner and signed all the required documents**.
 
+## Table of Contents
+1. [Getting Started](#getting-started)
+2. [Authentication](#authentication)
+3. [Definitions](#definitions)
+4. [Frequently Asked Questions](#frequently-asked-questions)
+5. [Feedback](#feedback)
+
 ## Getting Started
-We are excited for you to start using Carbon's API, but there are a few things you should keep in mind as you start integrating with us.
-1. Our API is still in Early Access, so please be patient as we add more functionality. Feel free to share your feedback.
-2. We have prioritized developing functionality for mass customized parts of similar geometry. At this time, we cannot guarantee that utilizing our part order / packing system will work for other applications.
-3. Currently, we are only providing examples in python but our REST API itself is language agnostic. 
+Welcome to Carbon's API, there are a few things you should keep in mind as you start integrating.
+1. The API is still in Early Access, so please be patient as more functionality is added. Feel free to share your feedback.
+2. Carbon has prioritized developing functionality for mass customized parts of similar geometry. At this time, there is no guarantee that utilizing the part order / packing system will work for other applications.
+3. Currently, there are only examples in Python but the REST API itself is language agnostic.
 
-The documentation is intended to help you get started and provide some examples, but detailed documentation about each request can be found at [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/). 
+The documentation is intended to help you get started and provide some examples, but detailed documentation about each request can be found at [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/).
 
-### Authentication
+## Authentication
 The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token to authenticate each request. Follow these steps to get started.
 1. Generate an API Key [here](https://carbon3d.print.carbon3d.com/api_keys)* by clicking the "Create API Key" button. This will automatically download a `secrets.json` file; your client secret is NOT stored by Carbon.
-2. You can now use the `authenticate-create.py` script to generate a valid token with your desired expiration. You can re-generate as many tokens as you'd like with new expirations utilizing the same secret. For example, to generate a token that is valid for 24 hours you could run:
+2. You can now use the `v1/python_examples/authenticate-create.py` script to generate a valid token with your desired expiration. You can re-generate as many tokens as you'd like with new expirations utilizing the same secret. For example, to generate a token that is valid for 24 hours you could run:
     ``` bash
     v1/python/examples/authtoken-create.py path/to/secret.json --exp_hours 24
     ```
@@ -21,7 +28,7 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
 
 *If you can't access this page, please reach out to your Carbon Technical Partner to discuss gaining access to our Early Access Program.
 
-### Definitions
+## Definitions
 **Models:** A file representing a three-dimensional geometry with no particular orientation, supports, etc. Models can belong to multiple parts.
 
 **Parts:** A printable model design which includes DLS-specific data, such as a specific orientation, resin, etc.
@@ -34,7 +41,13 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
 
 **Builds:** A printable set of parts arranged on a build platform ready for printing.
 
+**Part Measurements:** Measurements taken on a specific printed parts and logged in Carbon's cloud quality management system
+
+**Part Measurement Templates:** Templates for defining a part measurement to be taken and pass / failing criteria (e.g. length, width, visual inspection)
+
 ## Examples
+Currently there are only provide examples in python. Even if you are not using python to interact with our API, these examples will still be helpful to read through.
+
 ### Python
 Read more about our Python examples [here](v1/python_examples/README.md)
 
@@ -52,7 +65,7 @@ A project is a collection of builds that have been modified over time. For examp
 You can use the [createPrintOrder](https://api.carbon3d.com/v1/api-docs/#/PrintOrders/createPrintOrder) API method.
 
 ### Why can't I see my models, orders, etc. in the UI.
-Please let us know if you'd like to see these concepts exposed in our UI.
+Please let us know if you'd like to see these concepts exposed in our UI by reaching out to <api-list@carbon3d.com>
 
 ### What is a part number?
 Part numbers are a common term used in manufacturing to denote a reference to a particular _part design_. Each company chooses their own conventions for assigning part numbers, but generally a single part number is capable of having multiple versions or revisions. It is important to understand that a part number identifies a part _design_, whereas a serial numbers is a unique identifier for _a particular instantiation_ of that part design.

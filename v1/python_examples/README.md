@@ -1,25 +1,226 @@
 # Python Carbon3d API Client
 
-### Installation
+## Table of Contents
+- [Python Carbon3d API Client](#python-carbon3d-api-client)
+  - [Table of Contents](#table-of-contents)
+  - [Installation](#installation)
+  - [Generating an access token](#generating-an-access-token)
+  - [Getting Started](#getting-started)
+  - [Filtering](#filtering)
+  - [Total Count](#total-count)
+  - [Sorting](#sorting)
+  - [Pagination / Cursor](#pagination--cursor)
+    - [Pagination](#pagination)
+    - [Cursor](#cursor)
+  - [Retrieving Quality Information](#retrieving-quality-information)
+  - [Create a custom part order](#create-a-custom-part-order)
+
+## Installation
 To install the [carbon3d python client](https://pypi.org/project/carbon3d-client/), just run:
 `pip3 install carbon3d-client pyjwt`
 
-### Generating an access token
-First, generate an API key and download the secret.json file by following the steps at https://carbon3d.print.carbon3d.com/api_keys
+## Generating an access token
+First, generate an API key and download the secret.json file by following the steps at https://carbon3d.print.carbon3d.com/api_keys. This file contents will resemble this:
 
-You can then create your access token using the example script `authtoken-create.py`
+```json
+{
+ "client_id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+ "client_secret": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+}
 ```
+
+There is a convenient script (`authtoken-create.py`) that takes in the path to your `secrets.json` file and some expiration time frame then prints out an authentication token.
+```bash
 # generate an access token that is valid for 24 hours
 v1/python_examples/authtoken_create.py path/to/secret.json --exp_minutes 1440
 ```
 
-### Create a custom part order
-This API provides a programmatic interface for submitting part (and soon build) orders. The general process for creating an order is as
+## Getting Started
+Start the script by importing the carbon package and setting the configuration.
+```python
+import carbon3d as carbon
+import jwt
+import json
+import time
+
+jwt_contents = {
+    'iss': your_client_id_from_secrets_json,
+    'exp': int(time.time() + 5 * 60) # Token will expire in 5 minutes
+}
+encoded_jwt = jwt.encode(jwt_contents, your_client_secret_from_secrets_json, algorithm='RS256')
+
+config = carbon.Configuration(host='https://api.carbon3d.com/v1')
+config.access_token = encoded_jwt.decode('utf-8')
+```
+
+Next prepare the API clients, each resource gets its own client.
+```python
+api_client = carbon.ApiClient(config)
+printers_api = carbon.PrintersApi(api_client)
+prints_api = carbon.PrintsApi(api_client)
+```
+
+From here you can make API calls directly using the clients.
+```python
+printers_response = printers_api.get_printers(limit=50, offset=0)
+printers = printers_response.printers
+prints = prints_api.get_prints(limit=100, offset=0).prints
+```
+
+## Filtering
+The API provides some basic filtering capabilities to allow you to access the data you need. This is NOT intended to facilitate complex queries to explore your data, you are encouraged to load data into your own database for those needs.
+
+Querying with no filters is easy.
+```python
+prints_api = carbon.PrintsApi(api_client)
+all_prints = prints_api.get_prints(limit=100, offset=0)
+```
+
+If you want to query for all prints that used platform `1A0000`
+```python
+filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial="1A0000")
+```
+
+As of 08/11/2020 Carbon is still in the process of updating all of the filters to support requesting arrays. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information on filter options available for each endpoint. The following would return all prints that were printed with platform `1A0000` OR platform `1B0000`.
+```python
+filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial=["1A0000", "1B0000"])
+```
+
+Combining two different filters will always result in an `AND` query. The API currently does not support `OR` queries. The following will return prints on printer `1C0000` that utilized the platform `1A0000`.
+```python
+filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial="1A0000", printer_serial="1C0000")
+```
+
+For date ranges you can use the `_after` or `_before` query parameters. For example, here is how to query all prints that started since yesterday.
+```python
+from datetime import date, timedelta
+yesterday = date.today() - timedelta(days=1)
+filtered_prints = prints_api.get_prints(limit=100, offset=0, started_after=yesterday)
+```
+
+The API currently only supports exact matches, no wildcard queries or `LIKE` queries are supported.
+
+## Total Count
+The API will return an accurate total count of the results of your query up to 10,000 results. If you have more than 10,000 results for your query it will continue to return a `total_count` of 10,000. There is no existing method for retrieving an accurate total count of resources with >10,000 records.
+
+## Sorting
+You can sort by one or multiple fields. It is recommended you make no assumptions about the default sorting, if you would like to guarantee a particular order then explicitly provide the sort parameter.
+
+The default will assume you want to sort in ascending order.
+```python
+part_orders_api = carbon.PartOrdersApi(api_client)
+part_orders_api.get_part_orders(limit=100, offset=0, sort=["due_date"])
+```
+
+You can also sort by multiple values. The following will sort be part_order_number in descending order then by due_date in ascending order.
+```python
+part_orders_api.get_part_orders(limit=100, offset=0, sort=["part_order_number,desc", "due_date"])
+```
+
+As of 08/11/2020 Carbon is still the process of adding sorting functionality to all list endpoints. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information on filter options available for each endpoint.
+
+## Pagination / Cursor
+As of 08/11/2020 Carbon is still the process of switching from traditional limit/offset pagination to cursor based pagination. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information.
+
+### Pagination
+Retrieving the first page of data is as simple as setting the limit and offset to their default values of 100 and 0 respectively.
+```python
+prints = prints_api.get_prints(limit=100, offset=0)
+```
+
+To get the next set of results you would increment the offset by 1.
+```python
+prints = prints_api.get_prints(limit=100, offset=1)
+```
+
+To check if you have retrieved all the data you can check if the number of results is less than the limit.
+```
+is_last_page = prints.limit > len(prints.prints.length)
+```
+
+
+### Cursor
+Nothing but the limit needs to be set the first time you query.
+```python
+prints = prints_api.get_prints(limit=100)
+```
+
+The response to your first query will include a value for `next_cursor` which you can use to query for your next set of results.
+```python
+prints = prints_api.get_prints(limit=100, cursor=prints.next_cursor)
+```
+
+In order to use the cursor effectively it is recommended you:
+1) Do not change any query parameters including filtering, sorting, etc. between the request that provided the `next_cursor` and the request where you are using the `cursor`
+2) Do not use the `next_cursor` more than 1 minute after the API has provided it i.e. the next_cursor expires in 60 seconds.
+
+Even following these rules, you may encounter duplicates or missing records if data was updated throughout your various queries to retrieve data. For example, if you query for `prints` sorted by `updated_at,desc`, your first query may retrieve all `prints` that were updated between now and 1 hour ago. Your next query will attempt to only find you records that were updated more than an hour ago. If one of your old print records is updated AFTER your first query, it will never be returned as when you made the first query it hadn't been updated in a while and when you made your second query it had just been updated.
+
+You will need to reconcile these discrepancies but there are a few best practices.
+1) If sorting on `updated_at` always sort in `ascending` order so that records that updated between queries are duplicated rather than missing entirely.
+2) Use the `uuid` of a resource to properly de-duplicate; this will always be unique and the most recent query is the source of truth for that `uuid`.
+3) Do not use a `cursor` more than 60 seconds after it was returned.
+
+
+## Retrieving Quality Information
+Before retrieving the actual measurements, it's important to retrieve the measurement templates so you can understand what the individual measurements represent.
+
+```python
+part_measurement_template_api = carbon.PartMeasurementTemplatesApi(api_client)
+results = part_measurement_template_api.get_part_measurement_templates(limit=100)
+```
+
+The following is a hypothetical measurement template as if you just ran: `print(results.part_measurement_templates[0])`
+```json
+{
+  "uuid": "11111111-1111-1111-1111-111111111111",
+  "updated_at": "2020-01-08T00:00:00.000Z",
+  "production_sop_name": "Widget ABC",
+  "production_sop_version": 1,
+  "operation_name": "Quality Control",
+  "measurement_name": "Weight",
+  "zones": [],
+  "zones_enabled": false,
+  "required_level": "required",
+  "measurement_type": "value",
+  "units": "g",
+  "min": 100,
+  "max": 110,
+  "measurement_classification": "mass",
+  "category_options": null
+}
+```
+All of this information was manually configured in the cloud quality management system. Once you have a mapping of all the measurement templates, querying the part measurements API will make a lot more sense.
+
+```python
+part_measurements_api = carbon.PartMeasurementsApi(api_client)
+results = part_measurements_api.get_part_measurements(limit=100)
+```
+
+The following is a hypothetical measurement as if you just ran: `print(results.part_measurements[0])`
+```json
+{
+  "uuid": "33333333-3333-3333-3333-333333333333",
+  "printed_part_uuid": "22222222-2222-2222-2222-222222222222",
+  "part_measurement_template_uuid": "11111111-1111-1111-1111-111111111111",
+  "value": 105,
+  "category_value": "",
+  "updated_at": "2020-01-08T00:00:00.000Z",
+  "measurement_result": "pass",
+  "zones": [],
+  "notes": ""
+}
+```
+Note how the `part_measurement_template_uuid` matches the `uuid` you saw in the request to `part_measurement_templates`. The measurement you are looking at is a `Weight` measurement with specs ranging from `100` to `110` and it was measured in `grams`.
+
+
+## Create a custom part order
+This API provides a programmatic interface for submitting part orders. The general process for creating an order is as follows:
 1. Upload model files to the API with the /models endpoint
 2. Create parts that reference a model and a part number with the /parts endpoint (Part numbers can be created here too)
-3. Create an order with the /orders endpoint
+3. Create an order with the /part_orders endpoint
 
-Uploaded models, parts and orders can be retrieved either in bulk or by UUID at the /models, /parts and /orders endpoints, respectively. 
+Uploaded models, parts and orders can be retrieved either in bulk or by UUID at the /models, /parts and /part_orders endpoints, respectively.
 
 Once a part order is submitted, automatic packing will create one or more builds (for mass-customization applications only).
 
@@ -27,11 +228,11 @@ Builds can be retrieved either in bulk or by UUID at the /builds endpoint.
 
 Build attachments (traveler, slice video) can be retrieved by UUID at the /attachments endpoint.
 
-```
+```bash
 ./v1/python_examples/custom_part_order.py --help
 usage: custom_part_order.py [-h] [--application_id APPLICATION_ID]
                             [--host HOST] --part_catalog_num PART_CATALOG_NUM
-                            --order_number ORDER_NUMBER --due_date DUE_DATE
+                            --part_order_number PART_ORDER_NUMBER --due_date DUE_DATE
                             --secret SECRET
                             files [files ...]
 
@@ -47,8 +248,8 @@ optional arguments:
   --host HOST           Carbon API host (default: https://api.carbon3d.com/v1)
   --part_catalog_num PART_CATALOG_NUM, -p PART_CATALOG_NUM
                         Part catalog number i.e. ALIGNER-001 (default: None)
-  --order_number ORDER_NUMBER, -o ORDER_NUMBER
-                        Order number (default: None)
+  --part_order_number PART_ORDER_NUMBER, -o PART_ORDER_NUMBER
+                        Part order number (default: None)
   --due_date DUE_DATE, -d DUE_DATE
                         Number of days from today for order due date to be set
                         (default: None)

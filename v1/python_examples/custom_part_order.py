@@ -16,8 +16,8 @@ import carbon3d as carbon
 
 
 #Set up logger
-LOG = logging.getLogger('customer_part_order')
-FILE_HANDLER = logging.FileHandler('customer_part_order.log')
+LOG = logging.getLogger('customer_part_part_order')
+FILE_HANDLER = logging.FileHandler('customer_part_part_order.log')
 CONSOLE_HANDLER = logging.StreamHandler()
 FORMATTER = logging.Formatter('%(asctime)s %(levelname)s %(process)d %(filename)s:%(lineno)d %(message)s')
 FILE_HANDLER.setFormatter(FORMATTER)
@@ -45,7 +45,7 @@ def create_api_token(key_file: str, exp_minutes: int) -> str:
     # Generate jwt token
     jwt_contents = {
         'iss': client_id,
-        'exp': int(time.time() + exp_minutes*60*60)
+        'exp': int(time.time() + exp_minutes*60)
     }
 
     # Sign & encode token with client secret
@@ -101,32 +101,32 @@ def create_part(parts_api: carbon.PartsApi,
     LOG.info('create_part: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
 
-def create_order(orders_api: carbon.OrdersApi,
-                 order_number: str,
-                 parts: List[carbon.models.part.Part],
-                 due_date: datetime.datetime) -> carbon.models.order.Order:
+def create_part_order(part_orders_api: carbon.PartOrdersApi,
+                      part_order_number: str,
+                      parts: List[carbon.models.part.Part],
+                      due_date: datetime.datetime) -> carbon.models.part_order.PartOrder:
     """
-    Creates an order
+    Creates an part_order
     Args:
-        orders_api: Authenticated Orders Api
-        order_number: Order number
+        part_orders_api: Authenticated PartOrders Api
+        part_order_number: PartOrder number
         parts: List of parts
-        due_date: Due date of order
+        due_date: Due date of part_order
     Returns:
-        carbon.models.order.Order
+        carbon.models.part_order.PartOrder
     """
-    LOG.info('create_order: parts={}'.format(str(parts).replace('\n', ' ')))
-    order_request_parts = [carbon.OrderRequestParts(part.uuid) for part in parts]
-    order_request = carbon.OrderRequest(order_number=order_number,
-                                        parts=order_request_parts,
-                                        due_date=due_date)
-    api_response = orders_api.create_order(order_request=order_request)
-    LOG.info('create_order: api_response={}'.format(re.sub(' +', ' ', (re.sub('\t|\n', ' ', str(api_response))))))
+    LOG.info('create_part_order: parts={}'.format(str(parts).replace('\n', ' ')))
+    part_order_request_parts = [carbon.OrderRequestParts(part.uuid) for part in parts]
+    part_order_request = carbon.PartOrderRequest(part_order_number=part_order_number,
+                                                 parts=part_order_request_parts,
+                                                 due_date=due_date)
+    api_response = part_orders_api.create_part_order(part_order_request=part_order_request)
+    LOG.info('create_part_order: api_response={}'.format(re.sub(' +', ' ', (re.sub('\t|\n', ' ', str(api_response))))))
     return api_response
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Script to upload models, create parts, and create an order',
+    parser = argparse.ArgumentParser(description='Script to upload models, create parts, and create an part_order',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter,
                                      add_help=True)
     parser.add_argument('--application_id',
@@ -141,14 +141,14 @@ def main():
                         '-p',
                         help='Part catalog number i.e. ALIGNER-001',
                         required=True)
-    parser.add_argument('--order_number',
+    parser.add_argument('--part_order_number',
                         '-o',
-                        help='Order number',
+                        help='Part order number',
                         required=True)
     parser.add_argument('--due_date',
                         '-d',
                         type=float,
-                        help='Number of days from today for order due date to be set',
+                        help='Number of days from today for part_order due date to be set',
                         required=True)
     parser.add_argument('--secret',
                         '-s',
@@ -177,7 +177,7 @@ def main():
     # Prepare APIs
     models_api = carbon.ModelsApi(carbon.ApiClient(config))
     parts_api = carbon.PartsApi(carbon.ApiClient(config))
-    orders_api = carbon.OrdersApi(carbon.ApiClient(config))
+    part_orders_api = carbon.PartOrdersApi(carbon.ApiClient(config))
 
     # Upload models
     models = []
@@ -191,10 +191,10 @@ def main():
         parts.append(create_part(parts_api, args.part_catalog_num, model.uuid, args.application_id))
     LOG.info('main: parts={}'.format(str(parts).replace('\n', ' ')))
 
-    # Create order
+    # Create part_order
     due_date = datetime.datetime.today() + datetime.timedelta(days=args.due_date)
     formatted_due_date = due_date.astimezone(dateutil.tz.gettz('UTC')).replace(microsecond=0).isoformat()
-    create_order(orders_api, args.order_number, parts, formatted_due_date)
+    create_part_order(part_orders_api, args.part_order_number, parts, formatted_due_date)
 
     LOG.info('main: End')
 
