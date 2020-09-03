@@ -5,6 +5,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **limit** | **int** |  | [optional] 
 **offset** | **int** |  | [optional] 
+**next_cursor** | **str** | The cursor that should used to retrieve the next page of results | [optional] 
 **total_count** | **int** |  | [optional] 
 **print_orders** | [**list[PrintOrder]**](PrintOrder.md) |  | [optional] 
 
