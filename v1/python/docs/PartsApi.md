@@ -155,7 +155,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_parts**
-> PartsResponse get_parts(limit, offset, model_uuid=model_uuid, sort=sort)
+> PartsResponse get_parts(limit, model_uuid=model_uuid, cursor=cursor, offset=offset, sort=sort)
 
 Fetch parts
 
@@ -191,13 +191,14 @@ with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.PartsApi(api_client)
     limit = 100 # int | Max records to return (default to 100)
-offset = 0 # int | Number of items to skip (default to 0)
 model_uuid = ['model_uuid_example'] # list[str] | A model_uuid or array of model_uuids (optional)
+cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
+offset = 0 # int | Number of items to skip (optional) (default to 0)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `part_number` (optional)
 
     try:
         # Fetch parts
-        api_response = api_instance.get_parts(limit, offset, model_uuid=model_uuid, sort=sort)
+        api_response = api_instance.get_parts(limit, model_uuid=model_uuid, cursor=cursor, offset=offset, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PartsApi->get_parts: %s\n" % e)
@@ -208,8 +209,9 @@ sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by de
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max records to return | [default to 100]
- **offset** | **int**| Number of items to skip | [default to 0]
  **model_uuid** | [**list[str]**](str.md)| A model_uuid or array of model_uuids | [optional] 
+ **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
+ **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;part_number&#x60; | [optional] 
 
 ### Return type
