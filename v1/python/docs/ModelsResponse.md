@@ -5,7 +5,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **limit** | **int** |  | [optional] 
 **next_cursor** | **str** | The cursor that should used to retrieve the next page of results | [optional] 
-**offset** | **int** |  | [optional] 
 **total_count** | **int** |  | [optional] 
 **models** | [**list[Model]**](Model.md) |  | [optional] 
 

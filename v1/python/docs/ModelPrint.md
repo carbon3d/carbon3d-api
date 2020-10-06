@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | [optional] 
 **print_id** | **str** |  | [optional] 
+**uuid** | **str** |  | [optional] 
 **build_uuid** | **str** |  | [optional] 
 **finished_at** | **datetime** |  | [optional] 
 **started_at** | **datetime** |  | [optional] 

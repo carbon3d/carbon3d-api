@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **part_order_number** | **str** | Customer-provided part order number | 
-**parts** | [**list[OrderRequestParts]**](OrderRequestParts.md) | Parts to be printed | 
+**parts** | [**list[PartOrderRequestParts]**](PartOrderRequestParts.md) | Parts to be printed | 
 **due_date** | **datetime** | Print due date, used to prioritize orders for packing and printing | 
 **route_to** | **list[str]** | Section(s) to route this part order to (e.g. a rework line) | [optional] 
 **flush** | **bool** | Push parts in a part order through the auto-packer. | [optional] 

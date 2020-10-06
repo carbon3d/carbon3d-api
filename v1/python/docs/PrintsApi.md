@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_prints**
-> PrintsResponse get_prints(limit, cursor=cursor, offset=offset, uuid=uuid, application_id=application_id, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
+> PrintsResponse get_prints(limit, cursor=cursor, uuid=uuid, application_id=application_id, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
 
 List finished prints information
 
@@ -45,7 +45,6 @@ with carbon3d.ApiClient(configuration) as api_client:
     api_instance = carbon3d.PrintsApi(api_client)
     limit = 100 # int | Max records to return (default to 100)
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
-offset = 0 # int | Number of items to skip (optional) (default to 0)
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
 started_before = 'started_before_example' # str | Print started before timestamp (inclusive) (optional)
@@ -56,14 +55,14 @@ print_id = ['print_id_example'] # list[str] | An array of Print IDs (optional)
 status = ['status_example'] # list[str] | An array of statuses (optional)
 print_order_number = ['print_order_number_example'] # list[str] | An array of number(s) of the print_order submitted (optional)
 print_order_uuid = ['print_order_uuid_example'] # list[str] | An array of UUID(s) of the print_order submitted (optional)
-printer_serial = ['printer_serial_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
+printer_serial = ['printer_serial_example'] # list[str] | An array of serials of the Printer(s) used to print (optional)
 printer_name = ['printer_name_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
 platform_serial = ['platform_serial_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `uuid`, `status`, `started_at`, `finished_at`, `print_order_number` (optional)
 
     try:
         # List finished prints information
-        api_response = api_instance.get_prints(limit, cursor=cursor, offset=offset, uuid=uuid, application_id=application_id, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
+        api_response = api_instance.get_prints(limit, cursor=cursor, uuid=uuid, application_id=application_id, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintsApi->get_prints: %s\n" % e)
@@ -75,7 +74,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Max records to return | [default to 100]
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
- **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
  **started_before** | **str**| Print started before timestamp (inclusive) | [optional] 
@@ -86,7 +84,7 @@ Name | Type | Description  | Notes
  **status** | [**list[str]**](str.md)| An array of statuses | [optional] 
  **print_order_number** | [**list[str]**](str.md)| An array of number(s) of the print_order submitted | [optional] 
  **print_order_uuid** | [**list[str]**](str.md)| An array of UUID(s) of the print_order submitted | [optional] 
- **printer_serial** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 
+ **printer_serial** | [**list[str]**](str.md)| An array of serials of the Printer(s) used to print | [optional] 
  **printer_name** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 
  **platform_serial** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;uuid&#x60;, &#x60;status&#x60;, &#x60;started_at&#x60;, &#x60;finished_at&#x60;, &#x60;print_order_number&#x60; | [optional] 
