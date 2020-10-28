@@ -17,7 +17,18 @@
 
 ## Installation
 To install the [carbon3d python client](https://pypi.org/project/carbon3d-client/), just run:
-`pip3 install carbon3d-client pyjwt`
+`pip3 install carbon3d-client pyjwt[crypto]`
+*Note: The python examples here require Python 3.0 and above.*
+
+### Updating carbon3d-client
+As the CarbonAPI is continually improving, there may be times when a client version update is required, just run:
+`pip3 install carbon3d-client pyjwt[crypto] --upgrade`
+
+To verify that the correct client is being used, just run:
+`pip3 show carbon3d-client`
+
+*Note that the version should match the version indicated at https://api.carbon3d.com/v1/api-docs/ .*
+
 
 ## Generating an access token
 First, generate an API key and download the secret.json file by following the steps at https://carbon3d.print.carbon3d.com/api_keys. This file contents will resemble this:
@@ -122,6 +133,7 @@ As of 08/11/2020 Carbon is still the process of adding sorting functionality to 
 ## Pagination / Cursor
 As of 08/11/2020 Carbon is still the process of switching from traditional limit/offset pagination to cursor based pagination. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information.
 
+
 ### Pagination
 Retrieving the first page of data is as simple as setting the limit and offset to their default values of 100 and 0 respectively.
 ```python
@@ -151,15 +163,15 @@ prints = prints_api.get_prints(limit=100, cursor=prints.next_cursor)
 ```
 
 In order to use the cursor effectively it is recommended you:
-1) Do not change any query parameters including filtering, sorting, etc. between the request that provided the `next_cursor` and the request where you are using the `cursor`
-2) Do not use the `next_cursor` more than 1 minute after the API has provided it i.e. the next_cursor expires in 60 seconds.
+1. Do not change any query parameters including filtering, sorting, etc. between the request that provided the `next_cursor` and the request where you are using the `cursor`
+2. Do not use the `next_cursor` more than 1 minute after the API has provided it i.e. the next_cursor expires in 60 seconds.
 
 Even following these rules, you may encounter duplicates or missing records if data was updated throughout your various queries to retrieve data. For example, if you query for `prints` sorted by `updated_at,desc`, your first query may retrieve all `prints` that were updated between now and 1 hour ago. Your next query will attempt to only find you records that were updated more than an hour ago. If one of your old print records is updated AFTER your first query, it will never be returned as when you made the first query it hadn't been updated in a while and when you made your second query it had just been updated.
 
 You will need to reconcile these discrepancies but there are a few best practices.
-1) If sorting on `updated_at` always sort in `ascending` order so that records that updated between queries are duplicated rather than missing entirely.
-2) Use the `uuid` of a resource to properly de-duplicate; this will always be unique and the most recent query is the source of truth for that `uuid`.
-3) Do not use a `cursor` more than 60 seconds after it was returned.
+1. If sorting on `updated_at` always sort in `ascending` order so that records that updated between queries are duplicated rather than missing entirely.
+2. Use the `uuid` of a resource to properly de-duplicate; this will always be unique and the most recent query is the source of truth for that `uuid`.
+3. Do not use a `cursor` more than 60 seconds after it was returned.
 
 
 ## Retrieving Quality Information
@@ -217,12 +229,12 @@ Note how the `part_measurement_template_uuid` matches the `uuid` you saw in the 
 ## Create a custom part order
 This API provides a programmatic interface for submitting part orders. The general process for creating an order is as follows:
 1. Upload model files to the API with the /models endpoint
-2. Create parts that reference a model and a part number with the /parts endpoint (Part numbers can be created here too)
+2. Create parts that reference a model and a part number with the /parts endpoint
 3. Create an order with the /part_orders endpoint
 
-Uploaded models, parts and orders can be retrieved either in bulk or by UUID at the /models, /parts and /part_orders endpoints, respectively.
+Once a part order is submitted, automatic packing will create one or more builds with the parts within the part order (for mass-customization applications only). Currently, the maximum number of parts that will be placed on a build is 35.
 
-Once a part order is submitted, automatic packing will create one or more builds (for mass-customization applications only).
+Uploaded models, parts and orders can be retrieved either in bulk or by UUID at the /models, /parts and /part_orders endpoints, respectively.
 
 Builds can be retrieved either in bulk or by UUID at the /builds endpoint.
 
@@ -256,4 +268,52 @@ optional arguments:
   --secret SECRET, -s SECRET
                         JSON file with client_id and client_secret (default:
                         None)
+```
+
+## Joining information from multiple endpoints
+In order to reduce the payload of a response, only specific information is returned from each endpoint, but you can combine responses from different endpoints to join data.
+
+For example, for a given model or set of model names, in order to get the respective printed part status, combine the following calls:
+
+Retrieve the desired model uuids:
+
+```python
+models_api = carbon.ModelsApi(api_client)
+models_request = models_api.get_models(limit=10)
+```
+
+For the given set of model uuids, retreive the part uuids:
+
+```python
+parts_api = carbon.PartsApi(api_client)
+parts_request = parts_api.get_parts(model_uuid=[x.uuid for x in models_request.models], limit=5)
+```
+
+With the given part uuids, retrieve the respective printed part information:
+
+```python
+printed_parts_api = carbon.PrintedPartsApi(api_client)
+printed_parts_request = printed_parts_api.get_printed_parts(part_uuid=[x.uuid for x in parts_request.parts], limit=5)
+```
+
+Within the printed part response includes the status information regarding the specified models:
+
+```json
+ {"build_uuid": "",
+            "error": None,
+            "genealogy": {"build_info": None, "print_info": None},
+            "model_uuid": "11111111-1111-1111-1111-111111111111",
+            "part_number": "113080-01",
+            "part_order_number": "",
+            "part_order_uuid": "",
+            "part_uuid": "22222222-2222-2222-2222-222222222222",
+            "print_id": "ABC12345",
+            "print_order_number": "",
+            "print_order_uuid": "33333333-3333-3333-3333-333333333333",
+            "serial_number": "KTJ00BBA-14",
+            "status": "complete",
+            "tags": {"part": None,
+                     "part_number": None,
+                     "printed_part": {}},
+            "uuid": "44444444-4444-4444-4444-444444444444"}
 ```

@@ -17,6 +17,9 @@ Welcome to Carbon's API, there are a few things you should keep in mind as you s
 
 The documentation is intended to help you get started and provide some examples, but detailed documentation about each request can be found at [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/).
 
+## API Rate Limits
+To manage the amount of total requests that the API, please note that there is a 5 request per second rate limit that is emposed on a per user level. If you feel that this is not adequate to support your workflow, please contact your Carbon Technical Partner for further information.
+
 ## Authentication
 The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token to authenticate each request. Follow these steps to get started.
 1. Generate an API Key [here](https://carbon3d.print.carbon3d.com/api_keys)* by clicking the "Create API Key" button. This will automatically download a `secrets.json` file; your client secret is NOT stored by Carbon.
@@ -26,7 +29,7 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
     ```
 3. You must now add an HTTP header `Authorization: Bearer [token]` in all of your requests.
 
-*If you can't access this page, please reach out to your Carbon Technical Partner to discuss gaining access to our Early Access Program.
+* If you can't access this page, please reach out to your Carbon Technical Partner to discuss gaining access to our Early Access Program.
 
 ## Definitions
 **Models:** A file representing a three-dimensional geometry with no particular orientation, supports, etc. Models can belong to multiple parts.
@@ -45,6 +48,14 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
 
 **Part Measurement Templates:** Templates for defining a part measurement to be taken and pass / failing criteria (e.g. length, width, visual inspection)
 
+## Versioning and Updates to the API
+Please note that the CarbonAPI is confinually improving and that updates will be pushed out on a regular basis. Release notes can be found in Carbon Acadamy (https://academy.carbon3d.com/learn/dashboard). Once in Carbon Acadamy, select "Content" then "Release Notes" in the drop down. From here you will be able to see all of the API release notes. Please contact your Carbon Technical Partner if you do not have access to this page.
+
+When an update to the API is rolled out, the version will be updated. The following versioning protocol is followed:
+* Patch version (eg. 0.1.2 -> 0.1.3): Small updates that do not require a client update.
+* Minor version (eg. 0.1.2 -> 0.2.0): Client update required. Please update the carbon3d-client on your system to ensure proper integration with the API.
+* Major version (eg. 0.1.2 -> 1.0.0): Client update required. Please update the carbon3d-client on your system to ensure proper integration with the API. Please note that this update is not backwards compatible and requires the latest software to run.
+
 ## Examples
 Currently there are only provide examples in python. Even if you are not using python to interact with our API, these examples will still be helpful to read through.
 
@@ -58,6 +69,13 @@ You can think of an Application as a shareable folder for models, parts, project
 ### What's the difference between a model and a part?
 Models can't be printed; they just represent three-dimensional shapes that can be used in a variety of parts. For example, you could have a model for an iPhone case that is used in 2 parts, one that is printed in EPU 41 and another in UMA 90.
 
+### Can I specify how my parts are packed onto a build for a given part order?
+The automatic packer currently has a set of predefined rules that specify how a build should be assembled. These rules are currently tuned for the mass customizated parts of similar geometry. Please let us know if you'd like to have the functionality to adjust these rules through the API by reaching out to <api-list@carbon3d.com>.
+
+### Where can I find the build(s) generated from requesting a part order?
+The builds created from a given part order can be found in Builds Catalog under the Production tab at print.carbon3d.com. The name of the build will be AutoBuildXXX. By selecting the desired build in this UI, you will be able to also visually see the build_uuid and other relevant information. (*Note this information is also returned when querying the /builds endpoint.*) You will be able to edit and queue the given build from your printer UI.
+
+
 ### What's the difference between a project and a build?
 A project is a collection of builds that have been modified over time. For example, let's say you open our project editing software, upload 10 models, then click print. Afterwards, you realize you want to change the orientation of a few of the models so you open the project again, modify the orientation, and click print. You printed the same project but two different builds.
 
@@ -65,7 +83,7 @@ A project is a collection of builds that have been modified over time. For examp
 You can use the [createPrintOrder](https://api.carbon3d.com/v1/api-docs/#/PrintOrders/createPrintOrder) API method.
 
 ### Why can't I see my models, orders, etc. in the UI.
-Please let us know if you'd like to see these concepts exposed in our UI by reaching out to <api-list@carbon3d.com>
+Please let us know if you'd like to see these concepts exposed in our UI by reaching out to <api-list@carbon3d.com>.
 
 ### What is a part number?
 Part numbers are a common term used in manufacturing to denote a reference to a particular _part design_. Each company chooses their own conventions for assigning part numbers, but generally a single part number is capable of having multiple versions or revisions. It is important to understand that a part number identifies a part _design_, whereas a serial numbers is a unique identifier for _a particular instantiation_ of that part design.
@@ -74,7 +92,7 @@ Part numbers are a common term used in manufacturing to denote a reference to a 
 This API is not intended to facilitate robotic automation for a printer. If this is something you need, please let your Carbon Technical Partner know.
 
 ### Can you add ____ to the print data we are able to export?
-We would love to hear from you; please submit the request via <api-list@carbon3d.com>
+We would love to hear from you; please submit the request via <api-list@carbon3d.com>.
 
 ## Feedback
-Please send all questions and feedback to <api-list@carbon3d.com>
+Please send all questions and feedback to <api-list@carbon3d.com>.

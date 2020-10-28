@@ -135,7 +135,7 @@ started_before = '2013-10-20T19:20:30+01:00' # datetime | Started before time X 
 started_after = '2013-10-20T19:20:30+01:00' # datetime | Started after time X (optional)
 finished_before = '2013-10-20T19:20:30+01:00' # datetime | Finished before time X (optional)
 finished_after = '2013-10-20T19:20:30+01:00' # datetime | Finished after time X (optional)
-sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `status`, `part_number` (optional)
+sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `uuid`, `updated_at`, `part_number`, `created_at`, `status`, `part_number` (optional)
 
     try:
         # Fetch printed parts
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
  **started_after** | **datetime**| Started after time X | [optional] 
  **finished_before** | **datetime**| Finished before time X | [optional] 
  **finished_after** | **datetime**| Finished after time X | [optional] 
- **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;status&#x60;, &#x60;part_number&#x60; | [optional] 
+ **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;uuid&#x60;, &#x60;updated_at&#x60;, &#x60;part_number&#x60;, &#x60;created_at&#x60;, &#x60;status&#x60;, &#x60;part_number&#x60; | [optional] 
 
 ### Return type
 
