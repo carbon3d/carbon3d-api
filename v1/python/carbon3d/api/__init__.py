@@ -14,3 +14,4 @@ from carbon3d.api.print_orders_api import PrintOrdersApi
 from carbon3d.api.printed_parts_api import PrintedPartsApi
 from carbon3d.api.printers_api import PrintersApi
 from carbon3d.api.prints_api import PrintsApi
+from carbon3d.api.queues_api import QueuesApi

@@ -18,7 +18,7 @@ Welcome to Carbon's API, there are a few things you should keep in mind as you s
 The documentation is intended to help you get started and provide some examples, but detailed documentation about each request can be found at [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/).
 
 ## API Rate Limits
-To manage the amount of total requests that the API, please note that there is a 5 request per second rate limit that is emposed on a per user level. If you feel that this is not adequate to support your workflow, please contact your Carbon Technical Partner for further information.
+To manage the amount of total requests that the API, please note that there is a rate limit of 100 requests per 10 seconds that is emposed on a per user level. If you feel that this is not adequate to support your workflow, please contact your Carbon Technical Partner for further information.
 
 ## Authentication
 The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token to authenticate each request. Follow these steps to get started.

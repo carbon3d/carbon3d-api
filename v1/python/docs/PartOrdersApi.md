@@ -89,7 +89,7 @@ Name | Type | Description  | Notes
 
 Cancel a PartOrder
 
-Cancel an existing eligible PartOrder. Orders may only be canceled while they are in 'open' status. 
+Cancel an existing eligible PartOrder. Part orders may only be canceled while they are in 'open' status. 
 
 ### Example
 
