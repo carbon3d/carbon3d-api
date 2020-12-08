@@ -121,10 +121,10 @@ with carbon3d.ApiClient(configuration) as api_client:
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
-updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before time X (optional)
-updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated after time X (optional)
-created_before = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date prior to param (optional)
-created_after = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date after param (optional)
+updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
+updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
+created_before = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date before timestamp (exclusive) (optional)
+created_after = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date at or after timestamp (inclusive) (optional)
 name = ['name_example'] # list[str] | An array of build names (optional)
 revision = ['revision_example'] # list[str] | An array of build revisions (optional)
 status = 'status_example' # str | Status of the build (optional)
@@ -146,10 +146,10 @@ Name | Type | Description  | Notes
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
- **updated_before** | **datetime**| Updated before time X | [optional] 
- **updated_after** | **datetime**| Updated after time X | [optional] 
- **created_before** | **datetime**| Select build with creation date prior to param | [optional] 
- **created_after** | **datetime**| Select build with creation date after param | [optional] 
+ **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
+ **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 
+ **created_before** | **datetime**| Select build with creation date before timestamp (exclusive) | [optional] 
+ **created_after** | **datetime**| Select build with creation date at or after timestamp (inclusive) | [optional] 
  **name** | [**list[str]**](str.md)| An array of build names | [optional] 
  **revision** | [**list[str]**](str.md)| An array of build revisions | [optional] 
  **status** | **str**| Status of the build | [optional] 

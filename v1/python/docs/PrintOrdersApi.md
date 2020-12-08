@@ -197,8 +197,8 @@ cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ
 offset = 0 # int | Number of items to skip (optional) (default to 0)
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
-updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before time X (optional)
-updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated after time X (optional)
+updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
+updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
 print_order_number = ['print_order_number_example'] # list[str] | Customer-provided print order number (optional)
 printer_serial = ['printer_serial_example'] # list[str] | An array of serials of the Printer(s) used to print (optional)
 printer_name = ['printer_name_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
@@ -221,8 +221,8 @@ Name | Type | Description  | Notes
  **offset** | **int**| Number of items to skip | [optional] [default to 0]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
- **updated_before** | **datetime**| Updated before time X | [optional] 
- **updated_after** | **datetime**| Updated after time X | [optional] 
+ **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
+ **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 
  **print_order_number** | [**list[str]**](str.md)| Customer-provided print order number | [optional] 
  **printer_serial** | [**list[str]**](str.md)| An array of serials of the Printer(s) used to print | [optional] 
  **printer_name** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 

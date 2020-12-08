@@ -270,8 +270,8 @@ with carbon3d.ApiClient(configuration) as api_client:
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
-updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before time X (optional)
-updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated after time X (optional)
+updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
+updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
 status = carbon3d.PartOrderStatus() # PartOrderStatus | PartOrder status (optional)
 part_order_number = 'part_order_number_example' # str | Customer-provided part order number (optional)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `uuid`, `updated_at`, `part_order_number`, `due_date`, `flushed_at` (optional)
@@ -292,8 +292,8 @@ Name | Type | Description  | Notes
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
- **updated_before** | **datetime**| Updated before time X | [optional] 
- **updated_after** | **datetime**| Updated after time X | [optional] 
+ **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
+ **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 
  **status** | [**PartOrderStatus**](.md)| PartOrder status | [optional] 
  **part_order_number** | **str**| Customer-provided part order number | [optional] 
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;uuid&#x60;, &#x60;updated_at&#x60;, &#x60;part_order_number&#x60;, &#x60;due_date&#x60;, &#x60;flushed_at&#x60; | [optional] 

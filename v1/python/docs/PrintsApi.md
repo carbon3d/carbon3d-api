@@ -47,10 +47,10 @@ with carbon3d.ApiClient(configuration) as api_client:
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
-started_before = 'started_before_example' # str | Print started before timestamp (inclusive) (optional)
-started_after = 'started_after_example' # str | Print started after timestamp (inclusive) (optional)
-finished_before = 'finished_before_example' # str | Print finished before timestamp (inclusive) (optional)
-finished_after = 'finished_after_example' # str | Print finished after timestamp (inclusive) (optional)
+started_before = 'started_before_example' # str | Print started before timestamp (exclusive) (optional)
+started_after = 'started_after_example' # str | Print started at or after timestamp (inclusive) (optional)
+finished_before = 'finished_before_example' # str | Print finished before timestamp (exclusive) (optional)
+finished_after = 'finished_after_example' # str | Print finished at or after timestamp (inclusive) (optional)
 print_id = ['print_id_example'] # list[str] | An array of Print IDs (optional)
 status = ['status_example'] # list[str] | An array of statuses (optional)
 print_order_number = ['print_order_number_example'] # list[str] | An array of number(s) of the print_order submitted (optional)
@@ -76,10 +76,10 @@ Name | Type | Description  | Notes
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
- **started_before** | **str**| Print started before timestamp (inclusive) | [optional] 
- **started_after** | **str**| Print started after timestamp (inclusive) | [optional] 
- **finished_before** | **str**| Print finished before timestamp (inclusive) | [optional] 
- **finished_after** | **str**| Print finished after timestamp (inclusive) | [optional] 
+ **started_before** | **str**| Print started before timestamp (exclusive) | [optional] 
+ **started_after** | **str**| Print started at or after timestamp (inclusive) | [optional] 
+ **finished_before** | **str**| Print finished before timestamp (exclusive) | [optional] 
+ **finished_after** | **str**| Print finished at or after timestamp (inclusive) | [optional] 
  **print_id** | [**list[str]**](str.md)| An array of Print IDs | [optional] 
  **status** | [**list[str]**](str.md)| An array of statuses | [optional] 
  **print_order_number** | [**list[str]**](str.md)| An array of number(s) of the print_order submitted | [optional] 
