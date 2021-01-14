@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** | Part UUID | [readonly] 
 **part_number** | **str** | Part Number | 
-**model_uuid** | **str** | Model UUID | 
+**model_uuid** | **str** | Model UUID | [optional] 
 **description** | **str** |  | [optional] 
 **part_tags** | **dict(str, str)** | Key value pairs to be associated with part | [optional] 
 **part_number_tags** | **dict(str, str)** | Key value pairs to be associated with part number | [optional] 

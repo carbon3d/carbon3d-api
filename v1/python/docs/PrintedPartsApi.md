@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_printed_parts**
-> PrintedPartsResponse get_printed_parts(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, status=status, print_id=print_id, part_uuid=part_uuid, part_order_number=part_order_number, part_order_uuid=part_order_uuid, build_uuid=build_uuid, print_order_number=print_order_number, print_order_uuid=print_order_uuid, sort=sort)
+> PrintedPartsResponse get_printed_parts(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, status=status, print_id=print_id, print_uuid=print_uuid, part_uuid=part_uuid, part_order_number=part_order_number, part_order_uuid=part_order_uuid, build_uuid=build_uuid, print_order_number=print_order_number, print_order_uuid=print_order_uuid, sort=sort)
 
 Fetch printed parts
 
@@ -129,17 +129,18 @@ finished_before = '2013-10-20T19:20:30+01:00' # datetime | Finished before times
 finished_after = '2013-10-20T19:20:30+01:00' # datetime | Finished at or after timestamp (inclusive) (optional)
 status = carbon3d.PrintedPartStatus() # PrintedPartStatus | Current printed part status (optional)
 print_id = ['print_id_example'] # list[str] | An array of Print IDs. (optional)
-part_uuid = 'part_uuid_example' # str | Part UUID (optional)
-part_order_number = 'part_order_number_example' # str | Customer-provided part order number the printed parts belong to (optional)
-part_order_uuid = 'part_order_uuid_example' # str | PartOrder UUID (optional)
-build_uuid = 'build_uuid_example' # str | Build UUID (optional)
-print_order_number = 'print_order_number_example' # str | Customer-provided print order number that the printed parts belong to (optional)
-print_order_uuid = 'print_order_uuid_example' # str | Print Order UUID (optional)
+print_uuid = ['print_uuid_example'] # list[str] | An array of Print UUIDs. (optional)
+part_uuid = ['part_uuid_example'] # list[str] | An array of Part UUIDs (optional)
+part_order_number = ['part_order_number_example'] # list[str] | An array of customer-provided part order numbers the printed parts belong to (optional)
+part_order_uuid = ['part_order_uuid_example'] # list[str] | An array of PartOrder UUIDs (optional)
+build_uuid = ['build_uuid_example'] # list[str] | An array of Build UUIDs (optional)
+print_order_number = ['print_order_number_example'] # list[str] | An array of customer-provided print orders number that the printed parts belong to (optional)
+print_order_uuid = ['print_order_uuid_example'] # list[str] | An array of Print Order UUIDs (optional)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `uuid`, `updated_at`, `part_number`, `created_at`, `status`, `part_number` (optional)
 
     try:
         # Fetch printed parts
-        api_response = api_instance.get_printed_parts(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, status=status, print_id=print_id, part_uuid=part_uuid, part_order_number=part_order_number, part_order_uuid=part_order_uuid, build_uuid=build_uuid, print_order_number=print_order_number, print_order_uuid=print_order_uuid, sort=sort)
+        api_response = api_instance.get_printed_parts(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, status=status, print_id=print_id, print_uuid=print_uuid, part_uuid=part_uuid, part_order_number=part_order_number, part_order_uuid=part_order_uuid, build_uuid=build_uuid, print_order_number=print_order_number, print_order_uuid=print_order_uuid, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintedPartsApi->get_printed_parts: %s\n" % e)
@@ -161,12 +162,13 @@ Name | Type | Description  | Notes
  **finished_after** | **datetime**| Finished at or after timestamp (inclusive) | [optional] 
  **status** | [**PrintedPartStatus**](.md)| Current printed part status | [optional] 
  **print_id** | [**list[str]**](str.md)| An array of Print IDs. | [optional] 
- **part_uuid** | **str**| Part UUID | [optional] 
- **part_order_number** | **str**| Customer-provided part order number the printed parts belong to | [optional] 
- **part_order_uuid** | **str**| PartOrder UUID | [optional] 
- **build_uuid** | **str**| Build UUID | [optional] 
- **print_order_number** | **str**| Customer-provided print order number that the printed parts belong to | [optional] 
- **print_order_uuid** | **str**| Print Order UUID | [optional] 
+ **print_uuid** | [**list[str]**](str.md)| An array of Print UUIDs. | [optional] 
+ **part_uuid** | [**list[str]**](str.md)| An array of Part UUIDs | [optional] 
+ **part_order_number** | [**list[str]**](str.md)| An array of customer-provided part order numbers the printed parts belong to | [optional] 
+ **part_order_uuid** | [**list[str]**](str.md)| An array of PartOrder UUIDs | [optional] 
+ **build_uuid** | [**list[str]**](str.md)| An array of Build UUIDs | [optional] 
+ **print_order_number** | [**list[str]**](str.md)| An array of customer-provided print orders number that the printed parts belong to | [optional] 
+ **print_order_uuid** | [**list[str]**](str.md)| An array of Print Order UUIDs | [optional] 
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;uuid&#x60;, &#x60;updated_at&#x60;, &#x60;part_number&#x60;, &#x60;created_at&#x60;, &#x60;status&#x60;, &#x60;part_number&#x60; | [optional] 
 
 ### Return type

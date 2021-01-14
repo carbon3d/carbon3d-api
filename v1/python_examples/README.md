@@ -18,7 +18,9 @@
 ## Installation
 To install the [carbon3d python client](https://pypi.org/project/carbon3d-client/), just run:
 `pip3 install carbon3d-client pyjwt[crypto]`
-*Note: The python examples here require Python 3.0 and above.*
+Examples depend on additional packages that can be installed with:
+`pip3 install pandas numpy`
+*Note: The python examples here require Python 3.0 and above*
 
 ### Updating carbon3d-client
 As the CarbonAPI is continually improving, there may be times when a client version update is required, just run:
@@ -75,7 +77,7 @@ From here you can make API calls directly using the clients.
 ```python
 printers_response = printers_api.get_printers(limit=50, offset=0)
 printers = printers_response.printers
-prints = prints_api.get_prints(limit=100, offset=0).prints
+prints = prints_api.get_prints(limit=100).prints
 ```
 
 ## Filtering
@@ -84,29 +86,29 @@ The API provides some basic filtering capabilities to allow you to access the da
 Querying with no filters is easy.
 ```python
 prints_api = carbon.PrintsApi(api_client)
-all_prints = prints_api.get_prints(limit=100, offset=0)
+all_prints = prints_api.get_prints(limit=100)
 ```
 
 If you want to query for all prints that used platform `1A0000`
 ```python
-filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial="1A0000")
+filtered_prints = prints_api.get_prints(limit=100, platform_serial="1A0000")
 ```
 
 As of 08/11/2020 Carbon is still in the process of updating all of the filters to support requesting arrays. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information on filter options available for each endpoint. The following would return all prints that were printed with platform `1A0000` OR platform `1B0000`.
 ```python
-filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial=["1A0000", "1B0000"])
+filtered_prints = prints_api.get_prints(limit=100, platform_serial=["1A0000", "1B0000"])
 ```
 
 Combining two different filters will always result in an `AND` query. The API currently does not support `OR` queries. The following will return prints on printer `1C0000` that utilized the platform `1A0000`.
 ```python
-filtered_prints = prints_api.get_prints(limit=100, offset=0, platform_serial="1A0000", printer_serial="1C0000")
+filtered_prints = prints_api.get_prints(limit=100, platform_serial="1A0000", printer_serial="1C0000")
 ```
 
 For date ranges you can use the `_after` or `_before` query parameters. For example, here is how to query all prints that started since yesterday.
 ```python
 from datetime import date, timedelta
 yesterday = date.today() - timedelta(days=1)
-filtered_prints = prints_api.get_prints(limit=100, offset=0, started_after=yesterday)
+filtered_prints = prints_api.get_prints(limit=100, started_after=yesterday)
 ```
 
 The API currently only supports exact matches, no wildcard queries or `LIKE` queries are supported.
@@ -120,34 +122,34 @@ You can sort by one or multiple fields. It is recommended you make no assumption
 The default will assume you want to sort in ascending order.
 ```python
 part_orders_api = carbon.PartOrdersApi(api_client)
-part_orders_api.get_part_orders(limit=100, offset=0, sort=["due_date"])
+part_orders_api.get_part_orders(limit=100, sort=["due_date"])
 ```
 
 You can also sort by multiple values. The following will sort be part_order_number in descending order then by due_date in ascending order.
 ```python
-part_orders_api.get_part_orders(limit=100, offset=0, sort=["part_order_number,desc", "due_date"])
+part_orders_api.get_part_orders(limit=100, sort=["part_order_number,desc", "due_date"])
 ```
 
 As of 08/11/2020 Carbon is still the process of adding sorting functionality to all list endpoints. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information on filter options available for each endpoint.
 
 ## Pagination / Cursor
-As of 08/11/2020 Carbon is still the process of switching from traditional limit/offset pagination to cursor based pagination. This is NOT yet implemented for all endpoints. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information.
+As of 12/22/2020 All endpoints except 'printers' are using the cursor implementation. Please check [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/) for up to date information..
 
 
 ### Pagination
 Retrieving the first page of data is as simple as setting the limit and offset to their default values of 100 and 0 respectively.
 ```python
-prints = prints_api.get_prints(limit=100, offset=0)
+printers = printers_api.get_printers(limit=100, offset=0)
 ```
 
 To get the next set of results you would increment the offset by 1.
 ```python
-prints = prints_api.get_prints(limit=100, offset=1)
+printers = printers_api.get_printers(limit=100, offset=1)
 ```
 
 To check if you have retrieved all the data you can check if the number of results is less than the limit.
 ```
-is_last_page = prints.limit > len(prints.prints.length)
+is_last_page = printers.limit > len(printers.printers.length)
 ```
 
 
