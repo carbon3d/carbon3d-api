@@ -14,6 +14,8 @@
     - [Cursor](#cursor)
   - [Retrieving Quality Information](#retrieving-quality-information)
   - [Create a custom part order](#create-a-custom-part-order)
+  - [Joining information from multiple endpoints](#joining-information-from-multiple-endpoints)
+  - [Frequently Asked Questions](#frequently-asked-questions)
 
 ## Installation
 To install the [carbon3d python client](https://pypi.org/project/carbon3d-client/), just run:
@@ -319,3 +321,34 @@ Within the printed part response includes the status information regarding the s
                      "printed_part": {}},
             "uuid": "44444444-4444-4444-4444-444444444444"}
 ```
+## Frequently Asked Questions
+### What is an application id?
+You can think of an Application as a shareable folder for models, parts, projects, etc. that are related to each other. You might have one Application for a running shoe midsole you are working on and another Application for face shields. Functionality to share and manage your applications hasn't been exposed yet, so if you think you want to change how your applications are set up please reach out to your Carbon Technical Partner.
+
+### What's the difference between a model and a part?
+Models can't be printed; they just represent three-dimensional shapes that can be used in a variety of parts. For example, you could have a model for an iPhone case that is used in 2 parts, one that is printed in EPU 41 and another in UMA 90.
+
+### Can I specify how my parts are packed onto a build for a given part order?
+The automatic packer currently has a set of predefined rules that specify how a build should be assembled. These rules are currently tuned for mass customized parts of similar geometry. Please let us know if you'd like to have the functionality to adjust these rules through the API by reaching out to <api-list@carbon3d.com>.
+
+### Where can I find the build(s) generated from requesting a part order?
+The builds created from a given part order can be found in Builds Catalog under the Production tab at print.carbon3d.com. The name of the build will be AutoBuildXXX. By selecting the desired build in this UI, you will be able to also see the build_uuid and other relevant information. (*Note this information is also returned when querying the /builds endpoint.*) You can queue the given build to a printer from the Build Catalog to a printer in your fleet.
+
+
+### What's the difference between a project and a build?
+A project is a collection of builds that have been modified over time. For example, let's say you open our project editing software, upload 10 models, then click print. Afterwards, you realize you want to change the orientation of a few of the models so you open the project again, modify the orientation, and click print. You printed the same project but two different builds.
+
+### How can I queue a build?
+You can use the [createPrintOrder](https://api.carbon3d.com/v1/api-docs/#/PrintOrders/createPrintOrder) API method.
+
+### Why can't I see my models, orders, etc. in the UI.
+Please let us know if you'd like to see these concepts exposed in our UI by reaching out to <api-list@carbon3d.com>.
+
+### What is a part number?
+Part numbers are a common term used in manufacturing to denote a reference to a particular _part design_. Each company chooses their own conventions for assigning part numbers, but generally a single part number is capable of having multiple versions or revisions. It is important to understand that a part number identifies a part _design_, whereas a serial numbers is a unique identifier for _a particular instantiation_ of that part design.
+
+### Are there any API calls that allow me to interact with the printer (e.g. start a print, open the door, etc)?
+This API is not intended to facilitate robotic automation for a printer. If this is something you need, please let your Carbon Technical Partner know.
+
+### Can you add ____ to the print data we are able to export?
+We would love to hear from you; please submit the request via <api-list@carbon3d.com>.

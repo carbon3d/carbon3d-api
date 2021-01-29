@@ -204,7 +204,7 @@ configuration = carbon3d.Configuration(
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.ModelsApi(api_client)
-    filename = 'filename_example' # str | Filename of the model
+    filename = 'filename_example' # str | Filename of the model - assumes .stl if no extension is given
 application_id = 56 # int | Application ID (optional)
 body = '/path/to/file' # file |  (optional)
 
@@ -220,7 +220,7 @@ body = '/path/to/file' # file |  (optional)
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **filename** | **str**| Filename of the model | 
+ **filename** | **str**| Filename of the model - assumes .stl if no extension is given | 
  **application_id** | **int**| Application ID | [optional] 
  **body** | **file**|  | [optional] 
 
