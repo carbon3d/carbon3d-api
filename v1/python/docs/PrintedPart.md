@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **print_order_uuid** | **str** |  | [optional] 
 **print_order_number** | **str** |  | [optional] 
 **print_id** | **str** |  | [optional] 
+**print_uuid** | **str** |  | [optional] 
 **serial_number** | **str** | Only created after printing | [optional] 
 **tags** | [**PrintedPartTags**](PrintedPartTags.md) |  | [optional] 
 **status** | [**PrintedPartStatus**](PrintedPartStatus.md) |  | 
