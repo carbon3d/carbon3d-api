@@ -35,7 +35,7 @@ To verify that the correct client is being used, just run:
 
 
 ## Generating an access token
-First, generate an API key and download the secret.json file by following the steps at https://carbon3d.print.carbon3d.com/api_keys. This file contents will resemble this:
+First, generate an API key and download the secret.json file by following the steps at https://print.carbon3d.com/api_keys. This file contents will resemble this:
 
 ```json
 {

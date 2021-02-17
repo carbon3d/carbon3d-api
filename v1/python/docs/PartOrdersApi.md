@@ -231,7 +231,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_part_orders**
-> PartOrdersResponse get_part_orders(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, status=status, part_order_number=part_order_number, sort=sort)
+> PartOrdersResponse get_part_orders(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, status=status, part_order_number=part_order_number, sort=sort)
 
 Fetch part orders
 
@@ -270,6 +270,7 @@ with carbon3d.ApiClient(configuration) as api_client:
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
 application_id = [56] # list[int] | An array of Application IDs (optional)
+application_uuid = ['application_uuid_example'] # list[str] | An array of Application UUIDs (optional)
 updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
 updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
 status = carbon3d.PartOrderStatus() # PartOrderStatus | PartOrder status (optional)
@@ -278,7 +279,7 @@ sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by de
 
     try:
         # Fetch part orders
-        api_response = api_instance.get_part_orders(limit, cursor=cursor, uuid=uuid, application_id=application_id, updated_before=updated_before, updated_after=updated_after, status=status, part_order_number=part_order_number, sort=sort)
+        api_response = api_instance.get_part_orders(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, status=status, part_order_number=part_order_number, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PartOrdersApi->get_part_orders: %s\n" % e)
@@ -292,6 +293,7 @@ Name | Type | Description  | Notes
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
  **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
+ **application_uuid** | [**list[str]**](str.md)| An array of Application UUIDs | [optional] 
  **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
  **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 
  **status** | [**PartOrderStatus**](.md)| PartOrder status | [optional] 

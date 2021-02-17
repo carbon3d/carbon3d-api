@@ -3,6 +3,7 @@ from __future__ import absolute_import
 # flake8: noqa
 
 # import apis into api package
+from carbon3d.api.applications_api import ApplicationsApi
 from carbon3d.api.attachments_api import AttachmentsApi
 from carbon3d.api.builds_api import BuildsApi
 from carbon3d.api.models_api import ModelsApi
