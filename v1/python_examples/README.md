@@ -236,6 +236,8 @@ This API provides a programmatic interface for submitting part orders. The gener
 2. Create parts that reference a model and a part number with the /parts endpoint
 3. Create an order with the /part_orders endpoint
 
+Part orders can be created with an optional `build_sop_uuid` parameter, which references a Build SOP that configures automatic build generation. Manage at https://print.carbon3d.com/build_sops
+
 Once a part order is submitted, automatic packing will create one or more builds with the parts within the part order (for mass-customization applications only). Currently, the maximum number of parts that will be placed on a build is 35.
 
 Uploaded models, parts and orders can be retrieved either in bulk or by UUID at the /models, /parts and /part_orders endpoints, respectively.

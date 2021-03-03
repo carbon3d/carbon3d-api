@@ -104,7 +104,8 @@ def create_part(parts_api: carbon.PartsApi,
 def create_part_order(part_orders_api: carbon.PartOrdersApi,
                       part_order_number: str,
                       parts: List[carbon.models.part.Part],
-                      due_date: datetime.datetime) -> carbon.models.part_order.PartOrder:
+                      due_date: datetime.datetime,
+                      flush: bool) -> carbon.models.part_order.PartOrder:
     """
     Creates an part_order
     Args:
@@ -116,10 +117,11 @@ def create_part_order(part_orders_api: carbon.PartOrdersApi,
         carbon.models.part_order.PartOrder
     """
     LOG.info('create_part_order: parts={}'.format(str(parts).replace('\n', ' ')))
-    part_order_request_parts = [carbon.OrderRequestParts(part.uuid) for part in parts]
+    part_order_request_parts = [{'uuid': part.uuid} for part in parts]
     part_order_request = carbon.PartOrderRequest(part_order_number=part_order_number,
                                                  parts=part_order_request_parts,
-                                                 due_date=due_date)
+                                                 due_date=due_date,
+                                                 flush=flush)
     api_response = part_orders_api.create_part_order(part_order_request=part_order_request)
     LOG.info('create_part_order: api_response={}'.format(re.sub(' +', ' ', (re.sub('\t|\n', ' ', str(api_response))))))
     return api_response
@@ -150,6 +152,11 @@ def main():
                         type=float,
                         help='Number of days from today for part_order due date to be set',
                         required=True)
+    parser.add_argument('--flush',
+                        '-f',
+                        help='Flush part order',
+                        action='store_true',
+                        default=False)
     parser.add_argument('--secret',
                         '-s',
                         help='JSON file with client_id and client_secret',
@@ -194,7 +201,7 @@ def main():
     # Create part_order
     due_date = datetime.datetime.today() + datetime.timedelta(days=args.due_date)
     formatted_due_date = due_date.astimezone(dateutil.tz.gettz('UTC')).replace(microsecond=0).isoformat()
-    create_part_order(part_orders_api, args.part_order_number, parts, formatted_due_date)
+    create_part_order(part_orders_api, args.part_order_number, parts, formatted_due_date, args.flush)
 
     LOG.info('main: End')
 

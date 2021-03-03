@@ -11,6 +11,8 @@
 
 **Part Orders:** A logical grouping of parts you would like to be auto packed on as few builds as possible.
 
+**Build SOPs:** Optional configurations for automatic build generation
+
 **Print Orders:** A single build that you would like to queue X times on Y printers.
 
 **Builds:** A printable set of parts arranged on a build platform ready for printing associated with a specific version of a project.
