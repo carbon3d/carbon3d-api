@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 Fetch all applications summary
 
-Fetch all available applications and their names, descriptions, and uuids. Sorted by uuid, ascending.
+Fetch all available applications and their names, descriptions, and uuids. Sorted by name, ascending.
 
 ### Example
 
