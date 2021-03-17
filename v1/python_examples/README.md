@@ -236,7 +236,10 @@ This API provides a programmatic interface for submitting part orders. The gener
 2. Create parts that reference a model and a part number with the /parts endpoint
 3. Create an order with the /part_orders endpoint
 
-Part orders can be created with an optional `build_sop_uuid` parameter, which references a Build SOP that configures automatic build generation. Manage at https://print.carbon3d.com/build_sops
+Part orders can be created with an optional `build_sop_uuid` parameter, which references a Build SOP that configures automatic build generation. Generated builds will only contain parts from orders with the same Build SOP.
+Manage at https://print.carbon3d.com/build_sops
+
+Part orders can be grouped with an optional `packing_group` parameter, a string to identify part orders that should only be processed together. Part orders with different packing groups will be processed into different builds. Part orders with an unspecified packing_group will be treated as a separate group and will be packed together. A maximum of 40 total concurrent packing groups are permitted for 'open' and 'processing' PartOrders (contact carbon at api-support@carbon to increase this limit).
 
 Once a part order is submitted, automatic packing will create one or more builds with the parts within the part order (for mass-customization applications only). Currently, the maximum number of parts that will be placed on a build is 35.
 
@@ -248,7 +251,7 @@ Build attachments (traveler, slice video) can be retrieved by UUID at the /attac
 
 ```bash
 ./v1/python_examples/custom_part_order.py --help
-usage: custom_part_order.py [-h] [--application_id APPLICATION_ID]
+usage: custom_part_order.py [-h] [--application_uuid APPLICATION_UUID]
                             [--host HOST] --part_catalog_num PART_CATALOG_NUM
                             --part_order_number PART_ORDER_NUMBER --due_date DUE_DATE
                             --secret SECRET
@@ -261,7 +264,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            show this help message and exit
-  --application_id APPLICATION_ID, -a APPLICATION_ID
+  --application_uuid APPLICATION_UUID, -a APPLICATION_UUID
                         Application scope for part number (default: 0)
   --host HOST           Carbon API host (default: https://api.carbon3d.com/v1)
   --part_catalog_num PART_CATALOG_NUM, -p PART_CATALOG_NUM

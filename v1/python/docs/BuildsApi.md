@@ -82,7 +82,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_builds**
-> BuildsResponse get_builds(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, created_before=created_before, created_after=created_after, name=name, revision=revision, status=status, sort=sort)
+> BuildsResponse get_builds(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, created_before=created_before, created_after=created_after, name=name, packing_group=packing_group, revision=revision, status=status, sort=sort)
 
 Fetch builds
 
@@ -120,20 +120,20 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
-application_id = [56] # list[int] | An array of Application IDs (optional)
 application_uuid = ['application_uuid_example'] # list[str] | An array of Application UUIDs (optional)
 updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
 updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
 created_before = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date before timestamp (exclusive) (optional)
 created_after = '2013-10-20T19:20:30+01:00' # datetime | Select build with creation date at or after timestamp (inclusive) (optional)
 name = ['name_example'] # list[str] | An array of build names (optional)
+packing_group = 'packing_group_example' # str | Optional customer-provided part order packing group (optional)
 revision = ['revision_example'] # list[str] | An array of build revisions (optional)
 status = 'status_example' # str | Status of the build (optional)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `build_uuid`, `updated_at`, `status`, `created_at` (optional)
 
     try:
         # Fetch builds
-        api_response = api_instance.get_builds(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, created_before=created_before, created_after=created_after, name=name, revision=revision, status=status, sort=sort)
+        api_response = api_instance.get_builds(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, created_before=created_before, created_after=created_after, name=name, packing_group=packing_group, revision=revision, status=status, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling BuildsApi->get_builds: %s\n" % e)
@@ -146,13 +146,13 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
- **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
  **application_uuid** | [**list[str]**](str.md)| An array of Application UUIDs | [optional] 
  **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
  **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 
  **created_before** | **datetime**| Select build with creation date before timestamp (exclusive) | [optional] 
  **created_after** | **datetime**| Select build with creation date at or after timestamp (inclusive) | [optional] 
  **name** | [**list[str]**](str.md)| An array of build names | [optional] 
+ **packing_group** | **str**| Optional customer-provided part order packing group | [optional] 
  **revision** | [**list[str]**](str.md)| An array of build revisions | [optional] 
  **status** | **str**| Status of the build | [optional] 
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;build_uuid&#x60;, &#x60;updated_at&#x60;, &#x60;status&#x60;, &#x60;created_at&#x60; | [optional] 

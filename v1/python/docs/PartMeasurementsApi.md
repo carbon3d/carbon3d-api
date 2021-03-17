@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_part_measurements**
-> PartMeasurementResponse get_part_measurements(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, printed_part_uuid=printed_part_uuid, sort=sort)
+> PartMeasurementResponse get_part_measurements(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, printed_part_uuid=printed_part_uuid, sort=sort)
 
 Fetch printed part measurements
 
@@ -46,7 +46,6 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
-application_id = [56] # list[int] | An array of Application IDs (optional)
 application_uuid = ['application_uuid_example'] # list[str] | An array of Application UUIDs (optional)
 updated_before = '2013-10-20T19:20:30+01:00' # datetime | Updated before timestamp (exclusive) (optional)
 updated_after = '2013-10-20T19:20:30+01:00' # datetime | Updated at or after timestamp (inclusive) (optional)
@@ -55,7 +54,7 @@ sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by de
 
     try:
         # Fetch printed part measurements
-        api_response = api_instance.get_part_measurements(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, printed_part_uuid=printed_part_uuid, sort=sort)
+        api_response = api_instance.get_part_measurements(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, updated_before=updated_before, updated_after=updated_after, printed_part_uuid=printed_part_uuid, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PartMeasurementsApi->get_part_measurements: %s\n" % e)
@@ -68,7 +67,6 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
- **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
  **application_uuid** | [**list[str]**](str.md)| An array of Application UUIDs | [optional] 
  **updated_before** | **datetime**| Updated before timestamp (exclusive) | [optional] 
  **updated_after** | **datetime**| Updated at or after timestamp (inclusive) | [optional] 

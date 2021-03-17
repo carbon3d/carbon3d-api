@@ -57,13 +57,13 @@ def create_api_token(key_file: str, exp_minutes: int) -> str:
     return encoded_jwt.decode('utf-8')
 
 def upload_model(models_api: carbon.ModelsApi,
-                 application_id: int,
+                 application_uuid: str,
                  file_path: str) -> carbon.models.model.Model:
     """
     Uploads a model
     Args:
         models_api: Authenticated Models Api
-        application_id: Application id
+        application_uuid: Application uuid
         file_path: File path to model
     Returns:
         carbon.models.model.Model
@@ -73,7 +73,7 @@ def upload_model(models_api: carbon.ModelsApi,
     with open(file_path, 'rb') as mesh_file:
         api_response = models_api.upload_model(
             filename,
-            application_id=application_id,
+            application_uuid=application_uuid,
             body=mesh_file.read()
         )
     LOG.info('upload_model: api_response={}'.format(str(api_response).replace('\n', ' ')))
@@ -82,21 +82,21 @@ def upload_model(models_api: carbon.ModelsApi,
 def create_part(parts_api: carbon.PartsApi,
                 part_catalog_num: str,
                 model_uuid: str,
-                application_id: int) -> carbon.models.part.Part:
+                application_uuid: str) -> carbon.models.part.Part:
     """
     Creates a part
     Args:
         parts_api: Authenticated Parts Api
         part_catalog_num: Part catalog number
         model_uuid: Uploaded Model uuid
-        application_id: Application id
+        application_uuid: Application uuid
     Returns:
         carbon.models.part.Part
     """
     LOG.info('create_part: part_catalog_num={} model_uuid={}'.format(part_catalog_num, model_uuid))
     part_request = carbon.PartRequest(part_number=part_catalog_num,
                                       model_uuid=model_uuid,
-                                      application_id=application_id)
+                                      application_uuid=application_uuid)
     api_response = parts_api.create_part(part_request=part_request)
     LOG.info('create_part: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
@@ -131,11 +131,11 @@ def main():
     parser = argparse.ArgumentParser(description='Script to upload models, create parts, and create an part_order',
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter,
                                      add_help=True)
-    parser.add_argument('--application_id',
+    parser.add_argument('--application_uuid',
                         '-a',
                         help='Application scope for part number',
-                        type=int,
-                        default=0)
+                        type=str,
+                       )
     parser.add_argument('--host',
                         help='Carbon API host',
                         default='https://api.carbon3d.com/v1')
@@ -189,13 +189,13 @@ def main():
     # Upload models
     models = []
     for file_path in stls:
-        models.append(upload_model(models_api, args.application_id, file_path))
+        models.append(upload_model(models_api, args.application_uuid, file_path))
     LOG.info('main: models={}'.format(str(models).replace('\n', ' ')))
 
     # Create parts
     parts = []
     for model in models:
-        parts.append(create_part(parts_api, args.part_catalog_num, model.uuid, args.application_id))
+        parts.append(create_part(parts_api, args.part_catalog_num, model.uuid, args.application_uuid))
     LOG.info('main: parts={}'.format(str(parts).replace('\n', ' ')))
 
     # Create part_order

@@ -8,7 +8,7 @@ Method | HTTP request | Description
 
 
 # **get_prints**
-> PrintsResponse get_prints(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
+> PrintsResponse get_prints(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
 
 List finished prints information
 
@@ -46,7 +46,6 @@ with carbon3d.ApiClient(configuration) as api_client:
     limit = 100 # int | Max records to return (default to 100)
 cursor = '' # str | Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ=d) (optional) (default to '')
 uuid = ['uuid_example'] # list[str] | An array of UUIDs (optional)
-application_id = [56] # list[int] | An array of Application IDs (optional)
 application_uuid = ['application_uuid_example'] # list[str] | An array of Application UUIDs (optional)
 started_before = 'started_before_example' # str | Print started before timestamp (exclusive) (optional)
 started_after = 'started_after_example' # str | Print started at or after timestamp (inclusive) (optional)
@@ -63,7 +62,7 @@ sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by de
 
     try:
         # List finished prints information
-        api_response = api_instance.get_prints(limit, cursor=cursor, uuid=uuid, application_id=application_id, application_uuid=application_uuid, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
+        api_response = api_instance.get_prints(limit, cursor=cursor, uuid=uuid, application_uuid=application_uuid, started_before=started_before, started_after=started_after, finished_before=finished_before, finished_after=finished_after, print_id=print_id, status=status, print_order_number=print_order_number, print_order_uuid=print_order_uuid, printer_serial=printer_serial, printer_name=printer_name, platform_serial=platform_serial, sort=sort)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling PrintsApi->get_prints: %s\n" % e)
@@ -76,7 +75,6 @@ Name | Type | Description  | Notes
  **limit** | **int**| Max records to return | [default to 100]
  **cursor** | **str**| Cursor for paginating through data (e.g. dXNlcjpXMDdRQ1JQQTQ&#x3D;d) | [optional] [default to &#39;&#39;]
  **uuid** | [**list[str]**](str.md)| An array of UUIDs | [optional] 
- **application_id** | [**list[int]**](int.md)| An array of Application IDs | [optional] 
  **application_uuid** | [**list[str]**](str.md)| An array of Application UUIDs | [optional] 
  **started_before** | **str**| Print started before timestamp (exclusive) | [optional] 
  **started_after** | **str**| Print started at or after timestamp (inclusive) | [optional] 

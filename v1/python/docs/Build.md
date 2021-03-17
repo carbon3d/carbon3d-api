@@ -5,6 +5,7 @@ A build containing one or more parts
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **uuid** | **str** |  | [readonly] 
+**packing_group** | **str** | Optional customer-provided part order packing group | [optional] 
 **parts** | [**list[Part]**](Part.md) |  | 
 **attachments** | [**list[BuildAttachments]**](BuildAttachments.md) |  | [optional] 
 **name** | **str** |  | [optional] 
