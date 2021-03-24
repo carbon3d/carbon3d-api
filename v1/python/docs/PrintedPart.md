@@ -18,7 +18,6 @@ Name | Type | Description | Notes
 **serial_number** | **str** | Only created after printing | [optional] 
 **tags** | [**PrintedPartTags**](PrintedPartTags.md) |  | [optional] 
 **status** | [**PrintedPartStatus**](PrintedPartStatus.md) |  | 
-**genealogy** | [**PartGenealogy**](PartGenealogy.md) |  | [optional] 
 **error** | **str** | Error message (if part could not be produced) | [optional] [readonly] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

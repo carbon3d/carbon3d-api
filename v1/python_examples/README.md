@@ -310,7 +310,6 @@ Within the printed part response includes the status information regarding the s
 ```json
  {"build_uuid": "",
             "error": None,
-            "genealogy": {"build_info": None, "print_info": None},
             "model_uuid": "11111111-1111-1111-1111-111111111111",
             "part_number": "113080-01",
             "part_order_number": "",
