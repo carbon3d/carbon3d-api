@@ -169,7 +169,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **upload_model**
-> Model upload_model(filename, application_uuid=application_uuid, body=body)
+> Model upload_model(filename, application_uuid, body=body)
 
 Upload a model
 
@@ -205,12 +205,12 @@ with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.ModelsApi(api_client)
     filename = 'filename_example' # str | Filename of the model - assumes .stl if no extension is given
-application_uuid = 'application_uuid_example' # str | Application UUID (optional)
+application_uuid = 'application_uuid_example' # str | Application UUID
 body = '/path/to/file' # file |  (optional)
 
     try:
         # Upload a model
-        api_response = api_instance.upload_model(filename, application_uuid=application_uuid, body=body)
+        api_response = api_instance.upload_model(filename, application_uuid, body=body)
         pprint(api_response)
     except ApiException as e:
         print("Exception when calling ModelsApi->upload_model: %s\n" % e)
@@ -221,7 +221,7 @@ body = '/path/to/file' # file |  (optional)
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **filename** | **str**| Filename of the model - assumes .stl if no extension is given | 
- **application_uuid** | **str**| Application UUID | [optional] 
+ **application_uuid** | **str**| Application UUID | 
  **body** | **file**|  | [optional] 
 
 ### Return type

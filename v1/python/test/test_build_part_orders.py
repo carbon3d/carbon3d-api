@@ -17,11 +17,11 @@ import unittest
 import datetime
 
 import carbon3d
-from carbon3d.models.parts_response import PartsResponse  # noqa: E501
+from carbon3d.models.build_part_orders import BuildPartOrders  # noqa: E501
 from carbon3d.rest import ApiException
 
-class TestPartsResponse(unittest.TestCase):
-    """PartsResponse unit test stubs"""
+class TestBuildPartOrders(unittest.TestCase):
+    """BuildPartOrders unit test stubs"""
 
     def setUp(self):
         pass
@@ -30,26 +30,23 @@ class TestPartsResponse(unittest.TestCase):
         pass
 
     def make_instance(self, include_optional):
-        """Test PartsResponse
+        """Test BuildPartOrders
             include_option is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # model = carbon3d.models.parts_response.PartsResponse()  # noqa: E501
+        # model = carbon3d.models.build_part_orders.BuildPartOrders()  # noqa: E501
         if include_optional :
-            return PartsResponse(
-                limit = 56, 
-                next_cursor = 'dXNlcjpXMDdRQ1JQQTQ=', 
-                total_count = 56, 
-                parts = [
-                    {"uuid":"6401c93f-f340-4da2-8784-bddd4065e75c","part_number":"12345","model_uuid":"3cc663e2-c762-4f8f-8997-30d17bc13e8d"}
-                    ]
+            return BuildPartOrders(
+                uuid = '0', 
+                part_order_number = '0', 
+                status = '0'
             )
         else :
-            return PartsResponse(
+            return BuildPartOrders(
         )
 
-    def testPartsResponse(self):
-        """Test PartsResponse"""
+    def testBuildPartOrders(self):
+        """Test BuildPartOrders"""
         inst_req_only = self.make_instance(include_optional=False)
         inst_req_and_optional = self.make_instance(include_optional=True)
 

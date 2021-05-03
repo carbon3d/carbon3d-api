@@ -43,9 +43,11 @@ When an update to the API is rolled out, the version will be updated. The follow
 To manage the amount of total requests that the API, please note that there is a rate limit of 100 requests per 10 seconds that is emposed on a per user level. If you feel that this is not adequate to support your workflow, please contact your Carbon Technical Partner for further information.
 
 ## Examples
-Currently only examples in python are provided. Even if you are not using python to interact with our API, these examples will still be helpful to read through to understand how the information provided in the API can be joined.
+Python sample code is provided as a reference and starting point. While you may choose to use another language, the general workflow and guidelines for interacting with API data remain much the same.
+Overviews of common tasks like [pagination/cursor use](v1/python_examples/README.md#pagination--cursor), [creating part orders for automated packing](v1/python_examples/README.md#create-a-custom-part-order), and more can be found in the [readme](v1/python_examples/README.md)
 
 ### Python
+Several Python examples of common API transactions can be found in (v1/python_examples). These are ready to use, but are not intended to be complete solutions for interacting with production data.
 Read more about our Python examples [here](v1/python_examples/README.md).
 
 ## Feedback

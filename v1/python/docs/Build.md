@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **revision** | **str** |  | [optional] 
 **status** | **str** |  | [optional] 
+**application_uuid** | **str** | Application UUID | [optional] 
+**part_orders** | [**list[BuildPartOrders]**](BuildPartOrders.md) |  | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

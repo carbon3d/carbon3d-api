@@ -57,7 +57,7 @@ print_order_number = ['print_order_number_example'] # list[str] | An array of nu
 print_order_uuid = ['print_order_uuid_example'] # list[str] | An array of UUID(s) of the print_order submitted (optional)
 printer_serial = ['printer_serial_example'] # list[str] | An array of serials of the Printer(s) used to print (optional)
 printer_name = ['printer_name_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
-platform_serial = ['platform_serial_example'] # list[str] | An array of names of the Printer(s) used to print (optional)
+platform_serial = ['platform_serial_example'] # list[str] | An array of serials of the Platform(s) used to print (optional)
 sort = ['sort_example'] # list[str] | Field(s) to sort by. Ascending order by default, use `sort=field,desc` to specify descending order. Sortable fields are: `uuid`, `status`, `started_at`, `finished_at`, `print_order_number` (optional)
 
     try:
@@ -86,7 +86,7 @@ Name | Type | Description  | Notes
  **print_order_uuid** | [**list[str]**](str.md)| An array of UUID(s) of the print_order submitted | [optional] 
  **printer_serial** | [**list[str]**](str.md)| An array of serials of the Printer(s) used to print | [optional] 
  **printer_name** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 
- **platform_serial** | [**list[str]**](str.md)| An array of names of the Printer(s) used to print | [optional] 
+ **platform_serial** | [**list[str]**](str.md)| An array of serials of the Platform(s) used to print | [optional] 
  **sort** | [**list[str]**](str.md)| Field(s) to sort by. Ascending order by default, use &#x60;sort&#x3D;field,desc&#x60; to specify descending order. Sortable fields are: &#x60;uuid&#x60;, &#x60;status&#x60;, &#x60;started_at&#x60;, &#x60;finished_at&#x60;, &#x60;print_order_number&#x60; | [optional] 
 
 ### Return type
