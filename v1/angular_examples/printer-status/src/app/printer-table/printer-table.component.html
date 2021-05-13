@@ -1,0 +1,21 @@
+<div>
+  <h1>Printer Status Example</h1>
+  <table>
+     <thead>
+        <tr>
+           <th>Name</th>
+           <th>Serial</th>
+           <th>State</th>
+           <th>Version</th>
+        </tr>
+     </thead>
+     <tbody>
+        <tr *ngFor="let item of printers">
+           <th>{{ item.name }}</th>
+           <td>{{ item.serial }}</td>
+           <td>{{ item.status.printer_state}}</td>
+           <td>{{ item.status.software_version }}</td>
+        </tr>
+     </tbody>
+  </table>
+</div>

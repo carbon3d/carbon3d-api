@@ -1,0 +1,11 @@
+{
+  "name": "carbon-api-proxy",
+  "version": "0.0.0",
+  "scripts": {},
+  "private": true,
+  "dependencies": {
+    "express": "4.17.1",
+    "http-proxy-middleware": "2.0.0",
+    "jsonwebtoken": "8.5.1"
+  }
+}
