@@ -20,7 +20,7 @@
 
 ## Installation
 To install the [carbon3d python client](https://pypi.org/project/carbon3d-client/), just run:
-`pip3 install carbon3d-client pyjwt[crypto]`
+`pip3 install carbon3d-client 'pyjwt[crypto]'`
 Examples depend on additional packages that can be installed with:
 `pip3 install pandas numpy`
 *Note: The python examples here require Python 3.0 and above*

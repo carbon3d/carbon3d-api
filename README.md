@@ -22,7 +22,7 @@ The documentation is intended to help you get started and provide some examples,
 ## Authentication
 The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token to authenticate each request. Follow these steps to get started.
 1. Generate an API Key [here](https://print.carbon3d.com/api_keys)* by clicking the "Create API Key" button. This will automatically download a `secrets.json` file; your client secret is NOT stored by Carbon.
-    1. Note: You must be an ADMIN user within your customer profile to access the API keys. You also need to remain ADMIN in order to use the API keys to authenticate with the API
+    1. Note: You must be an ADMIN user within your customer profile to access the API keys.
 2. You can now use the `v1/python_examples/authenticate-create.py` script to generate a valid token with your desired expiration. You can re-generate as many tokens as you'd like with new expirations utilizing the same secret. For example, to generate a token that is valid for 24 hours you could run:
     ``` bash
     v1/python/examples/authtoken-create.py path/to/secret.json --exp_hours 24
