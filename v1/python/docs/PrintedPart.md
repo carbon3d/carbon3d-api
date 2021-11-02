@@ -16,6 +16,9 @@ Name | Type | Description | Notes
 **print_id** | **str** |  | [optional] 
 **print_uuid** | **str** |  | [optional] 
 **serial_number** | **str** | Only created after printing | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**updated_at** | **datetime** |  | [optional] 
+**finished_at** | **datetime** |  | [optional] 
 **tags** | [**PrintedPartTags**](PrintedPartTags.md) |  | [optional] 
 **status** | [**PrintedPartStatus**](PrintedPartStatus.md) |  | 
 **error** | **str** | Error message (if part could not be produced) | [optional] [readonly] 
