@@ -4,10 +4,85 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**download_model**](ModelsApi.md#download_model) | **GET** /models/{uuid}/download | Download a model by UUID
 [**get_model**](ModelsApi.md#get_model) | **GET** /models/{uuid} | Get a model by UUID
 [**get_models**](ModelsApi.md#get_models) | **GET** /models | Fetch models
 [**upload_model**](ModelsApi.md#upload_model) | **POST** /models | Upload a model
 
+
+# **download_model**
+> file download_model(uuid)
+
+Download a model by UUID
+
+Download a model by UUID
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+```python
+from __future__ import print_function
+import time
+import carbon3d
+from carbon3d.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.carbon3d.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = carbon3d.Configuration(
+    host = "https://api.carbon3d.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = carbon3d.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Enter a context with an instance of the API client
+with carbon3d.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = carbon3d.ModelsApi(api_client)
+    uuid = 'uuid_example' # str | Model UUID
+
+    try:
+        # Download a model by UUID
+        api_response = api_instance.download_model(uuid)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ModelsApi->download_model: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **uuid** | **str**| Model UUID | 
+
+### Return type
+
+**file**
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/octet-stream
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | File response after redirect |  -  |
+**302** | Expected response to be a redirect to the file |  -  |
+**404** | The model does not exist |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_model**
 > Model get_model(uuid)

@@ -9,7 +9,7 @@ import logging
 from http.client import HTTPConnection
 import jwt
 
-HTTPConnection.debuglevel = 1  # type: ignore
+HTTPConnection.debuglevel = 1
 logging.basicConfig()
 logging.getLogger().setLevel(logging.DEBUG)
 REQUESTS_LOG = logging.getLogger("requests.packages.urllib3")
