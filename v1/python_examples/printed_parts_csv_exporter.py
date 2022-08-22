@@ -22,7 +22,7 @@ MAX_LIMIT = 100
 # API allows up to 100 values per filter per request
 FILTER_LIMIT = 100
 # API server rate limits incoming requests - add a delay between requests to avoid 429s
-REQ_DELAY_S = 1 /5
+REQ_DELAY_S = 1 / 5
 
 def get_next_limit(page: int,
                    max_records: int) -> int:
@@ -33,6 +33,7 @@ def get_next_limit(page: int,
 
 class Carbon3dCsvExporter():
     """Export CSV of printed_parts joined with prints"""
+
     def __init__(self,
                  api_client: ApiClient) -> None:
         if client_version < version('0.2.2'):
@@ -161,7 +162,11 @@ def main():
         'iss': client_id,
         'exp': int(time() + args.token_exp_minutes * 60)
     }
-    jwt_token = jwt.encode(jwt_contents, client_secret, algorithm='RS256').decode('utf-8')
+    jwt_token = jwt.encode(jwt_contents, client_secret, algorithm='RS256')
+
+    # Versions of pyjwt before v2.0.0 return bytes
+    if isinstance(jwt_token, bytes):
+        jwt_token = jwt_token.decode("utf-8")
 
     if args.filter_options:
         filter_options = json.loads(args.filter_options)
@@ -174,6 +179,7 @@ def main():
 
     exporter = Carbon3dCsvExporter(api_client)
     exporter.export_printed_parts(args.export_path, filter_options, args.sort_options, args.max_records)
+
 
 if __name__ == '__main__':
     main()

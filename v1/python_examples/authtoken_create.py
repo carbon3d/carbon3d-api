@@ -33,7 +33,7 @@ def create_api_token(key_file, exp_minutes):
         # generate jwt token
         jwt_contents = {
             'iss': client_id,
-            'exp': int(time.time() + exp_minutes*60)
+            'exp': int(time.time() + exp_minutes * 60)
         }
         # sign & encode token with client secret
         encoded_jwt = jwt.encode(
@@ -41,11 +41,15 @@ def create_api_token(key_file, exp_minutes):
             client_secret,
             algorithm='RS256'
         )
+        # Versions of pyjwt before v2.0.0 return bytes
+        if isinstance(encoded_jwt, bytes):
+            encoded_jwt = encoded_jwt.decode("utf-8")
         # output token
-        print(encoded_jwt.decode('utf-8'))
+        print(encoded_jwt)
     except Exception as e:
         print("Exception when creating token:\n%s\n" % e, file=sys.stderr)
         print(ARGS)
+
 
 if __name__ == "__main__":
     # Create JWT Token from API key

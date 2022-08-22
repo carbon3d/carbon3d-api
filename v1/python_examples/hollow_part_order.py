@@ -9,7 +9,6 @@ import re
 import time
 from typing import List
 
-import dateutil
 import jwt
 import carbon3d as carbon
 
@@ -42,17 +41,11 @@ def create_api_token(key_file: str, exp_minutes: int) -> str:
     client_secret = secret_json['client_secret']
 
     # Generate jwt token
-    jwt_contents = {
-        'iss': client_id,
-        'exp': int(time.time() + exp_minutes * 60)
-    }
+    expiration = int(time.time() + exp_minutes * 60)
+    jwt_contents = {'iss': client_id, 'exp': expiration}
 
     # Sign & encode token with client secret
-    encoded_jwt = jwt.encode(
-        jwt_contents,
-        client_secret,
-        algorithm='RS256'
-    )
+    encoded_jwt = jwt.encode(jwt_contents, client_secret, algorithm='RS256')
 
     # Versions of pyjwt before v2.0.0 return bytes
     if isinstance(encoded_jwt, bytes):
@@ -83,6 +76,27 @@ def upload_model(models_api: carbon.ModelsApi,
     LOG.info('upload_model: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
 
+def create_model_program_run(model_program_runs_api: carbon.ModelProgramRunsApi,
+                             model_program_uuid: str,
+                             model_uuid: str) -> carbon.models.model_program_run.ModelProgramRun:
+    """
+    Creates a model program run
+    Args:
+        model_program_runs_api: Authenticated model_program_runs Api
+        model_program_uuid: Model program uuid
+        model_uuid: Uploaded Model uuid
+    Returns:
+        carbon.models.model_program_run.ModelProgramRun
+    """
+    LOG.info('create_model_program_run: model_program_uuid={} model_uuid={}'.format(model_program_uuid, model_uuid))
+    model_program_run_request = carbon.ModelProgramRunRequest(
+        model_program_uuid=model_program_uuid,
+        parameters={"model_uuid": model_uuid}
+    )
+    api_response = model_program_runs_api.create_model_program_run(model_program_run_request=model_program_run_request)
+    LOG.info('create_model_program_run: api_response={}'.format(str(api_response).replace('\n', ' ')))
+    return api_response
+
 def create_part(parts_api: carbon.PartsApi,
                 part_catalog_num: str,
                 model_uuid: str,
@@ -98,9 +112,11 @@ def create_part(parts_api: carbon.PartsApi,
         carbon.models.part.Part
     """
     LOG.info('create_part: part_catalog_num={} model_uuid={}'.format(part_catalog_num, model_uuid))
-    part_request = carbon.PartRequest(part_number=part_catalog_num,
-                                      model_uuid=model_uuid,
-                                      application_uuid=application_uuid)
+    part_request = carbon.PartRequest(
+        part_number=part_catalog_num,
+        model_uuid=model_uuid,
+        application_uuid=application_uuid
+    )
     api_response = parts_api.create_part(part_request=part_request)
     LOG.info('create_part: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
@@ -108,7 +124,7 @@ def create_part(parts_api: carbon.PartsApi,
 def create_part_order(part_orders_api: carbon.PartOrdersApi,
                       part_order_number: str,
                       parts: List[carbon.models.part.Part],
-                      due_date: datetime.datetime,
+                      due_date: datetime,
                       flush: bool,
                       build_sop_uuid: str) -> carbon.models.part_order.PartOrder:
     """
@@ -125,11 +141,13 @@ def create_part_order(part_orders_api: carbon.PartOrdersApi,
     """
     LOG.info('create_part_order: parts={}'.format(str(parts).replace('\n', ' ')))
     part_order_request_parts = [{'uuid': part.uuid} for part in parts]
-    part_order_request = carbon.PartOrderRequest(part_order_number=part_order_number,
-                                                 parts=part_order_request_parts,
-                                                 due_date=due_date,
-                                                 flush=flush,
-                                                 build_sop_uuid=build_sop_uuid)
+    part_order_request = carbon.PartOrderRequest(
+        part_order_number=part_order_number,
+        parts=part_order_request_parts,
+        due_date=due_date,
+        flush=flush,
+        build_sop_uuid=build_sop_uuid
+    )
     api_response = part_orders_api.create_part_order(part_order_request=part_order_request)
     LOG.info('create_part_order: api_response={}'.format(re.sub(' +', ' ', (re.sub('\t|\n', ' ', str(api_response))))))
     return api_response
@@ -173,6 +191,9 @@ def main():
                         '-s',
                         help='JSON file with client_id and client_secret',
                         required=True)
+    parser.add_argument('--model_program_uuid',
+                        help='Carbon-provided model program identifier',
+                        required=True)
     parser.add_argument('files',
                         nargs='+',
                         help='Model file paths (.stl)')
@@ -190,12 +211,14 @@ def main():
     config = carbon.Configuration(host=args.host)
 
     # Configure Bearer authorization (JWT): bearerAuth
-    config.access_token = create_api_token(args.secret, 5)
+    config.access_token = create_api_token(args.secret, 60)
 
     # Prepare APIs
-    models_api = carbon.ModelsApi(carbon.ApiClient(config))
-    parts_api = carbon.PartsApi(carbon.ApiClient(config))
-    part_orders_api = carbon.PartOrdersApi(carbon.ApiClient(config))
+    api_client = carbon.ApiClient(config)
+    models_api = carbon.ModelsApi(api_client)
+    model_program_runs_api = carbon.ModelProgramRunsApi(api_client)
+    parts_api = carbon.PartsApi(api_client)
+    part_orders_api = carbon.PartOrdersApi(api_client)
 
     # Upload models
     models = []
@@ -203,10 +226,35 @@ def main():
         models.append(upload_model(models_api, args.application_uuid, file_path))
     LOG.info('main: models={}'.format(str(models).replace('\n', ' ')))
 
+    # Execute model programs
+    model_program_run_uuids = []
+    for model in models:
+        model_program_run = create_model_program_run(model_program_runs_api, args.model_program_uuid, model.uuid)
+        model_program_run_uuids.append(model_program_run.uuid)
+    LOG.info('main: model_program_run_uuids={}'.format(str(model_program_run_uuids).replace('\n', ' ')))
+
+    output_model_uuids = []
+    while len(model_program_run_uuids) > 0:
+        for run_uuid in list(model_program_run_uuids):
+            run_response = model_program_runs_api.get_model_program_run(run_uuid)
+            LOG.info('get_model_program_run: api_response={}'.format(str(run_response).replace('\n', ' ')))
+            if run_response.status == 'complete':
+                if not run_response.model_uuid:
+                    continue
+                output_model_uuids.append(run_response.model_uuid)
+                model_program_run_uuids.remove(run_uuid)
+            elif run_response.status == 'failed':
+                LOG.warning('model program run failed. Continuing with remaining models.')
+                model_program_run_uuids.remove(run_uuid)
+            elif run_response.status == 'preparing':
+                time.sleep(30)
+            else:
+                raise "Encountered unknown model_program_run status"
+
     # Create parts
     parts = []
-    for model in models:
-        parts.append(create_part(parts_api, args.part_catalog_num, model.uuid, args.application_uuid))
+    for model_uuid in output_model_uuids:
+        parts.append(create_part(parts_api, args.part_catalog_num, model_uuid, args.application_uuid))
     LOG.info('main: parts={}'.format(str(parts).replace('\n', ' ')))
 
     # Create part_order
