@@ -4,8 +4,8 @@ All URIs are relative to *https://api.carbon3d.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_model_program_run**](ModelProgramRunsApi.md#create_model_program_run) | **POST** /model_program_run | Run a model program to alter your models
-[**get_model_program_run**](ModelProgramRunsApi.md#get_model_program_run) | **GET** /model_program_run/{uuid} | Get a model program run by UUID
+[**create_model_program_run**](ModelProgramRunsApi.md#create_model_program_run) | **POST** /model_program_runs | Run a model program to alter your models
+[**get_model_program_run**](ModelProgramRunsApi.md#get_model_program_run) | **GET** /model_program_runs/{uuid} | Get a model program run by UUID
 
 
 # **create_model_program_run**

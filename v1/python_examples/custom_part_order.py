@@ -9,7 +9,6 @@ import re
 import time
 from typing import List
 
-import dateutil
 import jwt
 import carbon3d as carbon
 
@@ -108,7 +107,7 @@ def create_part(parts_api: carbon.PartsApi,
 def create_part_order(part_orders_api: carbon.PartOrdersApi,
                       part_order_number: str,
                       parts: List[carbon.models.part.Part],
-                      due_date: datetime.datetime,
+                      due_date: datetime,
                       flush: bool,
                       build_sop_uuid: str) -> carbon.models.part_order.PartOrder:
     """

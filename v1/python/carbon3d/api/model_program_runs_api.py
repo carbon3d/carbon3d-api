@@ -136,7 +136,7 @@ class ModelProgramRunsApi(object):
         auth_settings = ['bearerAuth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/model_program_run', 'POST',
+            '/model_program_runs', 'POST',
             path_params,
             query_params,
             header_params,
@@ -250,7 +250,7 @@ class ModelProgramRunsApi(object):
         auth_settings = ['bearerAuth']  # noqa: E501
 
         return self.api_client.call_api(
-            '/model_program_run/{uuid}', 'GET',
+            '/model_program_runs/{uuid}', 'GET',
             path_params,
             query_params,
             header_params,

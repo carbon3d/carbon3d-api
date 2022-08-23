@@ -97,8 +97,8 @@ Class | Method | HTTP request | Description
 *AttachmentsApi* | [**get_attachment**](docs/AttachmentsApi.md#get_attachment) | **GET** /attachments/{uuid} | Download a file attachment
 *BuildsApi* | [**get_build**](docs/BuildsApi.md#get_build) | **GET** /builds/{uuid} | Fetch a build
 *BuildsApi* | [**get_builds**](docs/BuildsApi.md#get_builds) | **GET** /builds | Fetch builds
-*ModelProgramRunsApi* | [**create_model_program_run**](docs/ModelProgramRunsApi.md#create_model_program_run) | **POST** /model_program_run | Run a model program to alter your models
-*ModelProgramRunsApi* | [**get_model_program_run**](docs/ModelProgramRunsApi.md#get_model_program_run) | **GET** /model_program_run/{uuid} | Get a model program run by UUID
+*ModelProgramRunsApi* | [**create_model_program_run**](docs/ModelProgramRunsApi.md#create_model_program_run) | **POST** /model_program_runs | Run a model program to alter your models
+*ModelProgramRunsApi* | [**get_model_program_run**](docs/ModelProgramRunsApi.md#get_model_program_run) | **GET** /model_program_runs/{uuid} | Get a model program run by UUID
 *ModelsApi* | [**download_model**](docs/ModelsApi.md#download_model) | **GET** /models/{uuid}/download | Download a model by UUID
 *ModelsApi* | [**get_model**](docs/ModelsApi.md#get_model) | **GET** /models/{uuid} | Get a model by UUID
 *ModelsApi* | [**get_models**](docs/ModelsApi.md#get_models) | **GET** /models | Fetch models
