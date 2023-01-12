@@ -7,6 +7,8 @@ Method | HTTP request | Description
 [**download_model**](ModelsApi.md#download_model) | **GET** /models/{uuid}/download | Download a model by UUID
 [**get_model**](ModelsApi.md#get_model) | **GET** /models/{uuid} | Get a model by UUID
 [**get_models**](ModelsApi.md#get_models) | **GET** /models | Fetch models
+[**get_presigned_upload_url**](ModelsApi.md#get_presigned_upload_url) | **POST** /models/presigned | Create presigned upload URL for a filename
+[**resolve_presigned_model_upload**](ModelsApi.md#resolve_presigned_model_upload) | **POST** /models/presigned/resolve | Resolve presigned model upload
 [**upload_model**](ModelsApi.md#upload_model) | **POST** /models | Upload a model
 
 
@@ -240,6 +242,151 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Successful operation |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_presigned_upload_url**
+> ModelPresignedUploadUrlResponse get_presigned_upload_url(model_presigned_upload_url_request=model_presigned_upload_url_request)
+
+Create presigned upload URL for a filename
+
+Create presigned upload URL for a filename
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+```python
+from __future__ import print_function
+import time
+import carbon3d
+from carbon3d.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.carbon3d.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = carbon3d.Configuration(
+    host = "https://api.carbon3d.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = carbon3d.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Enter a context with an instance of the API client
+with carbon3d.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = carbon3d.ModelsApi(api_client)
+    model_presigned_upload_url_request = carbon3d.ModelPresignedUploadUrlRequest() # ModelPresignedUploadUrlRequest | Create presigned upload URL for a filename. (optional)
+
+    try:
+        # Create presigned upload URL for a filename
+        api_response = api_instance.get_presigned_upload_url(model_presigned_upload_url_request=model_presigned_upload_url_request)
+        pprint(api_response)
+    except ApiException as e:
+        print("Exception when calling ModelsApi->get_presigned_upload_url: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_presigned_upload_url_request** | [**ModelPresignedUploadUrlRequest**](ModelPresignedUploadUrlRequest.md)| Create presigned upload URL for a filename. | [optional] 
+
+### Return type
+
+[**ModelPresignedUploadUrlResponse**](ModelPresignedUploadUrlResponse.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**400** | Invalid input |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **resolve_presigned_model_upload**
+> resolve_presigned_model_upload(model_resolve_upload_request=model_resolve_upload_request)
+
+Resolve presigned model upload
+
+Resolve presigned model upload
+
+### Example
+
+* Bearer (JWT) Authentication (bearerAuth):
+```python
+from __future__ import print_function
+import time
+import carbon3d
+from carbon3d.rest import ApiException
+from pprint import pprint
+# Defining the host is optional and defaults to https://api.carbon3d.com/v1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = carbon3d.Configuration(
+    host = "https://api.carbon3d.com/v1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure Bearer authorization (JWT): bearerAuth
+configuration = carbon3d.Configuration(
+    access_token = 'YOUR_BEARER_TOKEN'
+)
+
+# Enter a context with an instance of the API client
+with carbon3d.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = carbon3d.ModelsApi(api_client)
+    model_resolve_upload_request = carbon3d.ModelResolveUploadRequest() # ModelResolveUploadRequest | Resolve presigned model upload (optional)
+
+    try:
+        # Resolve presigned model upload
+        api_instance.resolve_presigned_model_upload(model_resolve_upload_request=model_resolve_upload_request)
+    except ApiException as e:
+        print("Exception when calling ModelsApi->resolve_presigned_model_upload: %s\n" % e)
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **model_resolve_upload_request** | [**ModelResolveUploadRequest**](ModelResolveUploadRequest.md)| Resolve presigned model upload | [optional] 
+
+### Return type
+
+void (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful operation |  -  |
+**400** | Invalid input |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

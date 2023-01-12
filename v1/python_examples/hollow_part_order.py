@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import re
+import requests
 import time
 from typing import List
 
@@ -76,6 +77,44 @@ def upload_model(models_api: carbon.ModelsApi,
     LOG.info('upload_model: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
 
+def presigned_upload_model(models_api: carbon.ModelsApi,
+                           file_path: str) -> carbon.models.model.Model:
+    """
+    Uploads a model
+    Args:
+        models_api: Authenticated Models Api
+        file_path: File path to model
+    Returns:
+        carbon.models.model.Model
+    """
+    LOG.info('presigned_upload_model: file_path={}'.format(file_path))
+    filename = os.path.basename(file_path)
+
+    presigned_upload_req = carbon.ModelPresignedUploadUrlRequest(
+        filename=filename,
+    )
+    presigned_upload_resp = models_api.get_presigned_upload_url(
+        model_presigned_upload_url_request=presigned_upload_req)
+    public_model_uuid = presigned_upload_resp.model_uuid
+
+    with open(file_path, 'rb') as model_file:
+        headers = {
+            'Content-Type': 'application/octet-stream',
+        }
+        put_model_resp = requests.put(presigned_upload_resp.presigned_url, data=model_file, headers=headers)
+    etag = put_model_resp.headers.get('etag', None)
+    if not etag:
+        raise Exception("No etag in response to s3 upload={}".format(presigned_upload_resp.presigned_url))
+
+    resolve_model_req = carbon.ModelResolveUploadRequest(
+        filename=filename,
+        model_etag=etag,
+        model_uuid=public_model_uuid,
+    )
+    models_api.resolve_presigned_model_upload(model_resolve_upload_request=resolve_model_req)
+
+    return carbon.models.model.Model(filename=filename, uuid=public_model_uuid)
+
 def create_model_program_run(model_program_runs_api: carbon.ModelProgramRunsApi,
                              model_program_uuid: str,
                              model_uuid: str) -> carbon.models.model_program_run.ModelProgramRun:
@@ -91,7 +130,7 @@ def create_model_program_run(model_program_runs_api: carbon.ModelProgramRunsApi,
     LOG.info('create_model_program_run: model_program_uuid={} model_uuid={}'.format(model_program_uuid, model_uuid))
     model_program_run_request = carbon.ModelProgramRunRequest(
         model_program_uuid=model_program_uuid,
-        parameters={"model_uuid": model_uuid}
+        parameters={"~MODEL_UUID~": model_uuid}
     )
     api_response = model_program_runs_api.create_model_program_run(model_program_run_request=model_program_run_request)
     LOG.info('create_model_program_run: api_response={}'.format(str(api_response).replace('\n', ' ')))
@@ -223,7 +262,7 @@ def main():
     # Upload models
     models = []
     for file_path in stls:
-        models.append(upload_model(models_api, args.application_uuid, file_path))
+        models.append(presigned_upload_model(models_api, file_path))
     LOG.info('main: models={}'.format(str(models).replace('\n', ' ')))
 
     # Execute model programs
