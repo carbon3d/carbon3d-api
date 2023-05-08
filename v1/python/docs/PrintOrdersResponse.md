@@ -4,7 +4,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **limit** | **int** |  | [optional] 
-**next_cursor** | **str** | The cursor that should used to retrieve the next page of results | [optional] 
+**next_cursor** | **str** | the cursor that should be used to retrieve the next page of results | [optional] 
 **total_count** | **int** |  | [optional] 
 **print_orders** | [**list[PrintOrder]**](PrintOrder.md) |  | [optional] 
 

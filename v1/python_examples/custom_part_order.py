@@ -2,15 +2,14 @@
 
 import argparse
 from datetime import datetime, timezone, timedelta
-import json
 import logging
 import os
 import re
-import time
 from typing import List
 
-import jwt
 import carbon3d as carbon
+
+from authtoken_create import create_api_token
 
 
 # Set up logger
@@ -24,40 +23,6 @@ LOG.addHandler(FILE_HANDLER)
 LOG.addHandler(CONSOLE_HANDLER)
 LOG.setLevel(logging.INFO)
 
-def create_api_token(key_file: str, exp_minutes: int) -> str:
-    """
-    Creates api token to authorize api usage
-    Args:
-        key_file: JSON file that contains client_id and client_secret
-        exp_minutes: Number of minutes before api token expires
-    Returns:
-        str: jwt token
-    """
-    LOG.info('create_api_token: key_file={} exp_minutes={}'.format(key_file, exp_minutes))
-    with open(key_file, 'r') as secrets_file:
-        secret_content = secrets_file.read()
-        secret_json = json.loads(secret_content)
-    client_id = secret_json['client_id']
-    client_secret = secret_json['client_secret']
-
-    # Generate jwt token
-    jwt_contents = {
-        'iss': client_id,
-        'exp': int(time.time() + exp_minutes * 60)
-    }
-
-    # Sign & encode token with client secret
-    encoded_jwt = jwt.encode(
-        jwt_contents,
-        client_secret,
-        algorithm='RS256'
-    )
-
-    # Versions of pyjwt before v2.0.0 return bytes
-    if isinstance(encoded_jwt, bytes):
-        encoded_jwt = encoded_jwt.decode("utf-8")
-
-    return encoded_jwt
 
 def upload_model(models_api: carbon.ModelsApi,
                  application_uuid: str,
@@ -82,6 +47,7 @@ def upload_model(models_api: carbon.ModelsApi,
     LOG.info('upload_model: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
 
+
 def create_part(parts_api: carbon.PartsApi,
                 part_catalog_num: str,
                 model_uuid: str,
@@ -103,6 +69,7 @@ def create_part(parts_api: carbon.PartsApi,
     api_response = parts_api.create_part(part_request=part_request)
     LOG.info('create_part: api_response={}'.format(str(api_response).replace('\n', ' ')))
     return api_response
+
 
 def create_part_order(part_orders_api: carbon.PartOrdersApi,
                       part_order_number: str,
@@ -132,6 +99,7 @@ def create_part_order(part_orders_api: carbon.PartOrdersApi,
     api_response = part_orders_api.create_part_order(part_order_request=part_order_request)
     LOG.info('create_part_order: api_response={}'.format(re.sub(' +', ' ', (re.sub('\t|\n', ' ', str(api_response))))))
     return api_response
+
 
 def main():
 

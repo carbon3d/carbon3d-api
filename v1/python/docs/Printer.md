@@ -5,6 +5,7 @@ Printer object
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** |  | 
+**alias** | **str** |  | [optional] 
 **serial** | **str** |  | 
 **hw_type** | **str** |  | 
 **url** | **str** |  | 
