@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **status** | **str** |  | [optional] 
 **application_uuid** | **str** | Application UUID | [optional] 
 **part_orders** | [**list[BuildPartOrders]**](BuildPartOrders.md) |  | [optional] 
+**created_at** | **datetime** | Timestamp at which the build was created. | [optional] 
+**updated_at** | **datetime** | Timestamp at which the build was last updated. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

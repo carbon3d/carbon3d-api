@@ -228,60 +228,29 @@ Note how the `part_measurement_template_uuid` matches the `uuid` you saw in the 
 
 
 ## Create a custom part order
-This API provides a programmatic interface for submitting part orders. The general process for creating an order is as follows:
+
+This API provides a programmatic interface for submitting custom part orders. The general process for creating an order is as follows:
 1. Upload model files to the API with the /models endpoint
-2. Create parts that reference a model and a part number with the /parts endpoint
-3. Create a part order with the /part_orders endpoint
+2. Create a custom part design (or alter an uploaded model in some way) with the /model_program_run endpoint (optional)
+3. Create parts that reference a model and a part number with the /parts endpoint
+4. Create a part order with the /part_orders endpoint
 
 Uploaded models, parts and part orders can be retrieved either in bulk or by UUID at the /models, /parts and /part_orders endpoints, respectively.
 
 
-## Automatic part order packing
-If automatic packing has been configured for the application the parts in the order belong to, they'll be processed and combined into a Catalog Build once the order is submitted, according to the following parameters:
-- `part_order_number`: string to use to identify order(s) in API and UI.
-- `parts`: array of Part UUIDs (response from /parts endpoint) to be ordered.
-- `due_date`: used to prioritize part order processing.
-- `flush`: force orders to be processed for packing even if fewer parts than the minimum amount to fill a build are pending, until all parts ordered with `flush=true` are processed.
-- `build_sop_uuid`: optional reference to a Build SOP that configures parameters such as output name, resin, and print profile to use for generated builds. Generated builds will only contain parts from orders with the same Build SOP. To request access to Build SOP management, contact <api-list@carbon3d.com>.
-.
-- `packing group`: optional string to identify part orders that should be packed into builds together. Part orders with different packing groups will be processed into different builds. Part orders with an unspecified packing_group will be treated as a separate group and will be packed together. A maximum of 40 total concurrent packing groups are permitted for 'open' and 'processing' PartOrders
+## Automatic print preparation
+If automatic print preparation has been configured for the application the parts in the order belong to, they'll be processed and combined into a Catalog Build once the order is submitted, according to the following parameters:
 
-*Want to adjust the minimum count of parts to fill a build, or increase concurrent packing groups? Contact api-list@carbon3d.com to request changes to these parameters.*
+* `part_order_number`: string to use to identify order(s) in API and UI.
+* `parts`: array of Part UUIDs (response from /parts endpoint) to be ordered.
+* `due_date`: used to prioritize part order processing.
+* `flush`: force orders to be processed for print preparation even if fewer parts than the minimum amount to fill a build platform are pending, until all parts ordered with `flush=true` are processed.
+* `build_sop_uuid`: optional reference to a Build SOP that configures parameters such as output name, resin, and print profile to use for generated builds. Generated builds will only contain parts from orders with the same Build SOP. 
+* `packing group`: optional string to identify part orders that should be packed into builds together. Part orders with different packing groups will be processed into different builds. Part orders with an unspecified packing_group will be treated as a separate group and will be packed together. A maximum of 40 total concurrent packing groups are permitted for 'open' and 'processing' PartOrders.
 
 Once a **part order** is submitted, **printed parts** with `production_status=waiting` are generated for the requested parts that will be packed onto a build for printing. By querying the /printed_parts endpoint for **printed parts** with a `part_order_uuid` filter, the status of packing for an order can be monitored. An order is completely packed when all associated **printed parts** have status `printing`.
 
 As the automated packer completes builds, their `build_uuid` will be appended to the list returned for the part_order(s) they contain parts for. Builds can be retrieved either in bulk or by UUID at the /builds endpoint, and relevant attachments (traveler, slice video) can be retrieved by UUID at the /attachments endpoint.
-
-
-```bash
-./v1/python_examples/custom_part_order.py --help
-usage: custom_part_order.py [-h] [--application_uuid APPLICATION_UUID]
-                            [--host HOST] --part_catalog_num PART_CATALOG_NUM
-                            --part_order_number PART_ORDER_NUMBER --due_date DUE_DATE
-                            --secret SECRET
-                            files [files ...]
-
-Script to upload models, create parts, and create an order
-
-positional arguments:
-  files                 Model file paths (.stl)
-
-optional arguments:
-  -h, --help            show this help message and exit
-  --application_uuid APPLICATION_UUID, -a APPLICATION_UUID
-                        Application scope for part number (default: 0)
-  --host HOST           Carbon API host (default: https://api.carbon3d.com/v1)
-  --part_catalog_num PART_CATALOG_NUM, -p PART_CATALOG_NUM
-                        Part catalog number i.e. ALIGNER-001 (default: None)
-  --part_order_number PART_ORDER_NUMBER, -o PART_ORDER_NUMBER
-                        Part order number (default: None)
-  --due_date DUE_DATE, -d DUE_DATE
-                        Number of days from today for order due date to be set
-                        (default: None)
-  --secret SECRET, -s SECRET
-                        JSON file with client_id and client_secret (default:
-                        None)
-```
 
 ## Joining information from multiple endpoints
 In order to reduce the payload of a response, only specific information is returned from each endpoint, but you can combine responses from different endpoints to join data.
@@ -331,13 +300,13 @@ Within the printed part response includes the status information regarding the s
 ```
 ## Frequently Asked Questions
 ### What is an application uuid?
-You can think of an Application as a shareable folder for models, parts, projects, etc. that are related to each other. You might have one Application for a running shoe midsole you are working on and another Application for face shields. Functionality to share and manage your applications hasn't been exposed yet, so if you think you want to change how your applications are set up please reach out to your Carbon Technical Partner.
+You can think of an Application as a shareable folder for models, parts, projects, etc. that are related to each other. You might have one Application for a running shoe midsole you are working on and another Application for face shields. Applications are managed by Carbon. Please contact your Business Development Director or support@carbon3d.com to change or add Applications.
 
 ### What's the difference between a model and a part?
 Models can't be printed; they just represent three-dimensional shapes that can be used in a variety of parts. For example, you could have a model for an iPhone case that is used in 2 parts, one that is printed in EPU 41 and another in UMA 90.
 
 ### Can I specify how my parts are packed onto a build for a given part order?
-The automatic packer currently has a set of predefined rules that specify how a build should be assembled. These rules are currently tuned for mass customized parts of similar geometry, but some parameters can be adjusted by specifying a Build SOP and/or a Packing Group (see (#automatic-part-order-packing)). Please let us know if you'd like to have the functionality to adjust these rules through the API by reaching out to <api-list@carbon3d.com>.
+Parameters for how prints are prepared are governed by the Build SOP. For help designing a Build SOP that works for your application, reach out to your Business Development Director or support@carbon3d.com.
 
 ### Where can I find the build(s) generated from requesting a part order?
 The builds created from a given part order can be found in Builds Catalog under the Production tab at print.carbon3d.com. The name of the build will be AutoBuildXXX. By selecting the desired build in this UI, you will be able to also see the build_uuid and other relevant information. (*Note this information is also returned when querying the /builds endpoint.*) You can queue the given build to a printer from the Build Catalog to a printer in your fleet.
@@ -350,7 +319,7 @@ A project is a collection of builds that have been modified over time. For examp
 You can use the [createPrintOrder](https://api.carbon3d.com/v1/api-docs/#/PrintOrders/createPrintOrder) API method.
 
 ### Why can't I see my models, orders, etc. in the UI.
-Please let us know if you'd like to see these concepts exposed in our UI by reaching out to <api-list@carbon3d.com>.
+Direct API integration assumes that you are using an external system to visualize and manage your workflows more generally. If you require a UI to manage your processes, reach out to your Business Development Director or support@carbon3d.com.
 
 ### What is a part number?
 Part numbers are a common term used in manufacturing to denote a reference to a particular _part design_. Each company chooses their own conventions for assigning part numbers, but generally a single part number is capable of having multiple versions or revisions. It is important to understand that a part number identifies a part _design_, whereas a serial numbers is a unique identifier for _a particular instantiation_ of that part design.
@@ -363,7 +332,7 @@ To view and edit part number attributes, visit the part catalog at https://print
 
 
 ### Are there any API calls that allow me to interact with the printer (e.g. start a print, open the door, etc)?
-This API is not intended to facilitate robotic automation for a printer. If this is something you need, please let your Carbon Technical Partner know.
+This API is not intended to facilitate robotic automation for a printer. Other options may be available; reach out to your Business Development Director or support@carbon3d.com to discuss your needs.
 
 ### Can you add ____ to the print data we are able to export?
-We would love to hear from you; please submit the request via <api-list@carbon3d.com>.
+We would love to hear from you; please contact support@carbon3d.com.

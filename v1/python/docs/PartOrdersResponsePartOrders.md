@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **build_sop_uuid** | **str** | UUID of Build SOP to use for auto layout parameters, from print.carbon3d.com/build_sops | [optional] 
 **packing_group** | **str** | Optional string to identify part orders to be grouped together for packing. | [optional] 
 **application_uuid** | **str** | Application UUID | [optional] 
+**created_at** | **datetime** | Timestamp at which the part order was created. | [optional] 
+**updated_at** | **datetime** | Timestamp at which the part order was last updated. | [optional] 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
