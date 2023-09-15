@@ -81,6 +81,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Expected response to a valid request |  -  |
 **400** | Invalid input |  -  |
+**409** | PartOrder uuid already exists |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
