@@ -13,6 +13,7 @@ from carbon3d.api.part_measurements_api import PartMeasurementsApi
 from carbon3d.api.part_orders_api import PartOrdersApi
 from carbon3d.api.parts_api import PartsApi
 from carbon3d.api.print_orders_api import PrintOrdersApi
+from carbon3d.api.print_quality_data_api import PrintQualityDataApi
 from carbon3d.api.printed_parts_api import PrintedPartsApi
 from carbon3d.api.printers_api import PrintersApi
 from carbon3d.api.prints_api import PrintsApi

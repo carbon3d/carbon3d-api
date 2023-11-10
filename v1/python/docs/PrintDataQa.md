@@ -1,0 +1,57 @@
+# PrintDataQa
+
+Print related QA data
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**print_id** | **str** |  | [optional] 
+**printer_id** | **str** |  | [optional] 
+**total_slices** | **str** |  | [optional] 
+**cassette_name** | **str** |  | [optional] 
+**estimated_print_time__ms** | **str** |  | [optional] 
+**resin_exposure_compensation** | **str** |  | [optional] 
+**base_exposure_multiplier** | **str** |  | [optional] 
+**heater_setpoint__c** | **str** |  | [optional] 
+**printer_serial** | **str** |  | [optional] 
+**project_id** | **str** |  | [optional] 
+**print_number** | **str** |  | [optional] 
+**software_version** | **str** |  | [optional] 
+**printer_name** | **str** |  | [optional] 
+**ffb_enabled_print** | **str** |  | [optional] 
+**hardware_profile** | **str** |  | [optional] 
+**cassette_serial** | **str** |  | [optional] 
+**window_serial** | **str** |  | [optional] 
+**platform_serial** | **str** |  | [optional] 
+**resin_name** | **str** |  | [optional] 
+**blackline__um** | **str** |  | [optional] 
+**estimated_consumed_resin_volume__ml** | **str** |  | [optional] 
+**minimum_required_resin_volume__ml** | **str** |  | [optional] 
+**script_name** | **str** |  | [optional] 
+**project_name** | **str** |  | [optional] 
+**print_finished_status** | **str** |  | [optional] 
+**print_alerts** | **str** |  | [optional] 
+**started_date_time** | **str** |  | [optional] 
+**finished_date_time** | **str** |  | [optional] 
+**total_time__min** | **str** |  | [optional] 
+**move_time__min** | **str** |  | [optional] 
+**exposure_time_total__min** | **str** |  | [optional] 
+**total_delay_time__min** | **str** |  | [optional] 
+**light_engine_intensity__m_w_cm2** | **str** |  | [optional] 
+**current_to_light_engine__m_a** | **str** |  | [optional] 
+**avg_o2_partial_pressure_at_window__** | **str** |  | [optional] 
+**avg_o2_concentration__** | **str** |  | [optional] 
+**avg_o2_flow__ml_min** | **str** |  | [optional] 
+**estimated_resin_volume__ml** | **str** |  | [optional] 
+**slice_thickness__um** | **str** |  | [optional] 
+**build_height__mm** | **str** |  | [optional] 
+**created_at** | **str** |  | [optional] 
+**peak_wavelength__nm** | **str** |  | [optional] 
+**resin_alpha** | **str** |  | [optional] 
+**resin_dc** | **str** |  | [optional] 
+**resin_fc** | **str** |  | [optional] 
+**resin_viscosity** | **str** |  | [optional] 
+**light_engine_turned_on** | **str** |  | [optional] 
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

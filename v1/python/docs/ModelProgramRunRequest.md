@@ -1,5 +1,6 @@
 # ModelProgramRunRequest
 
+This schema is deprecated. Please Use the 'ModelProgramRunTypedRequest' schema instead.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
