@@ -38,16 +38,12 @@ class TestModelProgramRunRequest(unittest.TestCase):
         if include_optional :
             return ModelProgramRunRequest(
                 model_program_uuid = '0', 
-                parameters = {
-                    'key' : '0'
-                    }
+                parameters = null
             )
         else :
             return ModelProgramRunRequest(
                 model_program_uuid = '0',
-                parameters = {
-                    'key' : '0'
-                    },
+                parameters = null,
         )
 
     def testModelProgramRunRequest(self):

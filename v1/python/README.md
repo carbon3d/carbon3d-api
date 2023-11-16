@@ -96,7 +96,6 @@ Class | Method | HTTP request | Description
 *BuildsApi* | [**get_build**](docs/BuildsApi.md#get_build) | **GET** /builds/{uuid} | Fetch a build
 *BuildsApi* | [**get_builds**](docs/BuildsApi.md#get_builds) | **GET** /builds | Fetch builds
 *ModelProgramRunsApi* | [**create_model_program_run**](docs/ModelProgramRunsApi.md#create_model_program_run) | **POST** /model_program_runs | Run a model program to alter your models
-*ModelProgramRunsApi* | [**create_model_program_run_typed_params**](docs/ModelProgramRunsApi.md#create_model_program_run_typed_params) | **POST** /model_program_runs_typed_params | Run a model program to alter your models with typed params
 *ModelProgramRunsApi* | [**get_model_program_run**](docs/ModelProgramRunsApi.md#get_model_program_run) | **GET** /model_program_runs/{uuid} | Get a model program run by UUID
 *ModelProgramRunsApi* | [**get_model_program_runs**](docs/ModelProgramRunsApi.md#get_model_program_runs) | **GET** /model_program_runs | Get a list of model program runs based on their uuids
 *ModelsApi* | [**download_model**](docs/ModelsApi.md#download_model) | **GET** /models/{uuid}/download | Download a model by UUID
@@ -149,7 +148,6 @@ Class | Method | HTTP request | Description
  - [ModelProgramRunAllOf](docs/ModelProgramRunAllOf.md)
  - [ModelProgramRunRequest](docs/ModelProgramRunRequest.md)
  - [ModelProgramRunStatusInfo](docs/ModelProgramRunStatusInfo.md)
- - [ModelProgramRunTypedRequest](docs/ModelProgramRunTypedRequest.md)
  - [ModelProgramRuns](docs/ModelProgramRuns.md)
  - [ModelResolveUploadRequest](docs/ModelResolveUploadRequest.md)
  - [ModelsResponse](docs/ModelsResponse.md)

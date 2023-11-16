@@ -35,7 +35,7 @@ class ModelProgramRunRequest(object):
     """
     openapi_types = {
         'model_program_uuid': 'str',
-        'parameters': 'dict(str, str)'
+        'parameters': 'OneOfarraymap'
     }
 
     attribute_map = {
@@ -85,10 +85,10 @@ class ModelProgramRunRequest(object):
     def parameters(self):
         """Gets the parameters of this ModelProgramRunRequest.  # noqa: E501
 
-        parameters for the model program  # noqa: E501
+        Parameters for the model program. Use either `TypedReplacements` or `TokenReplacements`  # noqa: E501
 
         :return: The parameters of this ModelProgramRunRequest.  # noqa: E501
-        :rtype: dict(str, str)
+        :rtype: OneOfarraymap
         """
         return self._parameters
 
@@ -96,10 +96,10 @@ class ModelProgramRunRequest(object):
     def parameters(self, parameters):
         """Sets the parameters of this ModelProgramRunRequest.
 
-        parameters for the model program  # noqa: E501
+        Parameters for the model program. Use either `TypedReplacements` or `TokenReplacements`  # noqa: E501
 
         :param parameters: The parameters of this ModelProgramRunRequest.  # noqa: E501
-        :type: dict(str, str)
+        :type: OneOfarraymap
         """
         if self.local_vars_configuration.client_side_validation and parameters is None:  # noqa: E501
             raise ValueError("Invalid value for `parameters`, must not be `None`")  # noqa: E501

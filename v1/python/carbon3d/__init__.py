@@ -61,7 +61,6 @@ from carbon3d.models.model_program_run import ModelProgramRun
 from carbon3d.models.model_program_run_all_of import ModelProgramRunAllOf
 from carbon3d.models.model_program_run_request import ModelProgramRunRequest
 from carbon3d.models.model_program_run_status_info import ModelProgramRunStatusInfo
-from carbon3d.models.model_program_run_typed_request import ModelProgramRunTypedRequest
 from carbon3d.models.model_program_runs import ModelProgramRuns
 from carbon3d.models.model_resolve_upload_request import ModelResolveUploadRequest
 from carbon3d.models.models_response import ModelsResponse

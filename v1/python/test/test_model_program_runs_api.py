@@ -36,13 +36,6 @@ class TestModelProgramRunsApi(unittest.TestCase):
         """
         pass
 
-    def test_create_model_program_run_typed_params(self):
-        """Test case for create_model_program_run_typed_params
-
-        Run a model program to alter your models with typed params  # noqa: E501
-        """
-        pass
-
     def test_get_model_program_run(self):
         """Test case for get_model_program_run
 
