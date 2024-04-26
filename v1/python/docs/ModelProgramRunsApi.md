@@ -45,7 +45,7 @@ configuration = carbon3d.Configuration(
 with carbon3d.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = carbon3d.ModelProgramRunsApi(api_client)
-    model_program_run_request = carbon3d.ModelProgramRunRequest() # ModelProgramRunRequest |  (optional)
+    model_program_run_request = {"model_program_uuid":"3427f879-4a36-409a-b09c-4196cb2f5cd0","parameters":[{"key":"MODEL_UUID","type":"string","value":"63db11ee-a130-4ddf-b3d2-ab2c5d1852ed"},{"key":"THICKNESS_MM","type":"double","value":1.2}]} # ModelProgramRunRequest |  (optional)
 
     try:
         # Run a model program to alter your models
