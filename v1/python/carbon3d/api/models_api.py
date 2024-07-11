@@ -511,7 +511,7 @@ class ModelsApi(object):
     def resolve_presigned_model_upload(self, **kwargs):  # noqa: E501
         """Resolve presigned model upload  # noqa: E501
 
-        Resolve presigned model upload  # noqa: E501
+        Resolve presigned model upload. Models are available for 30 days after the time of upload.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.resolve_presigned_model_upload(async_req=True)
@@ -536,7 +536,7 @@ class ModelsApi(object):
     def resolve_presigned_model_upload_with_http_info(self, **kwargs):  # noqa: E501
         """Resolve presigned model upload  # noqa: E501
 
-        Resolve presigned model upload  # noqa: E501
+        Resolve presigned model upload. Models are available for 30 days after the time of upload.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.resolve_presigned_model_upload_with_http_info(async_req=True)
@@ -621,7 +621,7 @@ class ModelsApi(object):
     def upload_model(self, filename, **kwargs):  # noqa: E501
         """Upload a model  # noqa: E501
 
-        Upload a new model  # noqa: E501
+        Upload a new model. Models are available for 30 days after the time of upload.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.upload_model(filename, async_req=True)
@@ -649,7 +649,7 @@ class ModelsApi(object):
     def upload_model_with_http_info(self, filename, **kwargs):  # noqa: E501
         """Upload a model  # noqa: E501
 
-        Upload a new model  # noqa: E501
+        Upload a new model. Models are available for 30 days after the time of upload.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
         >>> thread = api.upload_model_with_http_info(filename, async_req=True)

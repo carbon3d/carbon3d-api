@@ -312,7 +312,7 @@ Name | Type | Description  | Notes
 
 Resolve presigned model upload
 
-Resolve presigned model upload
+Resolve presigned model upload. Models are available for 30 days after the time of upload.
 
 ### Example
 
@@ -384,7 +384,7 @@ void (empty response body)
 
 Upload a model
 
-Upload a new model
+Upload a new model. Models are available for 30 days after the time of upload.
 
 ### Example
 
