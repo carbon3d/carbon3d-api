@@ -9,7 +9,7 @@
 ## Getting Started
 Welcome to the Carbon DLS API. The documentation here will help you get started integrating with our API. **Note that Carbon must grant access for you to begin your integration. Please contact your Business Development Director or support@carbon3d.com if you do not yet have access.**
 
-The Carbon DLS API is a REST API that is built to enable outside systems to access specific information. The primary functions of the API include (a) offering access to near real-time printer and print status information and (b) enabling automatic design and print preparation actions. 
+The Carbon DLS API is a REST API that is built to enable outside systems to access specific information. The primary functions of the API include (a) offering access to near real-time printer and print status information and (b) enabling automatic design and print preparation actions.
 
 The documentation is intended to help you get started and provide some examples, but detailed documentation about each request can be found at [https://api.carbon3d.com/v1/api-docs/#/](https://api.carbon3d.com/v1/api-docs/#/). Note that while examples are provided in Python, the REST API itself is language-agnostic.
 
@@ -26,7 +26,7 @@ The Carbon API uses a [JWT](https://en.wikipedia.org/wiki/JSON_Web_Token) token 
 * **Please contact your Business Development Director or support@carbon3d.com if you cannot access API key management.**
 
 ## Versioning and Updates to the API
-Please note that the CarbonAPI is confinually improving and that updates will be pushed out on a regular basis. Release notes can be found in [Carbon Acadamy](https://academy.carbon3d.com/learn/dashboard). Once in Carbon Acadamy, select "Content" then "Release Notes" in the drop down. From here you will be able to see all of the API release notes. Contact your Business Development Director or support@carbon3d.com if you cannot access API release notes on Carbon Academy.
+Please note that the CarbonAPI is confinually improving and that updates will be pushed out on a regular basis. Release notes can be found in [Carbon Acadamy](https://learn.carbon3d.com/software). Once in Carbon Acadamy, select "Content" then "Release Notes" in the drop down. From here you will be able to see all of the API release notes. Contact your Business Development Director or support@carbon3d.com if you cannot access API release notes on Carbon Academy.
 
 When an update to the API is rolled out, the version will be updated. The following versioning protocol is followed:
 * Patch version (eg. 0.1.2 -> 0.1.3): Small updates that do not require a client update.
